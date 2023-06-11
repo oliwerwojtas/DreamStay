@@ -1,5 +1,4 @@
 import { useState, ChangeEvent } from "react";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 interface FormData {
   email: string;

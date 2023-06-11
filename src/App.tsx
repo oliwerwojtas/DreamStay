@@ -6,6 +6,8 @@ import { Offers } from "./pages/offers/Offers";
 import { Profile } from "./pages/profile/Profile.jsx";
 import { RootLayout } from "./pages/RootLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +40,7 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <div>
+      <ToastContainer theme="dark" />
       <RouterProvider router={router} />
     </div>
   );
