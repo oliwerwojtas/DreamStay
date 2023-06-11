@@ -5,6 +5,7 @@ import { useSignup } from "../../hooks/useSignup";
 import { FormData } from "../../types";
 import { db } from "../../config";
 import { toast } from "react-toastify";
+import { MediaAuth } from "../../components/GoogleAuth";
 
 export const SignUp = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -52,13 +53,13 @@ export const SignUp = () => {
           </div>
           <p className="absolute top-[25%] md:top-[35%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-extrabold z-30 text-white text-2xl">
             Hello, Friend!
-            <span className="absolute left-1/2 transform -translate-x-1/2 w-1/5 h-[3px] bg-white my-4"></span>
+            <span className="absolute top-[100%] left-1/2 transform -translate-x-1/2 w-1/5 h-[3px] bg-white my-4"></span>
           </p>
           <p className="w-3/4 md:w-1/2 absolute top-[45%] md:top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-semibold z-30 text-white text-center text-lg">
             Fill up personal information and start journey with us.
           </p>
           <button className="absolute top-[70%] md:top-[65%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 px-12 py-2 border-white border-2 rounded font-semibold z-30 text-white">
-            Login
+            Sign up
           </button>
         </div>
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20 bg-white h-[30rem] flex flex-col justify-between ">
@@ -66,6 +67,7 @@ export const SignUp = () => {
             Sign Up
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/5 h-[3px] bg-green-600 my-4"></div>
           </h1>
+          <MediaAuth />
           <form onSubmit={handleSignUpSubmit}>
             <div className="flex justify-center">
               <input
