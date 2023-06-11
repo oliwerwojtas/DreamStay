@@ -7,7 +7,7 @@ interface FormData {
 }
 
 export const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -16,9 +16,10 @@ export const Login = () => {
   const { email, password } = formData;
 
   const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.id]: e.target.value,
+      [id]: value,
     }));
   };
 
@@ -53,7 +54,7 @@ export const Login = () => {
           <form>
             <div className="flex justify-center">
               <input
-                className="w-80 px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6"
+                className="w-80 px-4 py-2 text-base text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6"
                 type="email"
                 id="email"
                 value={email}
@@ -63,14 +64,14 @@ export const Login = () => {
             </div>
             <div className="flex justify-center relative mb-6">
               <input
-                className="w-80 px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out "
-                type={showPassword ? "text" : "password"}
+                className="w-80 px-4 py-2 text-base text-gray-700 bg-white border-gray-300 rounded transition ease-in-out "
+                type="password"
                 id="password"
                 value={password}
                 onChange={handleChangeEmail}
                 placeholder="Password"
               />
-              {showPassword ? (
+              {/* {showPassword ? (
                 <AiFillEyeInvisible
                   className="absolute top-1/3 cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
@@ -80,7 +81,7 @@ export const Login = () => {
                   className="absolute top-1/3 cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
-              )}
+              )} */}
             </div>
             <div className="flex whitespace-nowrap text-sm sm:text-lg">
               <p className="mb-6 mx-auto">
