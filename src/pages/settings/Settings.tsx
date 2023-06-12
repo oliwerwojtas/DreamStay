@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLogout } from "../../hooks/useLogout";
 export const Settings = () => {
   const { logout } = useLogout();
-
+  const [changeDetail, setChangeDetail] = useState(false);
   const [formData, setFormData] = useState({
     name: "Oliwer",
     email: "olo_wojtas@o2.pl",
