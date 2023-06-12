@@ -1,12 +1,18 @@
 import { useState } from "react";
-
+import { useLogout } from "../../hooks/useLogout";
 export const Settings = () => {
+  const { logout } = useLogout();
+
   const [formData, setFormData] = useState({
     name: "Oliwer",
     email: "olo_wojtas@o2.pl",
   });
 
   const { name, email } = formData;
+
+  const handleLogoutSubmit = () => {
+    logout();
+  };
   return (
     <section className="max-w-6xl mx-auto flex justify-center items-center flex-col">
       <h1 className="text-3xl text-center mt-6 font-bold">My Profile</h1>
@@ -34,7 +40,10 @@ export const Settings = () => {
                 Edit
               </span>
             </p>
-            <p className="text-blue-600 hover:text-blue-800 transition duration-200 ease-in-out cursor-pointer">
+            <p
+              onClick={handleLogoutSubmit}
+              className="text-blue-600 hover:text-blue-800 transition duration-200 ease-in-out cursor-pointer"
+            >
               Sign out
             </p>
           </div>

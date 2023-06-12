@@ -4,15 +4,15 @@ import { getAuth, signInWithEmailAndPassword, UserCredential, User } from "fireb
 import { SignupError, LoginData } from "../types";
 // import { useAuthContext } from "../context/useAuthContext";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import { Login } from "../context/authSlice";
-import { RootState } from "../context/store";
+import { useDispatch } from "react-redux";
+import { Login } from "../store/authSlice";
+
 export const useLogin = () => {
   const [error, setError] = useState<SignupError | null>(null);
   const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.auth.user);
+
   const login = async (data: LoginData) => {
     setError(null);
     setIsPending(true);
@@ -29,9 +29,7 @@ export const useLogin = () => {
         navigate("/");
       }
 
-      //   const user: User = { uid: userCredential.user.uid }; // Tworzenie obiektu User z polem uid
-
-      dispatch(Login(userCredential.user));
+      dispatch(Login(userCredential.user.uid));
       toast.success("Registration successful!", {
         position: "top-center",
         autoClose: 3000,
