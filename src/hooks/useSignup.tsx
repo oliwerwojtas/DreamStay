@@ -5,6 +5,7 @@ import { SignupError, SignupData, SignupResult } from "../types";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../config";
 import { toast } from "react-toastify";
+
 export const useSignup = () => {
   const [error, setError] = useState<SignupError | null>(null);
   const [isPending, setIsPending] = useState(false);
@@ -35,6 +36,7 @@ export const useSignup = () => {
         hideProgressBar: true,
       });
       setIsPending(false);
+
       navigate("/");
       return { user };
     } catch (error) {

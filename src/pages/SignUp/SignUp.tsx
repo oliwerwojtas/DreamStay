@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import { useSignup } from "../../hooks/useSignup";
 import { FormData } from "../../types";
-import { db } from "../../config";
 import { toast } from "react-toastify";
 import { MediaAuth } from "../../components/GoogleAuth";
 

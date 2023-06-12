@@ -3,11 +3,12 @@ import { Home } from "./pages/home/Home";
 import { Login } from "./pages/Login/Login";
 import { SignUp } from "./pages/SignUp/SignUp";
 import { Offers } from "./pages/offers/Offers";
-import { Profile } from "./pages/profile/Profile.jsx";
+import { Settings } from "./pages/settings/Settings.js";
 import { RootLayout } from "./pages/RootLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import { useAuthContext } from "../src/context/useAuthContext.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,8 +32,8 @@ const router = createBrowserRouter([
         element: <Offers />,
       },
       {
-        path: "/profile",
-        element: <Profile />,
+        path: "/settings",
+        element: <Settings />,
       },
     ],
   },
