@@ -1,20 +1,39 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { ThunkDispatch } from "redux-thunk";
-import { checkAuthStatus } from "../store/authSlice";
 import { RootState } from "../store/store";
-
-export const useAuth = () => {
+import { Login, Logout } from "../store/authSlice";
+interface AuthStatus {
+  loggedIn: boolean;
+  googleLoggedIn: boolean;
+  checkingStatus: boolean;
+  initialStatusChecked: boolean;
+}
+export const useAuth = (): AuthStatus => {
+  const dispatch = useDispatch();
   const [checkingStatus, setCheckingStatus] = useState(true);
+  const [initialStatusChecked, setInitialStatusChecked] = useState(false);
 
-  const dispatch: ThunkDispatch<RootState, null, never> = useDispatch();
   const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
+  const googleLoggedIn = useSelector((state: RootState) => state.auth.googleLoggedIn);
 
   useEffect(() => {
-    dispatch(checkAuthStatus()).then(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCheckingStatus(false);
-    });
-  }, [dispatch]);
+      setInitialStatusChecked(true);
 
-  return { loggedIn, checkingStatus };
+      if (user) {
+        dispatch(Login(user.uid));
+      } else {
+        dispatch(Logout());
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  return { loggedIn, googleLoggedIn, checkingStatus, initialStatusChecked };
 };
