@@ -3,6 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 body {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: rgb(240, 253, 244);
 }

@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-
+import { Spinner } from "./Spinner";
 interface PrivateRouteProps {
   children: React.ReactNode;
 }
@@ -8,7 +8,7 @@ interface PrivateRouteProps {
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const { loggedIn, checkingStatus } = useAuth();
   if (checkingStatus) {
-    return <h3>loading</h3>;
+    return <Spinner />;
   }
   return loggedIn ? children : <Navigate to="/login" />;
 };
