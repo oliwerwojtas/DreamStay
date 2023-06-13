@@ -30,7 +30,7 @@ export const useLogin = () => {
       }
 
       dispatch(Login(userCredential.user.uid));
-      toast.success("Registration successful!", {
+      toast.success("Login successful!", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: true,
