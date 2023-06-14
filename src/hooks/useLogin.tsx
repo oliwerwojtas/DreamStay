@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword, UserCredential, User } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
 import { SignupError, LoginData } from "../types";
 // import { useAuthContext } from "../context/useAuthContext";
 import { toast } from "react-toastify";

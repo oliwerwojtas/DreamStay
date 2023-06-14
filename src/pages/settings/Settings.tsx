@@ -4,6 +4,8 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../config";
+import { FcHome } from "react-icons/fc";
+import { Link } from "react-router-dom";
 interface FormData {
   name: string;
   email: string;
@@ -79,8 +81,8 @@ export const Settings = () => {
             className="w-full px-4 p-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out mb-6"
           />
 
-          <div className="flex justify-between whitespace-nowrap text-lg md:text-sm">
-            <p className="flex items-center mb-6">
+          <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6">
+            <p className="flex items-center ">
               Do you want to change your name?
               <span
                 onClick={handleSpanClick}
@@ -97,6 +99,12 @@ export const Settings = () => {
             </p>
           </div>
         </form>
+        <button type="submit" className="bg-green-600 px-8 text-white rounded hover:bg-green-700">
+          <Link to="/create" className="flex justify-center items-center px-8 py-2">
+            <FcHome className="mr-2 text-2xl bg-red-200 rounded-full p-1" />
+            Sell house
+          </Link>
+        </button>
       </div>
     </section>
   );

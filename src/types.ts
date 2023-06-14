@@ -23,3 +23,18 @@ export interface LoginData {
   password: string;
   email: string;
 }
+export interface FormDataCreate {
+  type: string;
+  name: string;
+  bedrooms: number;
+  bathrooms: number;
+  parking: boolean;
+  furnished: boolean;
+  address: string;
+  description: string;
+  offer: boolean;
+  regularPrice: number;
+  discountedPrice: number;
+  images: FileList;
+  imgUrls: string[];
+}
