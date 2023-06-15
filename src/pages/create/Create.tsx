@@ -4,8 +4,9 @@ import { toast } from "react-toastify";
 
 import { FormDataCreate } from "../../types";
 import { useAddDocument } from "../../hooks/useAddDocument";
-
+import { getAuth } from "firebase/auth";
 export const Create = () => {
+  const auth = getAuth();
   const { addDocument } = useAddDocument("listings");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<FormDataCreate>({
@@ -22,6 +23,7 @@ export const Create = () => {
     discountedPrice: 0,
     images: {} as FileList,
     imgUrls: [],
+    user: auth.currentUser?.uid,
   });
 
   const {
@@ -38,6 +40,7 @@ export const Create = () => {
     discountedPrice,
     images,
     imgUrls,
+    user,
   } = formData;
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;

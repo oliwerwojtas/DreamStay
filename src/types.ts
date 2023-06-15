@@ -37,4 +37,24 @@ export interface FormDataCreate {
   discountedPrice: number;
   images: FileList;
   imgUrls: string[];
+  user: string | undefined;
+}
+export interface FormDataCreate2 {
+  id: string;
+  data: {
+    type: string;
+    name: string;
+    bedrooms: number;
+    bathrooms: number;
+    parking: boolean;
+    furnished: boolean;
+    address: string;
+    description: string;
+    offer: boolean;
+    regularPrice: number;
+    discountedPrice: number;
+    images: FileList;
+    imgUrls: string[];
+    user: string | undefined;
+  };
 }

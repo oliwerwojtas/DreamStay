@@ -4,7 +4,7 @@ import { db } from "../config";
 interface ErrorType {
   message: string;
 }
-export const useAddDocument = (collectionPath: string) => {
+export const useAddDocument = (collectionName: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<ErrorType | null>(null);
 
@@ -13,7 +13,7 @@ export const useAddDocument = (collectionPath: string) => {
     setError(null);
 
     try {
-      const docRef = await addDoc(collection(db, collectionPath), document);
+      const docRef = await addDoc(collection(db, collectionName), document);
       setIsLoading(false);
       console.log("Document written with ID: ", docRef.id);
     } catch (error) {
