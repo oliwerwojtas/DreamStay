@@ -1,11 +1,12 @@
 import React, { useState, ChangeEvent, MouseEvent, FormEvent } from "react";
 import { Spinner } from "../../components/Spinner";
 import { toast } from "react-toastify";
-import { collection } from "firebase/firestore";
-import { db } from "../../config";
-import { addDoc, doc } from "firebase/firestore";
+
 import { FormDataCreate } from "../../types";
+import { useAddDocument } from "../../hooks/useAddDocument";
+
 export const Create = () => {
+  const { addDocument } = useAddDocument("listings");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<FormDataCreate>({
     type: "rent",
@@ -81,7 +82,7 @@ export const Create = () => {
     }
 
     try {
-      const docRef = await addDoc(collection(db, "listings"), formData);
+      await addDocument(formData);
       setLoading(false);
       toast.success("Offer created!");
     } catch (error) {

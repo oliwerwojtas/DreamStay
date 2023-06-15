@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 
-interface AuthState {
+export interface AuthState {
   loggedIn: boolean;
   googleLoggedIn: boolean;
   checkingStatus: boolean;
