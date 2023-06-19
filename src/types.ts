@@ -56,5 +56,6 @@ export interface FormDataCreate2 {
     images: FileList;
     imgUrls: string[];
     user: string | undefined;
+    timestamp: any;
   };
 }

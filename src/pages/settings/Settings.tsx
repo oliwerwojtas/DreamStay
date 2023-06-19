@@ -6,7 +6,7 @@ import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../config";
 import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
-
+import { ListingItem } from "../../components/ListingItem";
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
 interface FormData {
   name: string;
@@ -111,13 +111,13 @@ export const Settings = () => {
           </button>
         </div>
       </section>
-      <div>
+      <div className="max-w-6xl px-3 mt-6 mx-auto">
         {!loading && listings.length > 0 && (
           <>
-            <h2 className="text-2xl text-center font-semibold">My listings</h2>
-            <ul>
+            <h2 className="text-2xl text-center font-semibold mb-6">My Listings</h2>
+            <ul className="sm:grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2">
               {listings.map((listing) => (
-                <div>{listing.data.name}</div>
+                <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
               ))}
             </ul>
           </>

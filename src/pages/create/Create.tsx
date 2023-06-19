@@ -1,12 +1,15 @@
-import React, { useState, ChangeEvent, MouseEvent, FormEvent } from "react";
+import { useState, ChangeEvent, MouseEvent, FormEvent } from "react";
 import { Spinner } from "../../components/Spinner";
 import { toast } from "react-toastify";
 
 import { FormDataCreate } from "../../types";
 import { useAddDocument } from "../../hooks/useAddDocument";
 import { getAuth } from "firebase/auth";
+import { serverTimestamp } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 export const Create = () => {
   const auth = getAuth();
+  const navigate = useNavigate();
   const { addDocument } = useAddDocument("listings");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<FormDataCreate>({
@@ -85,9 +88,11 @@ export const Create = () => {
     }
 
     try {
-      await addDocument(formData);
+      const formDataCopy = { ...formData, timestamp: serverTimestamp() };
+      await addDocument(formDataCopy);
       setLoading(false);
       toast.success("Offer created!");
+      navigate("/settings");
     } catch (error) {
       setLoading(false);
       toast.error("Error creating offer");
@@ -263,7 +268,7 @@ export const Create = () => {
             <p className="text-lg font-semibold">Regular price</p>
             <div className="flex w-full justify-center items-center space-x-6">
               <input
-                type="number"
+                type="text"
                 id="regularPrice"
                 value={regularPrice}
                 onChange={handleChange}
@@ -286,7 +291,7 @@ export const Create = () => {
               <p className="text-lg font-semibold">Discounted price</p>
               <div className="flex w-full justify-center items-center space-x-6">
                 <input
-                  type="number"
+                  type="text"
                   id="discountedPrice"
                   value={discountedPrice}
                   onChange={handleChange}

@@ -64,7 +64,7 @@ export const Login = () => {
           <form onSubmit={handleLoginSubmit}>
             <div className="flex justify-center">
               <input
-                className="w-80 px-4 py-2 text-base text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6"
+                className="w-80 px-4 py-2 text-base text-gray-700  border-gray-300 rounded transition ease-in-out mb-6 border-2 "
                 type="email"
                 id="email"
                 value={email}
@@ -74,7 +74,7 @@ export const Login = () => {
             </div>
             <div className="flex justify-center relative mb-6">
               <input
-                className="w-80 px-4 py-2 text-base text-gray-700 bg-white border-gray-300 rounded transition ease-in-out "
+                className="w-80 px-4 py-2 text-base text-gray-700  border-gray-300 rounded transition ease-in-out "
                 type="password"
                 id="password"
                 value={password}
