@@ -8,6 +8,7 @@ import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { ListingItem } from "../../components/ListingItem";
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
+
 interface FormData {
   name: string;
   email: string;
@@ -24,6 +25,7 @@ export const Settings = () => {
 
   const { name, email } = formData;
   const { listings, loading } = useFetchUserDocuments(auth.currentUser?.uid);
+  console.log(listings);
   const handleEditData: () => void = () => {
     setChangeDetail((prevState) => !prevState);
   };
@@ -63,6 +65,7 @@ export const Settings = () => {
       handleSubmitData(e as unknown as FormEvent<HTMLFormElement>);
     }
   };
+
   return (
     <>
       <section className="max-w-6xl mx-auto flex justify-center items-center flex-col">
@@ -115,7 +118,7 @@ export const Settings = () => {
         {!loading && listings.length > 0 && (
           <>
             <h2 className="text-2xl text-center font-semibold mb-6">My Listings</h2>
-            <ul className="sm:grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2">
+            <ul className="sm:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2">
               {listings.map((listing) => (
                 <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
               ))}

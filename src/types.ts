@@ -37,7 +37,7 @@ export interface FormDataCreate {
   discountedPrice: number;
   images: FileList;
   imgUrls: string[];
-  user: string | undefined;
+  userRef: string | undefined;
 }
 export interface FormDataCreate2 {
   id: string;
@@ -55,7 +55,7 @@ export interface FormDataCreate2 {
     discountedPrice: number;
     images: FileList;
     imgUrls: string[];
-    user: string | undefined;
+    userRef: string | undefined;
     timestamp: any;
   };
 }

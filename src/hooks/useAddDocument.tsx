@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { collection, addDoc, DocumentData } from "firebase/firestore";
 import { db } from "../config";
+
 interface ErrorType {
   message: string;
 }
-export const useAddDocument = (collectionName: string) => {
+export const useDocument = (collectionName: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<ErrorType | null>(null);
 
