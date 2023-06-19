@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { collection, addDoc, DocumentData } from "firebase/firestore";
+import { collection, addDoc, DocumentData, doc, updateDoc } from "firebase/firestore";
 import { db } from "../config";
 
 interface ErrorType {
@@ -25,6 +25,22 @@ export const useDocument = (collectionName: string) => {
       console.error("Error creating document: ", error);
     }
   };
+  const updateDocument = async (document: DocumentData, id: string) => {
+    setIsLoading(true);
+    setError(null);
 
-  return { addDocument, isLoading, error };
+    try {
+      const docRef = await updateDoc(doc(db, collectionName, id), document);
+      setIsLoading(false);
+      console.log("Document updated with ID: ", docRef);
+    } catch (error) {
+      const errorMessage = (error as Error).message;
+      setError({ message: errorMessage });
+      setIsLoading(false);
+
+      console.error("Error creating document: ", error);
+    }
+  };
+
+  return { addDocument, updateDocument, isLoading, error };
 };

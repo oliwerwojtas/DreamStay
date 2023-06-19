@@ -9,6 +9,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { EditDocument } from "./pages/edit/EditDocument";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Settings />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/edit/:id",
+        element: (
+          <PrivateRoute>
+            <EditDocument />
           </PrivateRoute>
         ),
       },

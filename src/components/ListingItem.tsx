@@ -8,7 +8,8 @@ import { MdEdit } from "react-icons/md";
 // import { useDeleteDocument } from "../hooks/useDeleteDocument";
 import { useFetchUserDocuments } from "../hooks/useFetchUserDocuments";
 import { getAuth } from "firebase/auth";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { documentId } from "firebase/firestore";
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;
@@ -16,6 +17,7 @@ interface ListingItemProps {
 
 export const ListingItem = ({ listing, id }: ListingItemProps) => {
   const auth = getAuth();
+  const navigate = useNavigate();
   const daysFromToday = dayjs().diff(dayjs(listing.timestamp.toDate()), "day");
   const { deleteDocument, loading } = useFetchUserDocuments(auth.currentUser?.uid);
   const formatPrice = (price: number) => {
@@ -30,6 +32,11 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
       // Jeśli lista dokumentów zostanie zaktualizowana, odśwież stronę
       window.location.reload();
     }
+  };
+  // console.log(documentID);
+  const handleEdit = () => {
+    console.log(id);
+    navigate(`/edit/${id}`);
   };
 
   return (
@@ -73,7 +80,7 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
         className="absolute bottom-2 right-2 cursor-pointer text-red-500"
         onClick={handleDelete}
       />
-      <MdEdit size={20} className="absolute bottom-2 right-8 cursor-pointer" />
+      <MdEdit size={20} className="absolute bottom-2 right-8 cursor-pointer" onClick={handleEdit} />
     </li>
   );
 };
