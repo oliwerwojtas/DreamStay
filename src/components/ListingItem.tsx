@@ -9,7 +9,7 @@ import { MdEdit } from "react-icons/md";
 import { useFetchUserDocuments } from "../hooks/useFetchUserDocuments";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { documentId } from "firebase/firestore";
+
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;
@@ -43,7 +43,7 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
     <li className="bg-white w-60 relative flex flex-col justify-between items-center shadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
       <Link to={`/category/${listing.type}/${id}`}>
         <img
-          src="https://th.bing.com/th/id/R.49c05bd2899fb27903e9707334ce8af9?rik=XmEu7gg6XRToHA&pid=ImgRaw&r=0"
+          src={listing.imgUrls[0]}
           alt="house photo"
           className="h-[170px] w-full object-cover hover:scale-105 transition-scale duration-200 ease-in"
         />

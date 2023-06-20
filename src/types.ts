@@ -1,5 +1,5 @@
 import { User, UserCredential } from "firebase/auth";
-
+import { Timestamp } from "firebase/firestore";
 export interface SignupError {
   message: string;
 }
@@ -35,7 +35,7 @@ export interface FormDataCreate {
   offer: boolean;
   regularPrice: number;
   discountedPrice: number;
-  images: FileList;
+  images: File[];
   imgUrls: string[];
   userRef: string | undefined;
 }
@@ -56,6 +56,6 @@ export interface FormDataCreate2 {
     images: FileList;
     imgUrls: string[];
     userRef: string | undefined;
-    timestamp: any;
+    timestamp: Timestamp;
   };
 }

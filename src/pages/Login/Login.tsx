@@ -55,7 +55,7 @@ export const Login = () => {
             Sign up
           </button>
         </div>
-        <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20 bg-white h-[30rem] flex flex-col justify-between ">
+        <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20 bg-white h-[30rem] flex flex-col justify-between rounded">
           <h1 className="text-3xl text-center mt-6 font-extrabold text-green-600 relative group">
             Sign in to Account
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/5 h-[3px] bg-green-600 my-4"></div>

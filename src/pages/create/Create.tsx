@@ -5,8 +5,11 @@ import { toast } from "react-toastify";
 import { FormDataCreate } from "../../types";
 import { useDocument } from "../../hooks/useAddDocument";
 import { getAuth } from "firebase/auth";
+import { v4 as uuidv4 } from "uuid";
 import { serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 export const Create = () => {
   const auth = getAuth();
   const navigate = useNavigate();
@@ -24,7 +27,7 @@ export const Create = () => {
     offer: false,
     regularPrice: 0,
     discountedPrice: 0,
-    images: {} as FileList,
+    images: [],
     imgUrls: [],
     userRef: auth.currentUser?.uid,
   });
@@ -55,10 +58,14 @@ export const Create = () => {
     }
 
     if (id === "images") {
-      setFormData((prevState: typeof formData) => ({
-        ...prevState,
-        images: (e.target as HTMLInputElement).files as FileList,
-      }));
+      const files = (e.target as HTMLInputElement).files;
+      if (files) {
+        const fileArray = Array.from(files) as File[];
+        setFormData((prevState: typeof formData) => ({
+          ...prevState,
+          images: fileArray,
+        }));
+      }
     } else {
       setFormData((prevState: typeof formData) => ({
         ...prevState,
@@ -84,9 +91,56 @@ export const Create = () => {
       toast.error("Maximum 3 images are allowed");
       return;
     }
+    const storeImage = async (image: any) => {
+      return new Promise((resolve, reject) => {
+        const storage = getStorage();
+        const filename = `${auth.currentUser?.uid}-${image.name}-${uuidv4()}`;
+        const storageRef = ref(storage, filename);
+        const uploadTask = uploadBytesResumable(storageRef, image);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            switch (snapshot.state) {
+              case "paused":
+                console.log("Upload is paused");
+                break;
+              case "running":
+                console.log("Upload is running");
+                break;
+            }
+          },
+          (error) => {
+            reject(error);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              resolve(downloadURL);
+            });
+          }
+        );
+      });
+    };
 
+    const imgUrls = await Promise.all([...images].map((image) => storeImage(image))).catch(
+      (error) => {
+        setLoading(false);
+        toast.error("Images not uploaded");
+        return;
+      }
+    );
+    console.log(imgUrls);
     try {
-      const formDataCopy = { ...formData, timestamp: serverTimestamp() };
+      const formDataCopy = {
+        ...formData,
+        imgUrls,
+
+        timestamp: serverTimestamp(),
+        userRef: auth.currentUser?.uid,
+      };
+      delete formDataCopy.images;
+      // const formDataCopy = { ...formData, timestamp: serverTimestamp() };
       await addDocument(formDataCopy);
       setLoading(false);
       toast.success("Offer created!");
@@ -97,7 +151,6 @@ export const Create = () => {
       console.error("Error creating offer", error);
     }
   };
-
   if (loading) {
     return <Spinner />;
   }
@@ -316,7 +369,6 @@ export const Create = () => {
             onChange={handleChange}
             accept=".jpg,.png,.jpeg"
             multiple
-            // required
             className="w-full px-3 py-1.5 text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:bg-white focus:border-slate-600"
           />
         </div>

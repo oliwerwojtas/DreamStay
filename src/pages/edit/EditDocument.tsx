@@ -27,7 +27,7 @@ export const EditDocument = () => {
     offer: false,
     regularPrice: 0,
     discountedPrice: 0,
-    images: {} as FileList,
+    images: [],
     imgUrls: [],
     userRef: auth.currentUser?.uid,
   });
@@ -46,12 +46,7 @@ export const EditDocument = () => {
     discountedPrice,
     images,
   } = formData;
-  //   useEffect(() => {
-  //     if (listing && listing.userRef !== auth.currentUser.uid) {
-  //       toast.error("You can't edit this listing");
-  //       navigate("/");
-  //     }
-  //   }, [auth.currentUser.uid, listing, navigate]);
+
   const params = useParams();
   console.log(params);
   useEffect(() => {
@@ -87,12 +82,15 @@ export const EditDocument = () => {
     if (value === "false") {
       boolean = false;
     }
-
     if (id === "images") {
-      setFormData((prevState: typeof formData) => ({
-        ...prevState,
-        images: (e.target as HTMLInputElement).files as FileList,
-      }));
+      const files = (e.target as HTMLInputElement).files;
+      if (files) {
+        const fileArray = Array.from(files) as File[];
+        setFormData((prevState: typeof formData) => ({
+          ...prevState,
+          images: fileArray,
+        }));
+      }
     } else {
       setFormData((prevState: typeof formData) => ({
         ...prevState,
@@ -132,11 +130,16 @@ export const EditDocument = () => {
     }
   };
 
+  const handleBackToList = () => {
+    navigate("/settings");
+  };
+
   if (loading) {
     return <Spinner />;
   }
   return (
     <main className="max-w-md px-2 mx-auto">
+      <button onClick={handleBackToList}>Back to list </button>
       <h1 className="text-3xl text-center mt-6 font-bold">Edit</h1>
       <form onSubmit={handleSubmitForm}>
         <p className="text-lg mt-6 font-semibold">Sell / Rent</p>
