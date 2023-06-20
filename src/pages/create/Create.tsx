@@ -75,10 +75,10 @@ export const Create = () => {
   };
 
   const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
-    const { id, value } = e.target as HTMLButtonElement;
+    const { value } = e.target as HTMLButtonElement;
     setFormData((prevState: typeof formData) => ({
       ...prevState,
-      [id]: value === "true",
+      type: value,
     }));
   };
 
@@ -162,7 +162,6 @@ export const Create = () => {
         <div className="flex">
           <button
             type="button"
-            id="type"
             value="sale"
             onClick={handleButtonClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
@@ -173,7 +172,6 @@ export const Create = () => {
           </button>
           <button
             type="button"
-            id="type"
             value="rent"
             onClick={handleButtonClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
