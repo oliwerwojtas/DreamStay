@@ -6,6 +6,7 @@ import { Login, Logout } from "../store/authSlice";
 interface AuthStatus {
   loggedIn: boolean;
   googleLoggedIn: boolean;
+  githubLoggedIn: boolean;
   checkingStatus: boolean;
   initialStatusChecked: boolean;
 }
@@ -16,7 +17,7 @@ export const useAuth = (): AuthStatus => {
 
   const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
   const googleLoggedIn = useSelector((state: RootState) => state.auth.googleLoggedIn);
-
+  const githubLoggedIn = useSelector((state: RootState) => state.auth.githubLoggedIn);
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -35,5 +36,5 @@ export const useAuth = (): AuthStatus => {
     };
   }, []);
 
-  return { loggedIn, googleLoggedIn, checkingStatus, initialStatusChecked };
+  return { loggedIn, googleLoggedIn, githubLoggedIn, checkingStatus, initialStatusChecked };
 };

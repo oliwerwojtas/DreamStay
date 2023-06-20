@@ -4,12 +4,14 @@ import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 export interface AuthState {
   loggedIn: boolean;
   googleLoggedIn: boolean;
+  githubLoggedIn: boolean;
   checkingStatus: boolean;
 }
 
 const initialState: AuthState = {
   loggedIn: false,
   googleLoggedIn: false,
+  githubLoggedIn: false,
   checkingStatus: true,
 };
 
@@ -29,11 +31,13 @@ const authSlice = createSlice({
     Login(state, action: PayloadAction<string>) {
       state.loggedIn = true;
       state.googleLoggedIn = true;
+      state.githubLoggedIn = true;
       console.log("User login:", state);
     },
     Logout(state) {
       state.loggedIn = false;
       state.googleLoggedIn = false;
+      state.githubLoggedIn = false;
       console.log("User logout:", state);
     },
   },
@@ -46,6 +50,7 @@ const authSlice = createSlice({
         state.checkingStatus = false;
         state.loggedIn = action.payload !== null;
         state.googleLoggedIn = action.payload !== null;
+        state.githubLoggedIn = action.payload !== null;
       });
   },
 });

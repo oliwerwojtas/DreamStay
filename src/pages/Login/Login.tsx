@@ -1,7 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { LoginData } from "../../types";
-import { MediaAuth } from "../../components/GoogleAuth";
+import { MediaAuth } from "../../components/auth/GoogleAuth";
+import { MediaAuthGithub } from "../../components/auth/GithubAuth";
 import { toast } from "react-toastify";
 import { useLogin } from "../../hooks/useLogin";
 export const Login = () => {
@@ -61,6 +62,7 @@ export const Login = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/5 h-[3px] bg-green-600 my-4"></div>
           </h1>
           <MediaAuth />
+          <MediaAuthGithub />
           <form onSubmit={handleLoginSubmit}>
             <div className="flex justify-center">
               <input

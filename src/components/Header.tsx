@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const navigate = useNavigate();
-  const { loggedIn, googleLoggedIn, initialStatusChecked } = useAuth();
+  const { loggedIn, googleLoggedIn, githubLoggedIn, initialStatusChecked } = useAuth();
   return (
     <div className="bg-white border-b shadow-sm">
       <header className="flex justify-between items-center px-3 py-3 max-w-6xl mx-auto">
@@ -24,7 +24,7 @@ export const Header = () => {
                   Home
                   <div className="absolute w-full h-0.5 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform "></div>
                 </NavLink>
-                {loggedIn || googleLoggedIn ? (
+                {loggedIn || googleLoggedIn || githubLoggedIn ? (
                   <NavLink to="/settings" className="relative group">
                     Settings
                     <div className="absolute w-full h-0.5 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform "></div>

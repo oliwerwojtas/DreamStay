@@ -1,11 +1,10 @@
 import { FormDataCreate2 } from "../types";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import "dayjs/locale/pl"; // Dodaj lokalizację, jeśli chcesz sformatować datę w innym języku
+import "dayjs/locale/pl";
 import { MdLocationOn } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
-// import { useDeleteDocument } from "../hooks/useDeleteDocument";
 import { useFetchUserDocuments } from "../hooks/useFetchUserDocuments";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +28,6 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
   const handleDelete = async () => {
     await deleteDocument("listings", id);
     if (!loading) {
-      // Jeśli lista dokumentów zostanie zaktualizowana, odśwież stronę
       window.location.reload();
     }
   };

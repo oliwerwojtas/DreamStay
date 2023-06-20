@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useSignup } from "../../hooks/useSignup";
 import { FormData } from "../../types";
 import { toast } from "react-toastify";
-import { MediaAuth } from "../../components/GoogleAuth";
+import { MediaAuth } from "../../components/auth/GoogleAuth";
 
 export const SignUp = () => {
   const [formData, setFormData] = useState<FormData>({
