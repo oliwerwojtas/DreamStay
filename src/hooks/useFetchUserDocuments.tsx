@@ -14,15 +14,19 @@ import { toast } from "react-toastify";
 interface ErrorType {
   message: string;
 }
-export const useFetchUserDocuments = (userId: string | undefined) => {
+export const useFetchUserDocuments = (userId?: string) => {
   const [listings, setListings] = useState<FormDataCreate2[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ErrorType | null>(null);
   useEffect(() => {
     const fetchUserDocuments = async () => {
+      const listRef = collection(db, "listings");
+      let q = query(listRef);
+
       if (userId) {
-        const listRef = collection(db, "listings");
-        const q = query(listRef, where("userRef", "==", userId));
+        q = query(listRef, where("userRef", "==", userId));
+      }
+      try {
         const querySnap = await getDocs(q);
         const listings: FormDataCreate2[] = [];
         querySnap.forEach((doc: DocumentSnapshot) => {
@@ -37,11 +41,17 @@ export const useFetchUserDocuments = (userId: string | undefined) => {
 
         setListings(listings);
         setLoading(false);
+      } catch (error) {
+        const errorMessage = (error as Error).message;
+        setError({ message: errorMessage });
+        console.error("Error fetching documents: ", error);
+        setLoading(false);
       }
     };
 
     fetchUserDocuments();
   }, [userId]);
+
   const deleteDocument = async (collectionName: string, documentID: string) => {
     setLoading(true);
     setError(null);
