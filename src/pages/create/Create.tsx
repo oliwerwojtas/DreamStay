@@ -13,7 +13,9 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 export const Create = () => {
   const auth = getAuth();
   const navigate = useNavigate();
+
   const { addDocument } = useDocument("listings");
+
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<FormDataCreate>({
     type: "rent",
@@ -27,6 +29,8 @@ export const Create = () => {
     offer: false,
     regularPrice: 0,
     discountedPrice: 0,
+    // latitude: 1,
+    // longitude: 1,
     images: [],
     imgUrls: [],
     userRef: auth.currentUser?.uid,
@@ -45,7 +49,10 @@ export const Create = () => {
     regularPrice,
     discountedPrice,
     images,
+    // latitude,
+    // longitude,
   } = formData;
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     let boolean: boolean | null = null;
@@ -91,6 +98,7 @@ export const Create = () => {
       toast.error("Maximum 3 images are allowed");
       return;
     }
+
     const storeImage = async (image: any) => {
       return new Promise((resolve, reject) => {
         const storage = getStorage();
@@ -139,6 +147,7 @@ export const Create = () => {
         timestamp: serverTimestamp(),
         userRef: auth.currentUser?.uid,
       };
+
       delete formDataCopy.images;
       // const formDataCopy = { ...formData, timestamp: serverTimestamp() };
       await addDocument(formDataCopy);
@@ -278,6 +287,32 @@ export const Create = () => {
           required
           className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
         />
+
+        {/* <div className="flex space-x-4">
+          <div>
+            <p className="text-lg font-semibold">Latitude:</p>
+            <input
+              type="number"
+              id="latitude"
+              value={latitude}
+              required
+              onChange={handleChange}
+              className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded"
+            />
+          </div>
+          <div>
+            <p className="text-lg font-semibold">Longitude:</p>
+            <input
+              type="number"
+              id="longitude"
+              value={longitude}
+              required
+              onChange={handleChange}
+              className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded"
+            />
+          </div>
+        </div> */}
+
         <p className="text-lg font-semibold">Description</p>
         <textarea
           id="description"

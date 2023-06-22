@@ -38,6 +38,8 @@ export interface FormDataCreate {
   images: File[];
   imgUrls: string[];
   userRef: string | undefined;
+  // latitude: number;
+  // longitude: number;
 }
 export interface FormDataCreate2 {
   id: string;
@@ -57,5 +59,7 @@ export interface FormDataCreate2 {
     imgUrls: string[];
     userRef: string | undefined;
     timestamp: Timestamp;
+    // longitude: number;
+    // latitude: number;
   };
 }

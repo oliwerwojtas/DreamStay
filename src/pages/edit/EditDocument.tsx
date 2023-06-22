@@ -27,6 +27,8 @@ export const EditDocument = () => {
     offer: false,
     regularPrice: 0,
     discountedPrice: 0,
+    // latitude: 1,
+    // longitude: 1,
     images: [],
     imgUrls: [],
     userRef: auth.currentUser?.uid,
@@ -45,6 +47,8 @@ export const EditDocument = () => {
     regularPrice,
     discountedPrice,
     images,
+    // latitude,
+    // longitude,
   } = formData;
 
   const params = useParams();
@@ -111,15 +115,15 @@ export const EditDocument = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (images.length > 3) {
-      setLoading(false);
-      toast.error("Maximum 3 images are allowed");
-      return;
-    }
+    // if (images.length > 3) {
+    //   setLoading(false);
+    //   toast.error("Maximum 3 images are allowed");
+    //   return;
+    // }
 
     try {
       const formDataCopy = { ...formData, timestamp: serverTimestamp() };
-      await updateDocument(formDataCopy, params.id);
+      await updateDocument(formDataCopy, params.id || "");
       setLoading(false);
       toast.success("Edited!");
       navigate("/settings");

@@ -1,6 +1,7 @@
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
 
 import { ListingItem } from "../../components/ListingItem";
+
 export const Home = () => {
   const { listings } = useFetchUserDocuments();
   const saleListings = listings.filter((listing) => listing.data.type === "sale");
