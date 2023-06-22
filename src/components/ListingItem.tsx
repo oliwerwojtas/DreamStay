@@ -73,12 +73,20 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
           </div>
         </div>
       </Link>
-      <FaTrash
-        size={20}
-        className="absolute bottom-2 right-2 cursor-pointer text-red-500"
-        onClick={handleDelete}
-      />
-      <MdEdit size={20} className="absolute bottom-2 right-8 cursor-pointer" onClick={handleEdit} />
+      {auth.currentUser?.uid === listing.userRef && (
+        <>
+          <FaTrash
+            size={20}
+            className="absolute bottom-2 right-2 cursor-pointer text-red-500"
+            onClick={handleDelete}
+          />
+          <MdEdit
+            size={20}
+            className="absolute bottom-2 right-8 cursor-pointer"
+            onClick={handleEdit}
+          />
+        </>
+      )}
     </li>
   );
 };

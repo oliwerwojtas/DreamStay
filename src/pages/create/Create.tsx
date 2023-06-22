@@ -131,13 +131,11 @@ export const Create = () => {
       });
     };
 
-    const imgUrls = await Promise.all([...images].map((image) => storeImage(image))).catch(
-      (error) => {
-        setLoading(false);
-        toast.error("Images not uploaded");
-        return;
-      }
-    );
+    const imgUrls = await Promise.all([...images].map((image) => storeImage(image))).catch(() => {
+      setLoading(false);
+      toast.error("Images not uploaded");
+      return;
+    });
     console.log(imgUrls);
     try {
       const formDataCopy = {
