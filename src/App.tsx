@@ -1,7 +1,7 @@
 import { Home } from "./pages/home/Home";
 import { Login } from "./pages/login/Login";
 import { SignUp } from "./pages/signup/SignUp";
-import { Offers } from "./pages/offers/Offers";
+import { Details, Offers } from "./pages/details/Details";
 import { Settings } from "./pages/settings/Settings";
 import { Create } from "./pages/create/Create";
 import { RootLayout } from "./pages/RootLayout";
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "/offers",
-        element: <Offers />,
+        path: "/details/:id",
+        element: <Details />,
       },
       {
         path: "/create",

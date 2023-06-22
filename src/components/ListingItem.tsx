@@ -39,7 +39,7 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
 
   return (
     <li className="bg-white w-60 relative flex flex-col justify-between shadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
-      <Link to={`/category/${listing.type}/${id}`}>
+      <Link to={`/details/${id}`}>
         <img
           src={listing.imgUrls[0]}
           alt="house photo"
