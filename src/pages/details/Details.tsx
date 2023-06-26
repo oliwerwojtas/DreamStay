@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
 import { Spinner } from "../../components/Spinner";
 import { useGeolocation } from "../../hooks/useGeolocation";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
-
+import { MapContainerDetails } from "../../components/MapDetails";
 export const Details = () => {
   const { id } = useParams();
   const { listings } = useFetchUserDocuments();
@@ -32,13 +32,7 @@ export const Details = () => {
           scrollWheelZoom={false}
           style={{ height: "100%", width: "100%" }}
         >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker position={position}>
-            <Popup>{details.data.address}</Popup>
-          </Marker>
+          <MapContainerDetails position={position} details={details} />
         </MapContainer>
       </div>
     </div>
