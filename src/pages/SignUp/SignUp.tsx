@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { useSignup } from "../../hooks/useSignup";
 import { FormData } from "../../types";
 import { toast } from "react-toastify";
-import { MediaAuth } from "../../components/auth/GoogleAuth";
-
+import { HiOutlineMail } from "react-icons/hi";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { AiOutlineUser } from "react-icons/ai";
 export const SignUp = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -54,7 +55,7 @@ export const SignUp = () => {
             Hello, Friend!
             <span className="absolute top-[100%] left-1/2 transform -translate-x-1/2 w-1/5 h-[3px] bg-white my-4"></span>
           </p>
-          <p className="w-3/4 md:w-1/2 absolute top-[45%] md:top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-semibold z-30 text-white text-center text-lg">
+          <p className="w-3/4 md:w-1/2 absolute top-[45%] md:top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-medium z-30 text-white text-center text-lg">
             Fill up personal information and start journey with us.
           </p>
           <button className="absolute top-[70%] md:top-[65%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 px-12 py-2 border-white border-2 rounded font-semibold z-30 text-white">
@@ -64,39 +65,44 @@ export const SignUp = () => {
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20 bg-white h-[30rem] flex flex-col justify-between ">
           <h1 className="text-3xl text-center mt-6 font-extrabold text-green-600 relative group">
             Sign Up
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1/5 h-[3px] bg-green-600 my-4"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-green-600 my-4"></div>
           </h1>
-          <MediaAuth />
+
           <form onSubmit={handleSignUpSubmit}>
-            <div className="flex justify-center">
+            <div className="flex justify-center relative">
               <input
-                className="w-80 px-4 py-2 text-base text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6"
+                className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
                 type="text"
                 id="name"
                 value={name}
                 onChange={handleChangeData}
                 placeholder="Full Name"
               />
+              {name === "" && <AiOutlineUser size={20} className="absolute top-2.5 left-4" />}
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center relative">
               <input
-                className="w-80 px-4 py-2 text-base text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6"
+                className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
                 type="email"
                 id="email"
                 value={email}
                 onChange={handleChangeData}
-                placeholder="Email address"
+                placeholder="Email"
               />
+              {email === "" && <HiOutlineMail size={20} className="absolute top-2.5 left-4" />}
             </div>
             <div className="flex justify-center relative mb-6">
               <input
-                className="w-80 px-4 py-2 text-base text-gray-700 bg-white border-gray-300 rounded transition ease-in-out "
+                className="w-80 px-4 py-2 text-base text-gray-700  rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
                 type="password"
                 id="password"
                 value={password}
                 onChange={handleChangeData}
                 placeholder="Password"
               />
+              {password === "" && (
+                <RiLockPasswordLine size={20} className="absolute top-2.5 left-4" />
+              )}
             </div>
             <div className="flex whitespace-nowrap text-sm sm:text-lg">
               <p className="mb-6 mx-auto">

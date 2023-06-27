@@ -1,11 +1,15 @@
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
 
 import { ListingItem } from "../../components/ListingItem";
+import { Spinner } from "../../components/Spinner";
 
 export const Home = () => {
-  const { listings } = useFetchUserDocuments();
+  const { listings, loading } = useFetchUserDocuments();
   const saleListings = listings.filter((listing) => listing.data.type === "sale");
   const rentListings = listings.filter((listing) => listing.data.type === "rent");
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <div>
       <div className="flex flex-col">

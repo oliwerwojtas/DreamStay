@@ -20,15 +20,18 @@ export const Header = () => {
           <ul className="flex space-x-10">
             {initialStatusChecked && (
               <>
-                <NavLink to="/" className="relative group ">
-                  Home
-                  <div className="absolute w-full h-0.5 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform "></div>
-                </NavLink>
                 {loggedIn || googleLoggedIn || githubLoggedIn ? (
-                  <NavLink to="/settings" className="relative group">
-                    Settings
-                    <div className="absolute w-full h-0.5 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform "></div>
-                  </NavLink>
+                  <>
+                    <NavLink to="/" className="relative group ">
+                      Home
+                      <div className="absolute w-full h-0.5 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform "></div>
+                    </NavLink>
+
+                    <NavLink to="/settings" className="relative group">
+                      Settings
+                      <div className="absolute w-full h-0.5 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform "></div>
+                    </NavLink>
+                  </>
                 ) : (
                   <>
                     <NavLink to="/login" className="relative group">

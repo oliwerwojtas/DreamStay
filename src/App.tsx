@@ -1,7 +1,7 @@
 import { Home } from "./pages/home/Home";
 import { Login } from "./pages/login/Login";
 import { SignUp } from "./pages/signup/SignUp";
-import { Details, Offers } from "./pages/details/Details";
+import { Details } from "./pages/details/Details";
 import { Settings } from "./pages/settings/Settings";
 import { Create } from "./pages/create/Create";
 import { RootLayout } from "./pages/RootLayout";
@@ -10,7 +10,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { EditDocument } from "./pages/edit/EditDocument";
-
+import { SkeletonTheme } from "react-loading-skeleton";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -67,8 +67,10 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <div>
-      <ToastContainer theme="dark" />
-      <RouterProvider router={router} />
+      <SkeletonTheme baseColor="#202020" highlightColor="#444">
+        <ToastContainer theme="dark" />
+        <RouterProvider router={router} />
+      </SkeletonTheme>
     </div>
   );
 };

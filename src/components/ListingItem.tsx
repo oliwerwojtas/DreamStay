@@ -8,7 +8,8 @@ import { MdEdit } from "react-icons/md";
 import { useFetchUserDocuments } from "../hooks/useFetchUserDocuments";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;

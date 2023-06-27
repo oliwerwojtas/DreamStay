@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { db } from "../../config";
 import { getDoc, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { BsGoogle } from "react-icons/bs";
 export const MediaAuth = () => {
   const navigate = useNavigate();
   const handleMediaAuth = async () => {
@@ -33,10 +34,10 @@ export const MediaAuth = () => {
   return (
     <button
       type="button"
+      className="w-12 h-12  rounded-full flex justify-center items-center border-gray-300 border-2 hover:bg-green-600 duration-300 ease-in-out hover:border-white"
       onClick={handleMediaAuth}
-      className="px-2 py-1 bg-green-600 text-white w-1/3 rounded"
     >
-      Google
+      <BsGoogle size={20} />
     </button>
   );
 };
