@@ -7,12 +7,14 @@ import { useState } from "react";
 import { SignupError } from "../types";
 export const useLogout = () => {
   const [error, setError] = useState<SignupError | null>(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const logout = async () => {
     setError(null);
     navigate("/login");
+    setLoading(true);
 
     try {
       await getAuth().signOut();
@@ -21,9 +23,10 @@ export const useLogout = () => {
     } catch (error) {
       const errorMessage = (error as Error).message;
       setError({ message: errorMessage });
+      setLoading(false);
       throw error;
     }
   };
 
-  return { logout, error };
+  return { logout, loading, error };
 };

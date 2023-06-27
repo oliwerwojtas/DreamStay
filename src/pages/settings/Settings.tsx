@@ -8,6 +8,7 @@ import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { ListingItem } from "../../components/ListingItem";
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
+import { Spinner } from "../../components/Spinner";
 
 interface FormData {
   name: string;
@@ -65,6 +66,9 @@ export const Settings = () => {
       handleSubmitData(e as unknown as FormEvent<HTMLFormElement>);
     }
   };
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <>

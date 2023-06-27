@@ -1,42 +1,42 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { FormEvent, ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useSignup } from "../../hooks/useSignup";
-import { FormData } from "../../types";
 import { toast } from "react-toastify";
 import { HiOutlineMail } from "react-icons/hi";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { AiOutlineUser } from "react-icons/ai";
-export const SignUp = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    password: "",
-  });
 
-  const { name, email, password } = formData;
-  const { signup } = useSignup();
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { SignupError } from "../../types";
+import { Spinner } from "../../components/Spinner";
+export const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState<SignupError | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleChangeData = (e: ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
+  if (loading) {
+    return <Spinner />;
+  }
+  const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
   };
 
-  const handleSignUpSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const data = { email, password, displayName: name };
-      const result = await signup(data);
-      const user = result.user;
+    setLoading(true);
+    setError(null);
 
-      console.log(user);
+    try {
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth, email);
+      toast.success("Email was sent");
     } catch (error) {
-      toast.error("Somethin went wrong");
+      const errorMessage = (error as Error).message;
+      setError({ message: errorMessage });
+
+      toast.error(errorMessage);
     }
+
+    setLoading(false);
   };
 
   return (
@@ -68,20 +68,7 @@ export const SignUp = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-green-600 my-4"></div>
           </h1>
 
-          <form onSubmit={handleSignUpSubmit}>
-            <div className="flex justify-center">
-              <div className="relative">
-                <input
-                  className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={handleChangeData}
-                  placeholder="Full Name"
-                />
-                {name === "" && <AiOutlineUser size={20} className="absolute top-2.5 left-2" />}
-              </div>
-            </div>
+          <form onSubmit={handleSubmit}>
             <div className="flex justify-center">
               <div className="relative">
                 <input
@@ -89,43 +76,19 @@ export const SignUp = () => {
                   type="email"
                   id="email"
                   value={email}
-                  onChange={handleChangeData}
+                  onChange={handleChangeEmail}
                   placeholder="Email"
                 />
                 {email === "" && <HiOutlineMail size={20} className="absolute top-2.5 left-2" />}
               </div>
             </div>
-            <div className="flex justify-center">
-              <div className="relative">
-                <input
-                  className="w-80 px-4 py-2 text-base text-gray-700  rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={handleChangeData}
-                  placeholder="Password"
-                />
-                {password === "" && (
-                  <RiLockPasswordLine size={20} className="absolute top-2.5 left-2" />
-                )}
-              </div>
-            </div>
             <div className="flex justify-between text-xs mx-2 mb-12">
               <p>
+                Back to login
                 <Link
-                  to="/login"
-                  className="text-green-600 hover:text-green-800 transition duration-200 ease-in-out ml-1"
-                >
-                  Back to login
-                </Link>
-              </p>
-              <p>
-                <Link
-                  to="/forgotPassword"
-                  className="text-green-600 hover:text-green-800 transition duration-200 ease-in-out ml-1 "
-                >
-                  Forgot password?
-                </Link>
+                  to="/signup"
+                  className="text-green-600 hover:text-red-800 transition duration-200 ease-in-out ml-1"
+                ></Link>
               </p>
             </div>
             <button

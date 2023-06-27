@@ -24,6 +24,7 @@ export const Details = () => {
         <span>{details.data.name}</span>
         <span>Longitude: {location.longitude}</span>
         <span>Latitude: {location.latitude}</span>
+        <img src={details.data.imgUrls[0]} />
       </div>
       <div className="h-80">
         <MapContainer

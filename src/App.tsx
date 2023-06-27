@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { EditDocument } from "./pages/edit/EditDocument";
 import { SkeletonTheme } from "react-loading-skeleton";
+import { ForgotPassword } from "./pages/forgotPassword/ForgotPassword";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/forgotPassword",
+        element: <ForgotPassword />,
       },
       {
         path: "/details/:id",

@@ -63,7 +63,7 @@ export const Login = () => {
             Hello, Friend!
             <span className="absolute top-[100%] left-1/2 transform -translate-x-1/2 w-1/5 h-[3px] bg-white my-4"></span>
           </p>
-          <p className="w-3/4 md:w-1/2 absolute top-[45%] md:top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-medium z-30 text-white text-center text-lg">
+          <p className="w-3/4 md:w-2/3 absolute top-[45%] md:top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-medium z-30 text-white text-center text-lg">
             Fill up personal information and start journey with us.
           </p>
           <button
@@ -86,38 +86,51 @@ export const Login = () => {
           </div>
           <p className="text-center text-gray-500 text-sm">or use your email account</p>
           <form onSubmit={handleLoginSubmit}>
-            <div className="flex justify-center relative">
-              <input
-                className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
-                type="email"
-                id="email"
-                value={email}
-                onChange={handleChangeData}
-                placeholder="Email"
-              />
-              {email === "" && <HiOutlineMail size={20} className="absolute top-2.5 left-4" />}
+            <div className="flex justify-center">
+              <div className="relative">
+                <input
+                  className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={handleChangeData}
+                  placeholder="Email"
+                />
+
+                {email === "" && <HiOutlineMail size={20} className="absolute top-2.5 left-2" />}
+              </div>
             </div>
-            <div className="flex justify-center relative mb-6">
-              <input
-                className="w-80 px-4 py-2 text-base text-gray-700  rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
-                type="password"
-                id="password"
-                value={password}
-                onChange={handleChangeData}
-                placeholder="Password"
-              />
-              {password === "" && (
-                <RiLockPasswordLine size={20} className="absolute top-2.5 left-4" />
-              )}
+            <div className="flex justify-center  mb-0">
+              <div className="relative">
+                <input
+                  className="w-80 px-4 py-2 text-base text-gray-700  rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={handleChangeData}
+                  placeholder="Password"
+                />
+                {password === "" && (
+                  <RiLockPasswordLine size={20} className="absolute top-2.5 left-2" />
+                )}
+              </div>
             </div>
-            <div className="flex whitespace-nowrap text-sm sm:text-lg">
-              <p className="mb-6 mx-auto">
+            <div className="flex justify-between text-xs mx-2 mb-12">
+              <p>
                 Dont' have account?
                 <Link
                   to="/signup"
-                  className="text-red-600 hover:text-red-700 transition duration-200 ease-in-out ml-1"
+                  className="text-green-600 hover:text-green-800 transition duration-200 ease-in-out ml-1 font-semibold"
                 >
                   Register
+                </Link>
+              </p>
+              <p>
+                <Link
+                  to="/forgotPassword"
+                  className="text-green-600 hover:text-green-800 transition duration-200 ease-in-out ml-1 "
+                >
+                  Forgot password?
                 </Link>
               </p>
             </div>
