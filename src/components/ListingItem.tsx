@@ -8,8 +8,9 @@ import { MdEdit } from "react-icons/md";
 import { useFetchUserDocuments } from "../hooks/useFetchUserDocuments";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
+import { FavoriteButton } from "./FavouriteButton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useState } from "react";
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;
@@ -17,6 +18,7 @@ interface ListingItemProps {
 
 export const ListingItem = ({ listing, id }: ListingItemProps) => {
   const auth = getAuth();
+  const [isFavorite, setIsFavorite] = useState(false);
   const navigate = useNavigate();
   const daysFromToday = dayjs().diff(dayjs(listing.timestamp.toDate()), "day");
   const { deleteDocument, loading } = useFetchUserDocuments(auth.currentUser?.uid);
@@ -37,9 +39,16 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
     console.log(id);
     navigate(`/edit/${id}`);
   };
+  const addToFavoritesHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
+    setIsFavorite(true);
+    console.log("klikniete");
+  };
 
   return (
-    <li className="bg-white w-60 relative flex flex-col justify-between shadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
+    <li className="bg-white w-60 relative z-10 flex flex-col justify-between shadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
+      <FavoriteButton isFavorite={isFavorite} addToFavoritesHandler={addToFavoritesHandler} />
       <Link to={`/details/${id}`}>
         <img
           src={listing.imgUrls[0]}

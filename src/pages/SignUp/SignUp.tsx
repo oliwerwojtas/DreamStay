@@ -55,7 +55,7 @@ export const SignUp = () => {
             Hello, Friend!
             <span className="absolute top-[100%] left-1/2 transform -translate-x-1/2 w-1/5 h-[3px] bg-white my-4"></span>
           </p>
-          <p className="w-3/4 md:w-1/2 absolute top-[45%] md:top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-medium z-30 text-white text-center text-lg">
+          <p className="w-3/4 md:w-2/3 absolute top-[45%] md:top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-medium z-30 text-white text-center text-lg">
             Fill up personal information and start journey with us.
           </p>
           <button className="absolute top-[70%] md:top-[65%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 px-12 py-2 border-white border-2 rounded font-semibold z-30 text-white">
@@ -72,33 +72,33 @@ export const SignUp = () => {
             <div className="flex justify-center">
               <div className="relative">
                 <input
-                  className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
+                  className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-7"
                   type="text"
                   id="name"
                   value={name}
                   onChange={handleChangeData}
                   placeholder="Full Name"
                 />
-                {name === "" && <AiOutlineUser size={20} className="absolute top-2.5 left-2" />}
+                {name === "" && <AiOutlineUser size={20} className="absolute top-2.5 left-5" />}
               </div>
             </div>
             <div className="flex justify-center">
               <div className="relative">
                 <input
-                  className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
+                  className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-7"
                   type="email"
                   id="email"
                   value={email}
                   onChange={handleChangeData}
                   placeholder="Email"
                 />
-                {email === "" && <HiOutlineMail size={20} className="absolute top-2.5 left-2" />}
+                {email === "" && <HiOutlineMail size={20} className="absolute top-2.5 left-5" />}
               </div>
             </div>
             <div className="flex justify-center">
               <div className="relative">
                 <input
-                  className="w-80 px-4 py-2 text-base text-gray-700  rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
+                  className="w-80 px-4 py-2 text-base text-gray-700  rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-7"
                   type="password"
                   id="password"
                   value={password}
@@ -106,7 +106,7 @@ export const SignUp = () => {
                   placeholder="Password"
                 />
                 {password === "" && (
-                  <RiLockPasswordLine size={20} className="absolute top-2.5 left-2" />
+                  <RiLockPasswordLine size={20} className="absolute top-2.5 left-5" />
                 )}
               </div>
             </div>

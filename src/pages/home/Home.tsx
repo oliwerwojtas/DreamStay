@@ -7,6 +7,7 @@ export const Home = () => {
   const { listings, loading } = useFetchUserDocuments();
   const saleListings = listings.filter((listing) => listing.data.type === "sale");
   const rentListings = listings.filter((listing) => listing.data.type === "rent");
+
   if (loading) {
     return <Spinner />;
   }

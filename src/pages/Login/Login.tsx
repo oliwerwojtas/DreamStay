@@ -89,7 +89,7 @@ export const Login = () => {
             <div className="flex justify-center">
               <div className="relative">
                 <input
-                  className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
+                  className="w-80 px-4 py-2 text-base text-gray-700 rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-7"
                   type="email"
                   id="email"
                   value={email}
@@ -97,13 +97,13 @@ export const Login = () => {
                   placeholder="Email"
                 />
 
-                {email === "" && <HiOutlineMail size={20} className="absolute top-2.5 left-2" />}
+                {email === "" && <HiOutlineMail size={20} className="absolute top-2.5 left-5" />}
               </div>
             </div>
             <div className="flex justify-center  mb-0">
               <div className="relative">
                 <input
-                  className="w-80 px-4 py-2 text-base text-gray-700  rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-4"
+                  className="w-80 px-4 py-2 text-base text-gray-700  rounded transition ease-in-out mb-6 bg-gray-100 placeholder:px-7"
                   type="password"
                   id="password"
                   value={password}
@@ -111,7 +111,7 @@ export const Login = () => {
                   placeholder="Password"
                 />
                 {password === "" && (
-                  <RiLockPasswordLine size={20} className="absolute top-2.5 left-2" />
+                  <RiLockPasswordLine size={20} className="absolute top-2.5 left-5" />
                 )}
               </div>
             </div>
