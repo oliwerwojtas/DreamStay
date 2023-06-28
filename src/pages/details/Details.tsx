@@ -3,6 +3,13 @@ import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
 import { Spinner } from "../../components/Spinner";
 import { useGeolocation } from "../../hooks/useGeolocation";
 import { MdLocationOn } from "react-icons/md";
+import { BiBed } from "react-icons/bi";
+import { MdSmokeFree } from "react-icons/md";
+import { FaParking } from "react-icons/fa";
+import { MdOutlineBathroom } from "react-icons/md";
+import { BsFillHouseDoorFill } from "react-icons/bs";
+import { MdOutlineFreeBreakfast } from "react-icons/md";
+import { LuSofa } from "react-icons/lu";
 import { MapContainer } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
 import { MapContainerDetails } from "../../components/MapDetails";
@@ -41,18 +48,34 @@ export const Details = () => {
           <span>Type: {details.data.type}</span>
           <div>Description: {details.data.description}</div>
           <div className="flex flex-wrap justify-around mt-4 w-full">
-            <p className="bg-red-400 w-1/4">Beds: {details.data.bedrooms}</p>
-            <p className="bg-green-400 w-1/4">Baths: {details.data.bathrooms}</p>
-            <p className="bg-blue-400 w-1/4">
+            <p className="flex bg-red-400 w-1/4 justify-center items-center py-3">
+              <BiBed size={24} />
+              Beds: {details.data.bedrooms}
+            </p>
+            <p className="flex justify-center items-center bg-green-400 w-1/4">
+              <MdOutlineBathroom size={24} />
+              Baths: {details.data.bathrooms}
+            </p>
+            <p className="flex bg-blue-400 w-1/4 justify-center items-center">
+              <FaParking size={24} />
               {details.data.parking ? "Parking place!" : "No parking place!"}
             </p>
-            <p className="bg-yellow-400 w-1/4">
+            <p className="flex bg-yellow-400 w-1/4 justify-center items-center">
+              <LuSofa size={24} />
               {details.data.furnished ? "furnished!" : "No furnished!"}
             </p>
 
-            <p>Metry</p>
-            <p>Niepalący</p>
-            <p>Śniadania</p>
+            <p className="flex justify-center items-center w-1/3 bg-orange-200">
+              <BsFillHouseDoorFill size={24} /> Metry
+            </p>
+            <p className="flex justify-center items-center w-1/3 bg-slate-600 py-3">
+              <MdSmokeFree size={24} />
+              Niepalący
+            </p>
+            <p className="flex justify-center items-center w-1/3 bg-amber-700">
+              <MdOutlineFreeBreakfast size={24} />
+              Śniadania
+            </p>
           </div>
         </div>
         <div className="w-[30rem] bg-red-400">
