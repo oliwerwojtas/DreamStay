@@ -93,7 +93,7 @@ export const Settings = () => {
             />
 
             <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6">
-              <p className="flex items-center ">
+              <p className="flex items-center text-sm md:text-lg">
                 Do you want to change your name?
                 <span
                   onClick={handleSpanClick}
@@ -110,7 +110,10 @@ export const Settings = () => {
               </p>
             </div>
           </form>
-          <button type="submit" className="bg-green-600 px-8 text-white rounded hover:bg-green-700">
+          <button
+            type="submit"
+            className="flex mx-auto bg-green-600 px-8 text-white rounded hover:bg-green-700"
+          >
             <Link to="/create" className="flex justify-center items-center px-8 py-2">
               <FcHome className="mr-2 text-2xl bg-red-200 rounded-full p-1" />
               Sell house
@@ -118,11 +121,11 @@ export const Settings = () => {
           </button>
         </div>
       </section>
-      <div className="max-w-6xl px-3 mt-6 mx-auto">
+      <div className="flex flex-col flex-wrap">
         {!loading && listings.length > 0 && (
           <>
             <h2 className="text-2xl text-center font-semibold mb-6">My Listings</h2>
-            <ul className="sm:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2">
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-6 mx-auto mb-8">
               {listings.map((listing) => (
                 <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
               ))}

@@ -47,7 +47,7 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
   };
 
   return (
-    <li className="bg-white w-60 relative z-10 flex flex-col justify-between shadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
+    <li className="bg-white w-[17rem] relative z-10 flex flex-col justify-centershadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
       <FavoriteButton isFavorite={isFavorite} addToFavoritesHandler={addToFavoritesHandler} />
       <Link to={`/details/${id}`}>
         <img
@@ -55,7 +55,6 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
           alt="house photo"
           className="h-[170px] w-full object-cover hover:scale-105 transition-scale duration-200 ease-in"
         />
-        {/* <span>{formattedDate}</span> */}
         <span className="absolute top-2 left-2 bg-green-800 text-white uppercase text-xs font-semibold rounded-md px-2 py-1 shadow-lg">
           {daysFromToday} days ago
         </span>

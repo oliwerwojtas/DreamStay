@@ -29,8 +29,6 @@ export const Create = () => {
     offer: false,
     regularPrice: 0,
     discountedPrice: 0,
-    // latitude: 1,
-    // longitude: 1,
     images: [],
     imgUrls: [],
     userRef: auth.currentUser?.uid,
@@ -49,10 +47,11 @@ export const Create = () => {
     regularPrice,
     discountedPrice,
     images,
-    // latitude,
-    // longitude,
   } = formData;
 
+  if (loading) {
+    return <Spinner />;
+  }
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     let boolean: boolean | null = null;

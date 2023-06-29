@@ -13,17 +13,17 @@ export const Home = () => {
   }
   return (
     <div>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <span className="text-xl px-4 py-4">Checkout apartaments for buy!</span>
-        <div className="sm:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-5 gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-6 mx-auto">
           {saleListings.map((listing) => (
             <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
           ))}
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-wrap">
         <span className="text-xl px-4 py-4">Checkout apartaments for rent!</span>
-        <div className="sm:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-6 gap-2 w-full ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-6 mx-auto">
           {rentListings.map((listing) => (
             <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
           ))}
