@@ -3,20 +3,39 @@ import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
 import { ListingItem } from "../../components/ListingItem";
 import { Spinner } from "../../components/reusable/Spinner";
 import { ChangeEvent, useState } from "react";
-
+import { useDebounce } from "../../hooks/useDebounce";
 export const Home = () => {
+  const [search, setSearched] = useState<string>("");
   const { listings, loading } = useFetchUserDocuments();
-
-  const saleListings = listings.filter((listing) => listing.data.type === "sale");
-  const rentListings = listings.filter((listing) => listing.data.type === "rent");
-
+  const debounceSearch = useDebounce(search, 300);
+  const handleSearchText = (e: ChangeEvent<HTMLInputElement>) => {
+    const searchText = e.target.value;
+    setSearched(searchText);
+  };
   if (loading) {
     return <Spinner />;
   }
+  const filteredListings = listings.filter((listing) => {
+    const nameMatches = listing.data.name.toLowerCase().includes(debounceSearch.toLowerCase());
+    const addressMatches = listing.data.address
+      .toLowerCase()
+      .includes(debounceSearch.toLowerCase());
+    // const typeMatches = listing.data.type === "sale" || listing.data.type === "rent";
+    return nameMatches || addressMatches;
+    // && typeMatches
+  });
 
+  const saleListings = filteredListings.filter((listing) => listing.data.type === "sale");
+  const rentListings = filteredListings.filter((listing) => listing.data.type === "rent");
   return (
     <div>
       <div className="flex flex-col w-full">
+        <input
+          className="w-1/2 bg-slate-600 text-white"
+          onChange={handleSearchText}
+          value={search}
+          placeholder="Search..."
+        />
         <span className="text-2xl px-4 py-4 text-center font-semibold">
           Checkout apartaments for buy!
         </span>

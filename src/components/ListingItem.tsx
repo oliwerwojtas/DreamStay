@@ -28,6 +28,7 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
   const navigate = useNavigate();
   const daysFromToday = dayjs().diff(dayjs(listing.timestamp.toDate()), "day");
   const { deleteDocument, isLoading } = useDocument("listings");
+
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat(undefined, { minimumFractionDigits: 2 }).format(price);
   };
@@ -141,6 +142,3 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
     </li>
   );
 };
-function dispatch(arg0: any) {
-  throw new Error("Function not implemented.");
-}
