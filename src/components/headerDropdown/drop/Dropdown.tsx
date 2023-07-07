@@ -2,10 +2,9 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiChevronDown, FiEdit } from "react-icons/fi";
 import { AiOutlineHome, AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
-
 import { Option } from "./Option";
 import { useNavigate } from "react-router-dom";
-import { useLogout } from "../../hooks/useLogout";
+import { useLogout } from "../../../hooks/useLogout";
 export const Dropdown = () => {
   const { logout } = useLogout();
   const navigate = useNavigate();
@@ -39,7 +38,7 @@ export const Dropdown = () => {
           className="flex items-center gap-2 px-3 py-2 rounded-md text-indigo-50 bg-green-600 hover:bg-green-700 transition-colors"
           onClick={() => setOpen((previous) => !previous)}
         >
-          <span className="font-medium text-md text-white">Settings</span>
+          <span className="font-medium text-white">Settings</span>
           <motion.span variants={iconVariants}>
             <FiChevronDown />
           </motion.span>

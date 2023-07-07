@@ -5,12 +5,17 @@ import "dayjs/locale/pl";
 import { MdLocationOn } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
-import { useFetchUserDocuments } from "../hooks/useFetchUserDocuments";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { FavoriteButton } from "./FavouriteButton";
-import "react-loading-skeleton/dist/skeleton.css";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
+import { useDocument } from "../hooks/useDocument";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../config";
+import { addToFavorites, removeFromFavorites } from "../store/favoritesSlice";
+import { useDispatch } from "react-redux";
+
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;
@@ -18,37 +23,76 @@ interface ListingItemProps {
 
 export const ListingItem = ({ listing, id }: ListingItemProps) => {
   const auth = getAuth();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const dispatch = useDispatch();
+  const [favorites, setFavorites] = useState<string[]>([]);
   const navigate = useNavigate();
   const daysFromToday = dayjs().diff(dayjs(listing.timestamp.toDate()), "day");
-  const { deleteDocument, loading } = useFetchUserDocuments(auth.currentUser?.uid);
+  const { deleteDocument, isLoading } = useDocument("listings");
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat(undefined, { minimumFractionDigits: 2 }).format(price);
   };
-  console.log(listing);
-  console.log(id);
-  console.log(auth.currentUser?.uid == listing.userRef);
+
+  useEffect(() => {
+    if (auth.currentUser?.uid) {
+      const userFavoritesRef = doc(db, "favorites", auth.currentUser.uid);
+
+      getDoc(userFavoritesRef)
+        .then((docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const favoritesData = docSnapshot.data();
+            setFavorites(favoritesData.favorites);
+          } else {
+            setFavorites([]);
+          }
+        })
+        .catch((error) => {
+          console.error("Error getting user favorites:", error);
+        });
+    }
+  }, [auth.currentUser]);
+
   const handleDelete = async () => {
     await deleteDocument("listings", id);
-    if (!loading) {
+    if (!isLoading) {
       window.location.reload();
     }
   };
-  // console.log(documentID);
+
   const handleEdit = () => {
     console.log(id);
     navigate(`/edit/${id}`);
   };
-  const addToFavoritesHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const addToFavoritesHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
-    setIsFavorite(true);
-    console.log("klikniete");
+    if (auth.currentUser?.uid) {
+      const userFavoritesRef = doc(db, "favorites", auth.currentUser.uid);
+
+      let updatedFavorites = [];
+
+      if (favorites && favorites.includes(id)) {
+        dispatch(removeFromFavorites([id]));
+        updatedFavorites = favorites.filter((favoriteId) => favoriteId !== id);
+      } else {
+        dispatch(addToFavorites([id]));
+        updatedFavorites = [...favorites, id];
+      }
+
+      try {
+        await setDoc(userFavoritesRef, { favorites: updatedFavorites });
+        setFavorites(updatedFavorites);
+      } catch (error) {
+        console.error("Error adding to favorites:", error);
+      }
+    }
   };
 
   return (
     <li className="bg-white w-[17rem] relative z-10 flex flex-col justify-centershadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
-      <FavoriteButton isFavorite={isFavorite} addToFavoritesHandler={addToFavoritesHandler} />
+      <FavoriteButton
+        isFavorite={favorites && favorites.includes(id)}
+        addToFavoritesHandler={addToFavoritesHandler}
+      />
       <Link to={`/details/${id}`}>
         <img
           src={listing.imgUrls[0]}
@@ -65,9 +109,7 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
           </div>
           <p className="font-semibold mt-2 text-lg truncate">{listing.name}</p>
           <p>
-            {listing.offer
-              ? formatPrice(listing.discountedPrice)
-              : formatPrice(listing.regularPrice)}
+            {formatPrice(listing.regularPrice)}
             {listing.type === "rent" && " / month"}
           </p>
           <div className="flex items-center mt-[10px] space-x-3">
@@ -99,3 +141,6 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
     </li>
   );
 };
+function dispatch(arg0: any) {
+  throw new Error("Function not implemented.");
+}

@@ -50,7 +50,7 @@ export const Option = ({
     >
       <motion.span
         variants={actionIconVariants}
-        className="bg-green-500 rounded-full w-6 h-6 flex justify-center items-center"
+        className="bg-green-500 rounded-full w-6 h-6 px-1 flex justify-center items-center"
       >
         <Icon size={18} />
       </motion.span>

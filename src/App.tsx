@@ -5,12 +5,11 @@ import { Details } from "./pages/details/Details";
 import { Settings } from "./pages/settings/Settings";
 import { Create } from "./pages/create/Create";
 import { RootLayout } from "./pages/RootLayout";
-import { PrivateRoute } from "./components/PrivateRoute";
+import { PrivateRoute } from "./components/reusable/PrivateRoute";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { EditDocument } from "./pages/edit/EditDocument";
-import { SkeletonTheme } from "react-loading-skeleton";
 import { ForgotPassword } from "./pages/forgotPassword/ForgotPassword";
 const router = createBrowserRouter([
   {
@@ -71,11 +70,9 @@ const router = createBrowserRouter([
 ]);
 const App = () => {
   return (
-    <div>
-      <SkeletonTheme baseColor="#202020" highlightColor="#444">
-        <ToastContainer theme="dark" />
-        <RouterProvider router={router} />
-      </SkeletonTheme>
+    <div className="dark:bg-red-500">
+      <ToastContainer theme="dark" />
+      <RouterProvider router={router} />
     </div>
   );
 };

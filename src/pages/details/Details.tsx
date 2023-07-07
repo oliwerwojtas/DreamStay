@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
-import { Spinner } from "../../components/Spinner";
+import { Spinner } from "../../components/reusable/Spinner";
 import { useGeolocation } from "../../hooks/useGeolocation";
 import { MdLocationOn } from "react-icons/md";
 import { BiBed } from "react-icons/bi";
@@ -13,11 +13,9 @@ import { LuSofa } from "react-icons/lu";
 import { MapContainer } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
 import { MapContainerDetails } from "../../components/MapDetails";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/effect-fade";
-import { EffectFade, Navigation } from "swiper";
+import { ImageSlider } from "../../components/ImageSlider";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { Link } from "react-router-dom";
 export const Details = () => {
   const { id } = useParams();
   const { listings } = useFetchUserDocuments();
@@ -25,19 +23,19 @@ export const Details = () => {
   const details = listings.find((listing) => listing.id === id);
   const location = useGeolocation(details?.data.address || "");
 
-  console.log(details?.data.imgUrls);
-  console.log(details?.data);
-  console.log(location);
   if (!details) {
     return <Spinner />;
   }
   const position: LatLngTuple = [location.latitude, location.longitude];
-  console.log(position);
+
   return (
-    <div className="flex flex-col justify-center items-center h-[90vh]">
-      <button className="flex justify-start w-[70rem] mb-4">Back to list </button>
-      <div className="flex h-[20rem] bg-green-500 flex-wrap">
-        <div className="flex flex-col px-6 bg-white w-[40rem]">
+    <div className="flex flex-col justify-center items-center ">
+      <button className="flex mb-4 items-center gap-2 px-3 py-2 mt-4 rounded-md text-indigo-50 bg-green-600 hover:bg-green-700 transition-colors">
+        <AiOutlineArrowLeft /> <Link to="/">Back to list</Link>
+      </button>
+
+      <div className="flex bg-green-500 flex-wrap max-w-[80rem] justify-center">
+        <div className="flex flex-col px-6 bg-white w-[90vw] h-full ">
           <span>
             {details.data.name} - {details.data.regularPrice} / month
           </span>
@@ -45,40 +43,39 @@ export const Details = () => {
             <MdLocationOn className="h-4 w-4 text-green-600" />
             <p className="font-semibold text-sm mb-[2px]  truncate">{details.data.address}</p>
           </div>
-          <span>Type: {details.data.type}</span>
+          <span>Type: {details.data.type ? "rent" : "sale"}</span>
           <div>Description: {details.data.description}</div>
-          <div className="flex flex-wrap justify-around mt-4 w-full">
-            <p className="flex bg-red-400 w-1/4 justify-center items-center py-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 place-items-center w-full mb-4">
+            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-black border-2 border-green-500 hover:bg-green-600 hover:text-white transition-colors w-[13rem]">
               <BiBed size={24} />
               Beds: {details.data.bedrooms}
             </p>
-            <p className="flex justify-center items-center bg-green-400 w-1/4">
+            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-black border-2 border-green-500 hover:bg-green-600 hover:text-white transition-colors w-[13rem]">
               <MdOutlineBathroom size={24} />
               Baths: {details.data.bathrooms}
             </p>
-            <p className="flex bg-blue-400 w-1/4 justify-center items-center">
+            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-black border-2 border-green-500 hover:bg-green-600 hover:text-white transition-colors w-[13rem]">
               <FaParking size={24} />
               {details.data.parking ? "Parking place!" : "No parking place!"}
             </p>
-            <p className="flex bg-yellow-400 w-1/4 justify-center items-center">
+            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-black border-2 border-green-500 hover:bg-green-600 hover:text-white transition-colors w-[13rem]">
               <LuSofa size={24} />
-              {details.data.furnished ? "furnished!" : "No furnished!"}
+              {details.data.furnished ? "Furnished!" : "No furnished!"}
             </p>
-
-            <p className="flex justify-center items-center w-1/3 bg-orange-200">
-              <BsFillHouseDoorFill size={24} /> Metry
+            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-black border-2 border-green-500 hover:bg-green-600 hover:text-white transition-colors w-[13rem]">
+              <BsFillHouseDoorFill size={24} /> {details.data.meters}
             </p>
-            <p className="flex justify-center items-center w-1/3 bg-slate-600 py-3">
+            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-indiblack border-2 border-green-500  hover:bg-green-700 hover:text-white transition-colors w-[13rem] ">
               <MdSmokeFree size={24} />
-              Niepalący
+              {details.data.smoke ? "Dla palących!" : "Dla niepalących!"}
             </p>
-            <p className="flex justify-center items-center w-1/3 bg-amber-700">
+            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-indiblack  border-2 border-green-500 hover:bg-green-700 hover:text-white transition-colors w-[13rem] ">
               <MdOutlineFreeBreakfast size={24} />
-              Śniadania
+              {details.data.breakfast ? "Ze śniadaniami!" : "Bez śniadań!"}
             </p>
           </div>
         </div>
-        <div className="w-[30rem] bg-red-400">
+        <div className="w-full bg-red-400 h-[24rem]">
           <MapContainer
             center={position}
             zoom={13}
@@ -89,22 +86,9 @@ export const Details = () => {
           </MapContainer>
         </div>
       </div>
-      <div className="h-80 w-[50rem]">
-        <Swiper
-          navigation={true}
-          modules={[Navigation, EffectFade]}
-          effect={"fade"}
-          slidesPerView={1}
-          className="w-[25rem]"
-        >
-          {details.data.imgUrls.map((imageUrl, index) => (
-            <SwiperSlide key={index} className="flex justify-center">
-              <img className="w-full h-[20rem]" src={imageUrl} alt={`Image ${index + 1}`} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      <div className="h-80 w-[50rem] px-2 mt-4">
+        <ImageSlider imgUrls={details.data.imgUrls} />
       </div>
-      <div className="w-80 bg-white"></div>
     </div>
   );
 };

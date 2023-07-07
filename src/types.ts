@@ -24,6 +24,7 @@ export interface LoginData {
   email: string;
 }
 export interface FormDataCreate {
+  id: string;
   type: string;
   name: string;
   bedrooms: number;
@@ -32,18 +33,20 @@ export interface FormDataCreate {
   furnished: boolean;
   address: string;
   description: string;
-  offer: boolean;
   regularPrice: number;
-  discountedPrice: number;
   images: File[];
   imgUrls: string[];
   userRef: string | undefined;
-  // latitude: number;
-  // longitude: number;
+  smoke: boolean;
+  breakfast: boolean;
+  meters: number;
 }
 export interface FormDataCreate2 {
   id: string;
   data: {
+    breakfast: boolean;
+    smoke: boolean;
+    meters: number;
     type: string;
     name: string;
     bedrooms: number;
@@ -52,14 +55,10 @@ export interface FormDataCreate2 {
     furnished: boolean;
     address: string;
     description: string;
-    offer: boolean;
     regularPrice: number;
-    discountedPrice: number;
     images: FileList;
     imgUrls: string[];
     userRef: string | undefined;
     timestamp: Timestamp;
-    // longitude: number;
-    // latitude: number;
   };
 }

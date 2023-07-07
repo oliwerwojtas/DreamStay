@@ -1,5 +1,4 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { useLogout } from "../../hooks/useLogout";
 import { getAuth, updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 import { updateDoc, doc } from "firebase/firestore";
@@ -8,7 +7,7 @@ import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { ListingItem } from "../../components/ListingItem";
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
-import { Spinner } from "../../components/Spinner";
+import { Spinner } from "../../components/reusable/Spinner";
 
 interface FormData {
   name: string;
@@ -16,7 +15,6 @@ interface FormData {
 }
 export const Settings = () => {
   const auth = getAuth();
-  const { logout } = useLogout();
   const [changeDetail, setChangeDetail] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<FormData>({
@@ -92,7 +90,7 @@ export const Settings = () => {
               className="w-full px-4 p-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out mb-6"
             />
 
-            <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6">
+            <div className="flex justify-center whitespace-nowrap text-sm sm:text-lg mb-6">
               <p className="flex items-center text-sm md:text-lg">
                 Do you want to change your name?
                 <span
@@ -101,12 +99,6 @@ export const Settings = () => {
                 >
                   {changeDetail ? "Apply change" : "Edit"}
                 </span>
-              </p>
-              <p
-                onClick={logout}
-                className="text-blue-600 hover:text-blue-800 transition duration-200 ease-in-out cursor-pointer"
-              >
-                Sign out
               </p>
             </div>
           </form>
@@ -124,7 +116,7 @@ export const Settings = () => {
       <div className="flex flex-col flex-wrap">
         {!loading && listings.length > 0 && (
           <>
-            <h2 className="text-2xl text-center font-semibold mb-6">My Listings</h2>
+            <h2 className="text-2xl text-center font-semibold mb-6 mt-6">My Listings</h2>
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-6 mx-auto mb-8">
               {listings.map((listing) => (
                 <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
