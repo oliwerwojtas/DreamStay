@@ -1,10 +1,13 @@
 import { Home } from "./pages/home/Home";
+import { Welcome } from "./pages/welcome/Welcome";
 import { Login } from "./pages/login/Login";
+
 import { SignUp } from "./pages/signup/SignUp";
 import { Details } from "./pages/details/Details";
 import { Settings } from "./pages/settings/Settings";
 import { Create } from "./pages/create/Create";
 import { RootLayout } from "./pages/RootLayout";
+
 import { PrivateRoute } from "./components/reusable/PrivateRoute";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -24,6 +27,10 @@ const router = createBrowserRouter([
             <Home />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/welcome",
+        element: <Welcome />,
       },
       {
         path: "/login",

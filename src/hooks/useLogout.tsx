@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { useDispatch } from "react-redux";
@@ -13,7 +12,7 @@ export const useLogout = () => {
 
   const logout = async () => {
     setError(null);
-    navigate("/login");
+    navigate("/welcome");
     setLoading(true);
 
     try {

@@ -34,7 +34,7 @@ export const MediaAuth = () => {
   return (
     <button
       type="button"
-      className="w-12 h-12  rounded-full flex justify-center items-center border-gray-300 border-2 hover:bg-green-600 duration-300 ease-in-out hover:border-white"
+      className="w-12 h-12  rounded-full flex justify-center items-center  bg-[#ffcb74] hover:bg-[#dba548] duration-300 ease-in-out hover:border-white"
       onClick={handleMediaAuth}
     >
       <BsGoogle size={20} />

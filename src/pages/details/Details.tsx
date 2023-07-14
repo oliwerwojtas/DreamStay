@@ -30,8 +30,11 @@ export const Details = () => {
 
   return (
     <div className="flex flex-col justify-center items-center ">
-      <button className="flex mb-4 items-center gap-2 px-3 py-2 mt-4 rounded-md text-indigo-50 bg-green-600 hover:bg-green-700 transition-colors">
-        <AiOutlineArrowLeft /> <Link to="/">Back to list</Link>
+      <button className="flex mb-4 items-center gap-2 px-3 py-2 mt-4 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors">
+        <AiOutlineArrowLeft />{" "}
+        <Link to="/" className="font-medium">
+          Back to list
+        </Link>
       </button>
 
       <div className="flex bg-green-500 flex-wrap max-w-[80rem] justify-center">

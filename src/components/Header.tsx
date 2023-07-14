@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { MouseEvent } from "react";
-import icon from "../assets/favicon.ico";
+import icon from "../assets/favicon-32x32.png";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Dropdown } from "./headerDropdown/drop/Dropdown";
@@ -10,12 +10,13 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config";
 import { RootState } from "../store/store";
 import { useSelector } from "react-redux";
-import { DarkMode } from "./reusable/DarkMode";
 import { MdOutlineFavorite } from "react-icons/md";
 import { toast } from "react-toastify";
+
 export const Header = () => {
   const auth = getAuth();
   const navigate = useNavigate();
+
   const { loggedIn, googleLoggedIn, githubLoggedIn, initialStatusChecked } = useAuth();
   const [favoritesCount, setFavoritesCount] = useState(0);
   const favorites = useSelector((state: RootState) => state.favorites.favorites);
@@ -50,35 +51,36 @@ export const Header = () => {
         <div className="flex items-center cursor-pointer" onClick={() => navigate("/")}>
           <img src={icon} alt="app icon" className="h-10" />
           <div>
-            <span className="ml-2 text-green-500 font-medium text-lg">Dream</span>
-            <span className="font-medium text-xl">Stay</span>
+            <span className="ml-2 text-[#22292f]  font-medium text-lg">Dream</span>
+            <span className="font-medium text-xl text-[#22292f]">Stay</span>
           </div>
         </div>
 
         <div>
           <ul className="flex space-x-2">
-            <DarkMode />
             {initialStatusChecked && (
               <>
                 {loggedIn || googleLoggedIn || githubLoggedIn ? (
                   <>
                     <p className="flex justify-center items-center" onClick={handleOpenFavourites}>
-                      <MdOutlineFavorite size={28} className="text-red-600" />
-                      <span className="font-bold text-lg">({favoritesCount})</span>
+                      <MdOutlineFavorite size={24} className="text-red-600" />
+                      <span className="font-medium text-lg">({favoritesCount})</span>
                     </p>
 
                     <Dropdown />
                   </>
                 ) : (
                   <>
-                    <NavLink to="/login" className="relative group">
-                      Login
-                      <div className="absolute w-full h-0.5 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform "></div>
-                    </NavLink>
-                    <NavLink to="/signup" className="relative group">
-                      Sign Up
-                      <div className="absolute w-full h-0.5 bg-green-500 scale-x-0 group-hover:scale-x-100 transition-transform "></div>
-                    </NavLink>
+                    <button className="flex items-center gap-2 px-5 py-2 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors">
+                      <NavLink to="/login" className="font-medium text-[#22292f]">
+                        Login
+                      </NavLink>
+                    </button>
+                    <button className="flex items-center gap-2 px-5 py-2 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors">
+                      <NavLink to="/signup" className="font-medium text-[#22292f]">
+                        Sign Up
+                      </NavLink>
+                    </button>
                   </>
                 )}
               </>

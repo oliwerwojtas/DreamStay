@@ -15,7 +15,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../config";
 import { addToFavorites, removeFromFavorites } from "../store/favoritesSlice";
 import { useDispatch } from "react-redux";
-
+import { motion } from "framer-motion";
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;
@@ -53,7 +53,9 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
   }, [auth.currentUser]);
 
   const handleDelete = async () => {
+    dispatch(removeFromFavorites([id]));
     await deleteDocument("listings", id);
+
     if (!isLoading) {
       window.location.reload();
     }
@@ -89,56 +91,59 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
   };
 
   return (
-    <li className="bg-white w-[17rem] relative z-10 flex flex-col justify-centershadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
-      <FavoriteButton
-        isFavorite={favorites && favorites.includes(id)}
-        addToFavoritesHandler={addToFavoritesHandler}
-      />
-      <Link to={`/details/${id}`}>
-        <img
-          src={listing.imgUrls[0]}
-          alt="house photo"
-          className="h-[170px] w-full object-cover hover:scale-105 transition-scale duration-200 ease-in"
-        />
-        <span className="absolute top-2 left-2 bg-green-800 text-white uppercase text-xs font-semibold rounded-md px-2 py-1 shadow-lg">
-          {daysFromToday} days ago
-        </span>
-        <div className="w-full p-[10px]">
-          <div className="flex items-center space-x-1">
-            <MdLocationOn className="h-4 w-4 text-green-600" />
-            <p className="font-semibold text-sm mb-[2px]  truncate">{listing.address}</p>
-          </div>
-          <p className="font-semibold mt-2 text-lg truncate">{listing.name}</p>
-          <p>
-            {formatPrice(listing.regularPrice)}
-            {listing.type === "rent" && " / month"}
-          </p>
-          <div className="flex items-center mt-[10px] space-x-3">
+    <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }} layout>
+      <li className="bg-[white] text-[#22292f] w-[17rem] relative z-10 flex flex-col justify-centershadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
+        {auth.currentUser?.uid != listing.userRef && (
+          <FavoriteButton
+            isFavorite={favorites && favorites.includes(id)}
+            addToFavoritesHandler={addToFavoritesHandler}
+          />
+        )}
+        <Link to={`/details/${id}`}>
+          <img
+            src={listing.imgUrls[0]}
+            alt="house photo"
+            className="h-[170px] w-full object-cover hover:scale-105 transition-scale duration-200 ease-in"
+          />
+          <span className="absolute top-2 left-2 bg-[#ffcb74] text-[#22292f] uppercase text-xs font-semibold rounded-md px-2 py-1 shadow-lg">
+            {daysFromToday} days ago
+          </span>
+          <div className="w-full p-[10px]">
             <div className="flex items-center space-x-1">
-              {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}
+              <MdLocationOn className="h-4 w-4 text-[#ffcb74]" />
+              <p className="font-semibold text-sm mb-[2px]  truncate">{listing.address}</p>
+            </div>
+            <p className="font-semibold mt-2 text-lg truncate">{listing.name}</p>
+            <p>
+              {formatPrice(listing.regularPrice)} $ {listing.type === "rent" && " / month"}
+            </p>
+            <div className="flex items-center mt-[10px] space-x-3">
+              <div className="flex items-center space-x-1">
+                {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center space-x-1">
+                {listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : "1 Bath"}
+              </div>
             </div>
           </div>
-          <div>
-            <div className="flex items-center space-x-1">
-              {listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : "1 Bath"}
-            </div>
-          </div>
-        </div>
-      </Link>
-      {auth.currentUser?.uid === listing.userRef && (
-        <>
-          <FaTrash
-            size={20}
-            className="absolute bottom-2 right-2 cursor-pointer text-red-500"
-            onClick={handleDelete}
-          />
-          <MdEdit
-            size={20}
-            className="absolute bottom-2 right-8 cursor-pointer"
-            onClick={handleEdit}
-          />
-        </>
-      )}
-    </li>
+        </Link>
+        {auth.currentUser?.uid === listing.userRef && (
+          <>
+            <FaTrash
+              size={20}
+              className="absolute bottom-2 right-2 cursor-pointer text-red-500"
+              onClick={handleDelete}
+            />
+            <MdEdit
+              size={20}
+              className="absolute bottom-2 right-8 cursor-pointer"
+              onClick={handleEdit}
+            />
+          </>
+        )}
+      </li>
+    </motion.div>
   );
 };

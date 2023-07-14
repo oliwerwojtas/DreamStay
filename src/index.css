@@ -1,8 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Maven+Pro:wght@400;500&family=Montserrat:wght@400;500&family=Nunito+Sans:wght@300;600;800&family=Poppins:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700;900&family=Maven+Pro:wght@400;500&family=Montserrat:wght@400;500&family=Nunito+Sans:wght@300;600;800&family=Poppins:wght@400;500&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  .bg-image {
+    content-visibility: auto;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1920' height='1280' preserveAspectRatio='none' viewBox='0 0 1920 1280'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1067%26quot%3b)' fill='none'%3e%3crect width='1920' height='1280' x='0' y='0' fill='rgba(255%2c 203%2c 116%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c656.52C165.286%2c665.893%2c326.002%2c808.954%2c478.552%2c744.642C630.517%2c680.577%2c698.168%2c498.74%2c747.519%2c341.38C793.191%2c195.749%2c785.043%2c40.253%2c745.71%2c-107.217C709.448%2c-243.175%2c609.327%2c-343.688%2c533.231%2c-462.047C442.443%2c-603.257%2c417.825%2c-827.376%2c255.405%2c-869.83C91.739%2c-912.61%2c-39.317%2c-725.758%2c-191.275%2c-651.424C-313.151%2c-591.805%2c-452.382%2c-570.895%2c-549.461%2c-476.111C-651.396%2c-376.586%2c-735.33%2c-249.46%2c-748.28%2c-107.586C-760.994%2c31.699%2c-668.312%2c151.783%2c-618.71%2c282.556C-565.01%2c424.135%2c-574.486%2c613.946%2c-444.897%2c692.273C-314.939%2c770.823%2c-151.609%2c647.922%2c0%2c656.52' fill='%23ffbf53'%3e%3c/path%3e%3cpath d='M1920 1972.637C2071.612 1962.124 2222.994 2024.547 2366.687 1975.059 2532.216 1918.05 2734.661 1842.65 2784.619 1674.858 2835.636 1503.513 2651.267 1353.922 2602.867 1181.819 2562.917 1039.7640000000001 2625.997 863.412 2525.9210000000003 754.966 2425.871 646.549 2249.767 680.158 2106.7 644.158 1970.516 609.89 1842.584 519.377 1705.1970000000001 548.447 1564.725 578.17 1461.925 693.098 1366.863 800.704 1271.039 909.171 1200.038 1032.29 1155.966 1170.149 1105.031 1329.476 1042.3400000000001 1498.28 1092.8809999999999 1657.733 1145.38 1823.363 1269.2649999999999 1978.0729999999999 1431.645 2039.895 1588.387 2099.571 1752.684 1984.239 1920 1972.637' fill='%23ffd895'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1067'%3e%3crect width='1920' height='1280' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+  }
+  .miejsce {
+    grid-row: 3;
+    grid-column: 1 /-1;
+  }
+}
 body {
-  font-family: "Inter", sans-serif;
-  background-color: rgb(240, 253, 244);
+  font-family: "Maven Pro", sans-serif;
+  background-color: #f6f6f6;
 }

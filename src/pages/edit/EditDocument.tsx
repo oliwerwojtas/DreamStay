@@ -1,7 +1,8 @@
 import { useState, ChangeEvent, MouseEvent, FormEvent, useEffect } from "react";
 import { Spinner } from "../../components/reusable/Spinner";
 import { toast } from "react-toastify";
-
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import { FormDataCreate } from "../../types";
 import { useDocument } from "../../hooks/useDocument";
 import { getAuth } from "firebase/auth";
@@ -149,8 +150,10 @@ export const EditDocument = () => {
     return <Spinner />;
   }
   return (
-    <main className="max-w-md px-2 mx-auto">
-      <button onClick={handleBackToList}>Back to list </button>
+    <main className="max-w-md px-2 mx-auto text-[#22292f]">
+      <button className="flex mb-4 items-center gap-2 px-3 py-2 mt-4 font-medium rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors">
+        <AiOutlineArrowLeft /> <Link to="/">Back to list</Link>
+      </button>
       <h1 className="text-3xl text-center mt-6 font-bold">Edit</h1>
       <form onSubmit={handleSubmitForm}>
         <p className="text-lg mt-6 font-semibold">Sell / Rent</p>
@@ -161,7 +164,9 @@ export const EditDocument = () => {
             value="sale"
             onClick={handleTypeClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              type === "rent" ? "bg-white text-black" : "bg-green-600 text-white"
+              type === "rent"
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             sell
@@ -172,7 +177,9 @@ export const EditDocument = () => {
             value="rent"
             onClick={handleTypeClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              type === "sale" ? "bg-white text-black" : "bg-green-600 text-white"
+              type === "sale"
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             rent
@@ -237,7 +244,9 @@ export const EditDocument = () => {
             value="true"
             onClick={handleYesNoClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !parking ? "bg-white text-black" : "bg-green-600 text-white"
+              !parking
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             Yes
@@ -248,7 +257,7 @@ export const EditDocument = () => {
             value="false"
             onClick={handleYesNoClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              parking ? "bg-white text-black" : "bg-green-600 text-white"
+              parking ? "bg-white text-[#22292f]" : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             no
@@ -262,7 +271,9 @@ export const EditDocument = () => {
             value="true"
             onClick={handleYesNoClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !furnished ? "bg-white text-black" : "bg-green-600 text-white"
+              !furnished
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             yes
@@ -273,7 +284,9 @@ export const EditDocument = () => {
             value="false"
             onClick={handleYesNoClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              furnished ? "bg-white text-black" : "bg-green-600 text-white"
+              furnished
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             no
@@ -287,7 +300,9 @@ export const EditDocument = () => {
             value="true"
             onClick={handleYesNoClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !breakfast ? "bg-white text-black" : "bg-green-600 text-white"
+              !breakfast
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             Yes
@@ -298,7 +313,9 @@ export const EditDocument = () => {
             value="false"
             onClick={handleYesNoClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              breakfast ? "bg-white text-black" : "bg-green-600 text-white"
+              breakfast
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             no
@@ -312,7 +329,7 @@ export const EditDocument = () => {
             value="true"
             onClick={handleYesNoClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !smoke ? "bg-white text-black" : "bg-green-600 text-white"
+              !smoke ? "bg-white text-[#22292f]" : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             Yes
@@ -323,7 +340,7 @@ export const EditDocument = () => {
             value="false"
             onClick={handleYesNoClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              smoke ? "bg-white text-black" : "bg-green-600 text-white"
+              smoke ? "bg-white text-[#22292f]" : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             no
@@ -373,22 +390,21 @@ export const EditDocument = () => {
 
         <div className="mb-6">
           <p className="text-lg font-semibold">Images</p>
-          <p className="text-gray-600">The first image will be the cover (max 3)</p>
+          <p className="text-gray-700">The first image will be the cover (max 3)</p>
           <input
             type="file"
             id="images"
             onChange={handleChange}
             accept=".jpg,.png,.jpeg"
             multiple
-            // required
             className="w-full px-3 py-1.5 text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:bg-white focus:border-slate-600"
           />
         </div>
         <button
           type="submit"
-          className="mb-6 w-full px-7 py-3 bg-green-600 text-white font-medium text-sm uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out"
+          className="mb-6 w-full px-7 py-3  bg-[#ffcb74] hover:bg-[#dba548] text-[#22292f] font-medium text-sm uppercase rounded shadow-md  hover:shadow-lg focus:bg-[#dba548] focus:shadow-lg active:bg-[#dba548] active:shadow-lg transition duration-150 ease-in-out"
         >
-          Create Listing
+          Edit Listing
         </button>
       </form>
     </main>

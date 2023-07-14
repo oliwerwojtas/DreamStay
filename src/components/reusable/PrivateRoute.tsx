@@ -10,5 +10,5 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   if (checkingStatus) {
     return <Spinner />;
   }
-  return loggedIn ? children : <Navigate to="/login" />;
+  return loggedIn ? children : <Navigate to="/welcome" />;
 };

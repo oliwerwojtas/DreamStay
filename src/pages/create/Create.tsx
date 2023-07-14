@@ -168,7 +168,7 @@ export const Create = () => {
     return <Spinner />;
   }
   return (
-    <main className="max-w-md px-2 mx-auto">
+    <main className="max-w-md px-4 mx-auto text-[#22292f]">
       <h1 className="text-3xl text-center mt-6 font-bold">Create a Listing</h1>
       <form onSubmit={handleSubmitForm}>
         <p className="text-lg mt-6 font-semibold">Sell / Rent</p>
@@ -178,7 +178,9 @@ export const Create = () => {
             value="sale"
             onClick={handleTypeClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              type === "rent" ? "bg-white text-black" : "bg-green-600 text-white"
+              type === "rent"
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             sell
@@ -188,7 +190,9 @@ export const Create = () => {
             value="rent"
             onClick={handleTypeClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              type === "sale" ? "bg-white text-black" : "bg-green-600 text-white"
+              type === "sale"
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             rent
@@ -253,7 +257,9 @@ export const Create = () => {
             value="true"
             onClick={handleYesNoClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !parking ? "bg-white text-black" : "bg-green-600 text-white"
+              !parking
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             Yes
@@ -264,7 +270,7 @@ export const Create = () => {
             value="false"
             onClick={handleYesNoClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              parking ? "bg-white text-black" : "bg-green-600 text-white"
+              parking ? "bg-white text-[#22292f]" : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             no
@@ -278,7 +284,9 @@ export const Create = () => {
             value="true"
             onClick={handleYesNoClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !furnished ? "bg-white text-black" : "bg-green-600 text-white"
+              !furnished
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             yes
@@ -289,7 +297,9 @@ export const Create = () => {
             value="false"
             onClick={handleYesNoClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              furnished ? "bg-white text-black" : "bg-green-600 text-white"
+              furnished
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             no
@@ -303,7 +313,9 @@ export const Create = () => {
             value="true"
             onClick={handleYesNoClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !breakfast ? "bg-white text-black" : "bg-green-600 text-white"
+              !breakfast
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             Yes
@@ -314,7 +326,9 @@ export const Create = () => {
             value="false"
             onClick={handleYesNoClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              breakfast ? "bg-white text-black" : "bg-green-600 text-white"
+              breakfast
+                ? "bg-white text-[#22292f]"
+                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             no
@@ -328,7 +342,7 @@ export const Create = () => {
             value="true"
             onClick={handleYesNoClick}
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !smoke ? "bg-white text-black" : "bg-green-600 text-white"
+              !smoke ? "bg-white text-[#22292f]" : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             Yes
@@ -339,7 +353,7 @@ export const Create = () => {
             value="false"
             onClick={handleYesNoClick}
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              smoke ? "bg-white text-black" : "bg-green-600 text-white"
+              smoke ? "bg-white text-[#22292f]" : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
           >
             no
@@ -390,7 +404,7 @@ export const Create = () => {
 
         <div className="mb-6">
           <p className="text-lg font-semibold">Images</p>
-          <p className="text-gray-600">The first image will be the cover (max 3)</p>
+          <p className="text-gray-700">The first image will be the cover (max 3)</p>
           <input
             type="file"
             id="images"
@@ -402,7 +416,7 @@ export const Create = () => {
         </div>
         <button
           type="submit"
-          className="mb-6 w-full px-7 py-3 bg-green-600 text-white font-medium text-sm uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out"
+          className="mb-6 w-full px-7 py-3 bg-[#ffcb74] hover:bg-[#dba548] text-[#22292f] font-medium text-sm uppercase rounded shadow-md  hover:shadow-lg focus:bg-[#dba548] focus:shadow-lg active:bg-[#dba548] active:shadow-lg transition duration-150 ease-in-out"
         >
           Create Listing
         </button>

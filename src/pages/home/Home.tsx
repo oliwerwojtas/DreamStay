@@ -4,8 +4,15 @@ import { ListingItem } from "../../components/ListingItem";
 import { Spinner } from "../../components/reusable/Spinner";
 import { ChangeEvent, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
+import SearchBar from "../../components/SearchBar";
+import { Pagination } from "../../components/Pagination";
+
 export const Home = () => {
   const [search, setSearched] = useState<string>("");
+  const [sortKey, setSortKey] = useState<string>("date");
+  const [currentSalePage, setCurrentSalePage] = useState(1);
+  const [currentRentPage, setCurrentRentPage] = useState(1);
+  const [apartamentsPerPage] = useState(6);
   const { listings, loading } = useFetchUserDocuments();
   const debounceSearch = useDebounce(search, 300);
   const handleSearchText = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,36 +31,101 @@ export const Home = () => {
     return nameMatches || addressMatches;
     // && typeMatches
   });
+  const handleSortOptionClick = (selectedSortKey: string) => {
+    if (selectedSortKey === sortKey) {
+      setSortKey("");
+    } else {
+      setSortKey(selectedSortKey);
+    }
+  };
+  const sortedListings = [...filteredListings];
 
-  const saleListings = filteredListings.filter((listing) => listing.data.type === "sale");
-  const rentListings = filteredListings.filter((listing) => listing.data.type === "rent");
+  if (sortKey === "name") {
+    sortedListings.sort((a, b) => a.data.name.localeCompare(b.data.name));
+  } else if (sortKey === "address") {
+    sortedListings.sort((a, b) => a.data.address.localeCompare(b.data.address));
+  } else if (sortKey === "date") {
+    sortedListings.sort((a, b) => {
+      const dateA = new Date(a.data.timestamp.toDate());
+      const dateB = new Date(b.data.timestamp.toDate());
+      return dateB.getTime() - dateA.getTime();
+    });
+  }
+  const saleListings = sortedListings.filter((listing) => listing.data.type === "sale");
+  const rentListings = sortedListings.filter((listing) => listing.data.type === "rent");
+  const hasListings = filteredListings.length > 0;
+
+  const indexOfLastSaleApartament = currentSalePage * apartamentsPerPage;
+  const indexOfFirstSaleApartment = indexOfLastSaleApartament - apartamentsPerPage;
+  const currentSaleApartaments = saleListings.slice(
+    indexOfFirstSaleApartment,
+    indexOfLastSaleApartament
+  );
+
+  const indexOfLastRentApartament = currentRentPage * apartamentsPerPage;
+  const indexOfFirstRentApartment = indexOfLastRentApartament - apartamentsPerPage;
+  const currentRentApartaments = rentListings.slice(
+    indexOfFirstRentApartment,
+    indexOfLastRentApartament
+  );
+
+  const paginateSale = (pageNumber: number) => {
+    setCurrentSalePage(pageNumber);
+  };
+
+  const paginateRent = (pageNumber: number) => {
+    setCurrentRentPage(pageNumber);
+  };
   return (
     <div>
-      <div className="flex flex-col w-full">
-        <input
-          className="w-1/2 bg-slate-600 text-white"
-          onChange={handleSearchText}
-          value={search}
-          placeholder="Search..."
+      <div className="flex justify-center mt-4 mb-4">
+        <SearchBar
+          className="w-1/2"
+          handleSearchText={handleSearchText}
+          search={search}
+          onSortOptionClick={handleSortOptionClick}
+          sortKey={sortKey}
         />
-        <span className="text-2xl px-4 py-4 text-center font-semibold">
-          Checkout apartaments for buy!
+      </div>
+      <div className="flex flex-wrap ">
+        <span className="flex text-5xl px-4 py-4 text-center font-semibold text-[#22292f] justify-center items-center mx-auto w-[35rem]">
+          <span className="mb-4">
+            Checkout apartaments for <strong className="text-[#ffbb44]">buy.</strong>
+          </span>
         </span>
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-6 mx-auto">
-          {saleListings.map((listing) => (
+
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-6 mx-auto">
+          {currentSaleApartaments.map((listing) => (
             <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
           ))}
+          <div className="row-span-3 col-span-full">
+            <Pagination
+              apartamentsPerPage={apartamentsPerPage}
+              totalPosts={listings.length}
+              paginate={paginateSale}
+            />
+          </div>
         </div>
       </div>
-      <div className="flex flex-col flex-wrap">
-        <span className="text-2xl px-4 py-4 text-center font-semibold">
-          Checkout apartaments for rent!
-        </span>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-6 mx-auto">
-          {rentListings.map((listing) => (
+      <div className="flex flex-wrap mt-12 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-6 mx-auto">
+          {currentRentApartaments.map((listing) => (
             <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
           ))}
+          <div className="row-span-3 col-span-full">
+            <Pagination
+              apartamentsPerPage={apartamentsPerPage}
+              totalPosts={listings.length}
+              paginate={paginateRent}
+            />
+          </div>
         </div>
+
+        <span className="flex text-5xl px-4 py-4 text-center font-semibold text-[#22292f] justify-center items-center mx-auto w-[35rem] ">
+          <span>
+            Checkout apartaments for <strong className="text-[#ffbb44]">rent.</strong>
+          </span>
+        </span>
       </div>
     </div>
   );

@@ -6,12 +6,13 @@ import { MediaAuthGithub } from "../../components/auth/GithubAuth";
 import { toast } from "react-toastify";
 import { useLogin } from "../../hooks/useLogin";
 import { SignupError } from "../../types";
-import { useNavigate } from "react-router-dom";
+
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
+
 export const Login = () => {
   const { login } = useLogin();
-  const navigate = useNavigate();
+
   const [error, setError] = useState<SignupError | null>(null);
 
   const [formData, setFormData] = useState<LoginData>({
@@ -27,10 +28,6 @@ export const Login = () => {
       ...prevState,
       [id]: value,
     }));
-  };
-
-  const handleNavigate = () => {
-    navigate("/signup");
   };
 
   const handleLoginSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -49,8 +46,8 @@ export const Login = () => {
 
   return (
     <section>
-      <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto ">
-        <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6 relative">
+      <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
+        {/* <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6 relative">
           <img
             src="https://images.unsplash.com/photo-1514227973936-5bebfc160b59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80"
             alt="green house photo"
@@ -72,11 +69,11 @@ export const Login = () => {
           >
             Sign up
           </button>
-        </div>
+        </div> */}
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20 bg-white h-[30rem] flex flex-col justify-between rounded-md">
-          <h1 className="text-3xl text-center mt-6 font-extrabold text-green-600 relative group">
+          <h1 className="text-3xl lg:text-4xl text-center mt-6 font-extrabold text-[#22292f] relative group">
             Sign in to Account
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-green-600 my-4"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-[#22292f] my-4"></div>
           </h1>
           <div className="flex justify-center mt-8">
             <div className="flex w-1/2 justify-around">
@@ -115,21 +112,18 @@ export const Login = () => {
                 )}
               </div>
             </div>
-            <div className="flex justify-between text-xs mx-2 mb-12">
+            <div className="flex justify-between text-xs mx-2 mb-12 ">
               <p>
                 Dont' have account?
                 <Link
                   to="/signup"
-                  className="text-green-600 hover:text-green-800 transition duration-200 ease-in-out ml-1 font-semibold"
+                  className=" transition duration-200 ease-in-out ml-1 font-semibold"
                 >
                   Register
                 </Link>
               </p>
               <p>
-                <Link
-                  to="/forgotPassword"
-                  className="text-green-600 hover:text-green-800 transition duration-200 ease-in-out ml-1 "
-                >
+                <Link to="/forgotPassword" className=" transition duration-200 ease-in-out ml-1 ">
                   Forgot password?
                 </Link>
               </p>
@@ -137,7 +131,7 @@ export const Login = () => {
             <div className="flex justify-center">
               <button
                 type="submit"
-                className="w-1/2 bg-green-600 hover:bg-green-700 text-white px-7 py-3 mb-6 rounded-md font-semibold"
+                className="flex mb-4 items-center gap-2 px-5 py-2 mt-4 font-medium rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors"
               >
                 Sign in
               </button>

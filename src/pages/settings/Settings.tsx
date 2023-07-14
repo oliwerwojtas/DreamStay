@@ -70,8 +70,8 @@ export const Settings = () => {
 
   return (
     <>
-      <section className="max-w-6xl mx-auto flex justify-center items-center flex-col">
-        <h1 className="text-3xl text-center mt-6 font-bold">My Profile</h1>
+      <section className="max-w-6xl mx-auto flex justify-center items-center flex-col ">
+        <h1 className="text-3xl text-center mt-6 font-bold text-[#22292f]">My Profile</h1>
         <div className="w-full md:w-1/2 mt-6 px-3">
           <form>
             <input
@@ -80,18 +80,18 @@ export const Settings = () => {
               value={name}
               disabled={!changeDetail}
               onChange={handleChangeData}
-              className="w-full px-4 p-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out mb-6"
+              className="w-full px-4 p-2 text-xl text-[#22292f] bg-white border border-gray-300 rounded transition ease-in-out mb-6"
             />
             <input
               type="email"
               id="email"
               value={email}
               disabled={!changeDetail}
-              className="w-full px-4 p-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out mb-6"
+              className="w-full px-4 p-2 text-xl text-[#22292f] bg-white border border-gray-300 rounded transition ease-in-out mb-6"
             />
 
             <div className="flex justify-center whitespace-nowrap text-sm sm:text-lg mb-6">
-              <p className="flex items-center text-sm md:text-lg">
+              <p className="flex items-center text-sm md:text-lg text-[#22292f]">
                 Do you want to change your name?
                 <span
                   onClick={handleSpanClick}
@@ -104,10 +104,10 @@ export const Settings = () => {
           </form>
           <button
             type="submit"
-            className="flex mx-auto bg-green-600 px-8 text-white rounded hover:bg-green-700"
+            className="flex mx-auto  px-8 text-[#22292f] font-medium rounded bg-[#ffcb74] hover:bg-[#dba548]"
           >
             <Link to="/create" className="flex justify-center items-center px-8 py-2">
-              <FcHome className="mr-2 text-2xl bg-red-200 rounded-full p-1" />
+              <FcHome className="mr-2 text-2xl bg-[#22292f] rounded-full p-1" />
               Sell house
             </Link>
           </button>
@@ -116,7 +116,9 @@ export const Settings = () => {
       <div className="flex flex-col flex-wrap">
         {!loading && listings.length > 0 && (
           <>
-            <h2 className="text-2xl text-center font-semibold mb-6 mt-6">My Listings</h2>
+            <h2 className="text-2xl text-center font-semibold mb-6 mt-6 text-[#22292f]">
+              My Listings
+            </h2>
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-6 gap-y-6 mx-auto mb-8">
               {listings.map((listing) => (
                 <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
