@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FiChevronDown, FiEdit } from "react-icons/fi";
 import { AiOutlineHome, AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
 import { Option } from "../../reusable/Option";
@@ -11,7 +11,7 @@ export const Dropdown = () => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
-
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const iconVariants = {
     open: { rotate: 180 },
     close: { rotate: 0 },
@@ -34,9 +34,20 @@ export const Dropdown = () => {
     },
   };
 
+  const handleClickOutside = (e: MouseEvent) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+
+    return () => document.addEventListener("click", handleClickOutside);
+  });
   return (
     <div className=" flex items-center justify-center bg-white">
-      <motion.div animate={open ? "open" : "closed"} className="relative">
+      <motion.div animate={open ? "open" : "closed"} className="relative" ref={wrapperRef}>
         <button
           className="flex items-center gap-2 px-3 py-2 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors"
           onClick={() => setOpen((previous) => !previous)}

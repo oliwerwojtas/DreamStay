@@ -8,6 +8,7 @@ export default {
       md: "39rem",
       lg: "52rem",
       xl: "64rem",
+      xxl: "88.5rem",
     },
     extend: {},
   },

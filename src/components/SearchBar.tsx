@@ -21,7 +21,7 @@ const SearchBar = ({
   sortKey,
 }: SearchBarProps) => {
   const [open, setOpen] = useState(false);
-
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const wrapperVariants = {
     open: {
       scaleY: 1,
@@ -34,11 +34,22 @@ const SearchBar = ({
     onSortOptionClick(sortKey);
     setOpen(false);
   };
+  const handleClickOutside = (e: MouseEvent) => {
+    if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      setOpen(false);
+    }
+  };
 
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
   return (
     <div className="flex justify-between w-4/5">
       <div className=" flex items-center justify-center bg-white">
-        <motion.div animate={open ? "open" : "closed"} className="relative">
+        <motion.div animate={open ? "open" : "closed"} className="relative" ref={wrapperRef}>
           <button
             className="flex items-center gap-2 px-3 py-2 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors"
             onClick={() => setOpen((previous) => !previous)}

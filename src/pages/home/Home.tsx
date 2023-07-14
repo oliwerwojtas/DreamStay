@@ -27,9 +27,8 @@ export const Home = () => {
     const addressMatches = listing.data.address
       .toLowerCase()
       .includes(debounceSearch.toLowerCase());
-    // const typeMatches = listing.data.type === "sale" || listing.data.type === "rent";
+
     return nameMatches || addressMatches;
-    // && typeMatches
   });
   const handleSortOptionClick = (selectedSortKey: string) => {
     if (selectedSortKey === sortKey) {
@@ -108,7 +107,7 @@ export const Home = () => {
         </div>
       </div>
       <div className="flex flex-wrap mt-12 mb-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-6 mx-auto">
+        <div className="grid order-2 xxl:order-1  grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-6 mx-auto ">
           {currentRentApartaments.map((listing) => (
             <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
           ))}
@@ -121,7 +120,7 @@ export const Home = () => {
           </div>
         </div>
 
-        <span className="flex text-5xl px-4 py-4 text-center font-semibold text-[#22292f] justify-center items-center mx-auto w-[35rem] ">
+        <span className="flex order-1 xxl:order-2 text-5xl px-4 py-4 text-center font-semibold text-[#22292f] justify-center items-center mx-auto w-[35rem] ">
           <span>
             Checkout apartaments for <strong className="text-[#ffbb44]">rent.</strong>
           </span>
