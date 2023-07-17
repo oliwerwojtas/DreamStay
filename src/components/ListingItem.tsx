@@ -14,8 +14,9 @@ import { useDocument } from "../hooks/useDocument";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../config";
 import { addToFavorites, removeFromFavorites } from "../store/favoritesSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { RootState } from "../store/store";
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;
@@ -28,7 +29,7 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
   const navigate = useNavigate();
   const daysFromToday = dayjs().diff(dayjs(listing.timestamp.toDate()), "day");
   const { deleteDocument, isLoading } = useDocument("listings");
-
+  const favoritesRedux = useSelector((state: RootState) => state.favorites.favoritesItems);
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat(undefined, { minimumFractionDigits: 2 }).format(price);
   };
@@ -50,7 +51,7 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
           console.error("Error getting user favorites:", error);
         });
     }
-  }, [auth.currentUser]);
+  }, [auth.currentUser, favoritesRedux]);
 
   const handleDelete = async () => {
     dispatch(removeFromFavorites([id]));
@@ -70,32 +71,28 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
 
     if (auth.currentUser?.uid) {
       const userFavoritesRef = doc(db, "favorites", auth.currentUser.uid);
+      let updatedFavorites = [...favorites]; // Skopiuj istniejące ulubione elementy
 
-      let updatedFavorites = [];
-
-      if (favorites && favorites.includes(id)) {
-        dispatch(removeFromFavorites([id]));
-        updatedFavorites = favorites.filter((favoriteId) => favoriteId !== id);
-      } else {
-        dispatch(addToFavorites([id]));
-        updatedFavorites = [...favorites, id];
+      // Sprawdź, czy element już istnieje w ulubionych
+      if (!updatedFavorites.includes(id)) {
+        updatedFavorites.push(id); // Dodaj nowy element do ulubionych
       }
 
       try {
         await setDoc(userFavoritesRef, { favorites: updatedFavorites });
+        dispatch(addToFavorites(updatedFavorites));
         setFavorites(updatedFavorites);
       } catch (error) {
         console.error("Error adding to favorites:", error);
       }
     }
   };
-
   return (
     <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }} layout>
       <li className="bg-[white] text-[#22292f] w-[17rem] relative z-10 flex flex-col justify-centershadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
         {auth.currentUser?.uid != listing.userRef && (
           <FavoriteButton
-            isFavorite={favorites && favorites.includes(id)}
+            isFavorite={favorites.includes(id)}
             addToFavoritesHandler={addToFavoritesHandler}
           />
         )}

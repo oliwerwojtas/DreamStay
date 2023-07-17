@@ -22,7 +22,7 @@ export const Welcome = () => {
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-8xl ">
         <div className=" lg:max-w-[650px] mb-12 md:mb-6 relative">
           <Lottie
-            className="h-[250px] lg:h-[650px] "
+            className="h-[250px] md:h-[400px] xxl:h-[650px] "
             onComplete={() => homeRef.current?.setDirection(-1)}
             lottieRef={homeRef}
             animationData={animation}

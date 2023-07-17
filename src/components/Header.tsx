@@ -19,7 +19,7 @@ export const Header = () => {
 
   const { loggedIn, googleLoggedIn, githubLoggedIn, initialStatusChecked } = useAuth();
   const [favoritesCount, setFavoritesCount] = useState(0);
-  const favorites = useSelector((state: RootState) => state.favorites.favorites);
+  const favorites = useSelector((state: RootState) => state.favorites.favoritesItems);
 
   useEffect(() => {
     if (auth.currentUser?.uid) {

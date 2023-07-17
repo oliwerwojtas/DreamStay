@@ -14,7 +14,7 @@ export const Home = () => {
   const [currentRentPage, setCurrentRentPage] = useState(1);
   const [apartamentsPerPage] = useState(6);
   const { listings, loading } = useFetchUserDocuments();
-  const debounceSearch = useDebounce(search, 300);
+  const debounceSearch = useDebounce(search, 500);
   const handleSearchText = (e: ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
     setSearched(searchText);
