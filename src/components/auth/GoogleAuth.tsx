@@ -4,6 +4,7 @@ import { db } from "../../config";
 import { getDoc, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { BsGoogle } from "react-icons/bs";
+import { Button } from "../shared/Button";
 export const MediaAuth = () => {
   const navigate = useNavigate();
   const handleMediaAuth = async () => {
@@ -32,12 +33,11 @@ export const MediaAuth = () => {
     }
   };
   return (
-    <button
-      type="button"
-      className="w-12 h-12  rounded-full flex justify-center items-center  bg-[#ffcb74] hover:bg-[#dba548] duration-300 ease-in-out hover:border-white"
+    <Button
+      className="w-12 h-12 rounded-full justify-center duration-300 ease-in-out"
       onClick={handleMediaAuth}
     >
       <BsGoogle size={20} />
-    </button>
+    </Button>
   );
 };

@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface FavoritesState {
-  favoritesItems: string[];
-}
-
+import { FavoritesState } from "../types";
 const initialState: FavoritesState = {
   favoritesItems: [],
 };

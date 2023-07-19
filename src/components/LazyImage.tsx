@@ -1,13 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-
-interface LazyImageProps {
-  imageUrl: string;
-
-  width: string;
-  height: string;
-}
-
-export const LazyImage: React.FC<LazyImageProps> = ({ width, height, imageUrl }) => {
+import { useEffect, useRef, useState } from "react";
+import { LazyImageProps } from "../types";
+export const LazyImage = ({ width, height, imageUrl }: LazyImageProps) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const [inView, setInView] = useState(false);
   const callback: IntersectionObserverCallback = (entries) => {

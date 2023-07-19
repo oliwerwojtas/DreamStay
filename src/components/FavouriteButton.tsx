@@ -1,10 +1,6 @@
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { motion } from "framer-motion";
-import { MouseEvent } from "react";
-interface FavoriteButtonProps {
-  isFavorite: boolean;
-  addToFavoritesHandler: (event: MouseEvent<HTMLButtonElement>) => void;
-}
+import { FavoriteButtonProps } from "../types";
 export const FavoriteButton = ({ isFavorite, addToFavoritesHandler }: FavoriteButtonProps) => {
   const favoriteVariants = {
     initial: { opacity: 1, scale: 1 },

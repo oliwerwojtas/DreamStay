@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import { useMap, TileLayer, Marker, Popup } from "react-leaflet";
-import { LatLngTuple } from "leaflet";
-interface MapContainerWrapperProps {
-  position: LatLngTuple;
-  details: any;
-}
+import { MapContainerWrapperProps } from "../types";
+
 export const MapContainerDetails = ({ position, details }: MapContainerWrapperProps) => {
   const map = useMap();
 

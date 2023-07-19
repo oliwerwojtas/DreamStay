@@ -1,13 +1,13 @@
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
 
 import { ListingItem } from "../../components/ListingItem";
-import { Spinner } from "../../components/reusable/Spinner";
+import { Spinner } from "../../components/shared/Spinner";
 import { ChangeEvent, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import SearchBar from "../../components/SearchBar";
 import { Pagination } from "../../components/Pagination";
 import { BackToTopButton } from "../../components/BackToTopButton";
-export const Home = () => {
+const Home = () => {
   const [search, setSearched] = useState<string>("");
   const [sortKey, setSortKey] = useState<string>("date");
   const [currentSalePage, setCurrentSalePage] = useState(1);
@@ -130,3 +130,4 @@ export const Home = () => {
     </div>
   );
 };
+export default Home;

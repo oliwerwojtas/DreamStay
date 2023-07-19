@@ -1,22 +1,16 @@
-import { useState, ChangeEvent, useEffect, useRef } from "react";
-import { Option } from "./reusable/Option";
+import { useState, useEffect, useRef } from "react";
+import { Option } from "./shared/Option";
 import { MdOutlineSpellcheck } from "react-icons/md";
 import { MdLocationOn } from "react-icons/md";
 import { AiOutlineFieldTime } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import { motion } from "framer-motion";
-interface SearchBarProps {
-  search: string;
-  handleSearchText: (e: ChangeEvent<HTMLInputElement>) => void;
-  className?: string;
-  onSortOptionClick: (sortKey: string) => void;
-  sortKey: string;
-}
-
+import { Button } from "./shared/Button";
+import { SearchBarProps } from "../types";
 const SearchBar = ({
   search,
   handleSearchText,
-  className,
+  // className,
   onSortOptionClick,
   sortKey,
 }: SearchBarProps) => {
@@ -50,17 +44,14 @@ const SearchBar = ({
     <div className="flex justify-between w-4/5">
       <div className=" flex items-center justify-center bg-white">
         <motion.div animate={open ? "open" : "closed"} className="relative" ref={wrapperRef}>
-          <button
-            className="flex items-center gap-2 px-3 py-2 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors"
-            onClick={() => setOpen((previous) => !previous)}
-          >
+          <Button onClick={() => setOpen((previous) => !previous)} className="rounded-md">
             <span className="font-medium text-[#22292f] flex items-center">
               Sorted by
               {sortKey === "name" && <MdOutlineSpellcheck className="ml-1" />}
               {sortKey === "address" && <MdLocationOn className="ml-1" />}
               {sortKey === "date" && <AiOutlineFieldTime className="ml-1" />}
             </span>
-          </button>
+          </Button>
 
           <motion.ul
             initial={wrapperVariants.closed}

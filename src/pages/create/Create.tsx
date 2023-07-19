@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, MouseEvent, FormEvent } from "react";
-import { Spinner } from "../../components/reusable/Spinner";
+import { Spinner } from "../../components/shared/Spinner";
 import { toast } from "react-toastify";
 import { FormDataCreate } from "../../types";
 import { useDocument } from "../../hooks/useDocument";
@@ -9,7 +9,7 @@ import { serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-export const Create = () => {
+const Create = () => {
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -424,3 +424,4 @@ export const Create = () => {
     </main>
   );
 };
+export default Create;

@@ -1,13 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-
-export interface AuthState {
-  loggedIn: boolean;
-  googleLoggedIn: boolean;
-  githubLoggedIn: boolean;
-  checkingStatus: boolean;
-}
-
+import { AuthState } from "../types";
 const initialState: AuthState = {
   loggedIn: false,
   googleLoggedIn: false,

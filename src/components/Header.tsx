@@ -3,15 +3,16 @@ import { MouseEvent } from "react";
 import icon from "../assets/favicon-32x32.png";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { Dropdown } from "./headerDropdown/drop/Dropdown";
+import { Dropdown } from "./Dropdown";
 import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config";
-import { RootState } from "../store/store";
+import { RootState } from "../types";
 import { useSelector } from "react-redux";
 import { MdOutlineFavorite } from "react-icons/md";
 import { toast } from "react-toastify";
+import { Button } from "./shared/Button";
 
 export const Header = () => {
   const auth = getAuth();
@@ -71,16 +72,16 @@ export const Header = () => {
                   </>
                 ) : (
                   <>
-                    <button className="flex items-center gap-2 px-5 py-2 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors">
+                    <Button className="px-5 rounded-md ">
                       <NavLink to="/login" className="font-medium text-[#22292f]">
                         Login
                       </NavLink>
-                    </button>
-                    <button className="flex items-center gap-2 px-5 py-2 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors">
+                    </Button>
+                    <Button className="px-5 rounded-md ">
                       <NavLink to="/signup" className="font-medium text-[#22292f]">
                         Sign Up
                       </NavLink>
-                    </button>
+                    </Button>
                   </>
                 )}
               </>

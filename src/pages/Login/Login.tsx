@@ -9,8 +9,9 @@ import { SignupError } from "../../types";
 
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { Button } from "../../components/shared/Button";
 
-export const Login = () => {
+const Login = () => {
   const { login } = useLogin();
 
   const [error, setError] = useState<SignupError | null>(null);
@@ -129,12 +130,7 @@ export const Login = () => {
               </p>
             </div>
             <div className="flex justify-center">
-              <button
-                type="submit"
-                className="flex mb-4 items-center gap-2 px-5 py-2 mt-4 font-medium rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors"
-              >
-                Sign in
-              </button>
+              <Button className=" mb-4 px-5 mt-4 font-medium rounded-md">Sign in</Button>
             </div>
           </form>
         </div>
@@ -142,3 +138,4 @@ export const Login = () => {
     </section>
   );
 };
+export default Login;

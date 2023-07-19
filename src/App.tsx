@@ -1,58 +1,88 @@
-import { Home } from "./pages/home/Home";
-import { Welcome } from "./pages/welcome/Welcome";
-import { Login } from "./pages/login/Login";
-
-import { SignUp } from "./pages/signup/SignUp";
-import { Details } from "./pages/details/Details";
-import { Settings } from "./pages/settings/Settings";
-import { Create } from "./pages/create/Create";
-import { RootLayout } from "./pages/RootLayout";
-
-import { PrivateRoute } from "./components/reusable/PrivateRoute";
+import { PrivateRoute } from "./components/shared/PrivateRoute";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { EditDocument } from "./pages/edit/EditDocument";
 import { ForgotPassword } from "./pages/forgotPassword/ForgotPassword";
+import { lazy, Suspense } from "react";
+import { Spinner } from "./components/shared/Spinner";
+
+const Home = lazy(() => import("./pages/home/Home"));
+const Welcome = lazy(() => import("./pages/welcome/Welcome"));
+const Login = lazy(() => import("./pages/login/Login"));
+const SignUp = lazy(() => import("./pages/signup/SignUp"));
+const Details = lazy(() => import("./pages/details/Details"));
+const Settings = lazy(() => import("./pages/settings/Settings"));
+const Create = lazy(() => import("./pages/create/Create"));
+const RootLayout = lazy(() => import("./pages/RootLayout"));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
-    // errorElement: <ErrorPage />,
+    element: (
+      <Suspense fallback={<Spinner />}>
+        <RootLayout />
+      </Suspense>
+    ),
     children: [
       {
         path: "/",
         element: (
           <PrivateRoute>
-            <Home />
+            <Suspense fallback={<Spinner />}>
+              <Home />
+            </Suspense>
           </PrivateRoute>
         ),
       },
       {
         path: "/welcome",
-        element: <Welcome />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <Welcome />
+          </Suspense>
+        ),
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <Login />
+          </Suspense>
+        ),
       },
       {
         path: "/signup",
-        element: <SignUp />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SignUp />
+          </Suspense>
+        ),
       },
       {
         path: "/forgotPassword",
-        element: <ForgotPassword />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <ForgotPassword />
+          </Suspense>
+        ),
       },
       {
         path: "/details/:id",
-        element: <Details />,
+        element: (
+          <PrivateRoute>
+            <Suspense fallback={<Spinner />}>
+              <Details />
+            </Suspense>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/create",
         element: (
           <PrivateRoute>
-            <Create />
+            <Suspense fallback={<Spinner />}>
+              <Create />
+            </Suspense>
           </PrivateRoute>
         ),
       },
@@ -60,7 +90,9 @@ const router = createBrowserRouter([
         path: "/settings",
         element: (
           <PrivateRoute>
-            <Settings />
+            <Suspense fallback={<Spinner />}>
+              <Settings />
+            </Suspense>
           </PrivateRoute>
         ),
       },
@@ -68,7 +100,9 @@ const router = createBrowserRouter([
         path: "/edit/:id",
         element: (
           <PrivateRoute>
-            <EditDocument />
+            <Suspense fallback={<Spinner />}>
+              <EditDocument />
+            </Suspense>
           </PrivateRoute>
         ),
       },

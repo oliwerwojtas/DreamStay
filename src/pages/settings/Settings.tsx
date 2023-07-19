@@ -7,9 +7,9 @@ import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { ListingItem } from "../../components/ListingItem";
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
-import { Spinner } from "../../components/reusable/Spinner";
+import { Spinner } from "../../components/shared/Spinner";
 import { FormData } from "../../types";
-export const Settings = () => {
+const Settings = () => {
   const auth = getAuth();
   const [changeDetail, setChangeDetail] = useState<boolean>(false);
 
@@ -127,3 +127,4 @@ export const Settings = () => {
     </>
   );
 };
+export default Settings;

@@ -6,7 +6,7 @@ import { HiOutlineMail } from "react-icons/hi";
 
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { SignupError } from "../../types";
-import { Spinner } from "../../components/reusable/Spinner";
+import { Spinner } from "../../components/shared/Spinner";
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState<SignupError | null>(null);

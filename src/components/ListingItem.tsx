@@ -16,7 +16,7 @@ import { db } from "../config";
 import { addToFavorites, removeFromFavorites } from "../store/favoritesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { RootState } from "../store/store";
+import { RootState } from "../types";
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;
@@ -71,11 +71,10 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
 
     if (auth.currentUser?.uid) {
       const userFavoritesRef = doc(db, "favorites", auth.currentUser.uid);
-      let updatedFavorites = [...favorites]; // Skopiuj istniejące ulubione elementy
+      let updatedFavorites = [...favorites];
 
-      // Sprawdź, czy element już istnieje w ulubionych
       if (!updatedFavorites.includes(id)) {
-        updatedFavorites.push(id); // Dodaj nowy element do ulubionych
+        updatedFavorites.push(id);
       }
 
       try {

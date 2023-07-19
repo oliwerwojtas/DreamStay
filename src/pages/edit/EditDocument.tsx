@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, MouseEvent, FormEvent, useEffect } from "react";
-import { Spinner } from "../../components/reusable/Spinner";
+import { Spinner } from "../../components/shared/Spinner";
 import { toast } from "react-toastify";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";

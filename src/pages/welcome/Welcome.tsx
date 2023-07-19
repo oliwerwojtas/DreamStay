@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import animation from "../../assets/lottie-home.json";
 
-export const Welcome = () => {
+const Welcome = () => {
   const [isPreferenceBased, setIsPreferenceBased] = useState(true);
 
   const homeRef = useRef<LottieRefCurrentProps>(null);
@@ -88,3 +88,4 @@ export const Welcome = () => {
     </section>
   );
 };
+export default Welcome;

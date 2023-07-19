@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineUser } from "react-icons/ai";
-export const SignUp = () => {
+import { Button } from "../../components/shared/Button";
+const SignUp = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -129,12 +130,7 @@ export const SignUp = () => {
               </p>
             </div>
             <div className="flex justify-center">
-              <button
-                type="submit"
-                className="flex mb-4 items-center gap-2 px-5 py-2 mt-4 font-medium rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors"
-              >
-                Sign up
-              </button>
+              <Button className=" mb-4 px-5 mt-4 font-medium rounded-md">Sign up</Button>
             </div>
           </form>
         </div>
@@ -142,3 +138,4 @@ export const SignUp = () => {
     </section>
   );
 };
+export default SignUp;

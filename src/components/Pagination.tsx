@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
-interface PaginationProps {
-  apartamentsPerPage: number;
-  totalPosts: number;
-  paginate: (pageNumber: number) => void;
-}
-
+import { Button } from "./shared/Button";
+import { PaginationProps } from "../types";
 export const Pagination = ({ apartamentsPerPage, totalPosts, paginate }: PaginationProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumbers = [];
@@ -30,21 +26,15 @@ export const Pagination = ({ apartamentsPerPage, totalPosts, paginate }: Paginat
     <div className="">
       <ul className="flex gap-2">
         <li className={currentPage === 1 ? "disabled" : ""}>
-          <button
-            onClick={handlePrev}
-            className="flex justify-center items-center bg-[#ffcb74] hover:bg-[#dba548] px-5 py-2 mt-4 font-medium rounded-md text-[#22292f]"
-          >
+          <Button onClick={handlePrev} className="px-5 mt-4 font-medium rounded-md">
             <GrFormPrevious /> <span>Prev</span>
-          </button>
+          </Button>
         </li>
 
         <li className={currentPage === pageNumbers.length ? "disabled" : ""}>
-          <button
-            onClick={handleNext}
-            className="flex justify-center items-center bg-[#ffcb74] hover:bg-[#dba548] px-5 py-2 mt-4 font-medium rounded-md text-[#22292f]"
-          >
+          <Button onClick={handleNext} className="px-5 mt-4 font-medium rounded-md">
             Next <GrFormNext />
-          </button>
+          </Button>
         </li>
       </ul>
     </div>

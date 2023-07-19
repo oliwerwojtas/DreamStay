@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { FiChevronDown, FiEdit } from "react-icons/fi";
 import { AiOutlineHome, AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
-import { Option } from "../../reusable/Option";
+import { Option } from "./shared/Option";
 import { useNavigate } from "react-router-dom";
-import { useLogout } from "../../../hooks/useLogout";
-
+import { useLogout } from "../hooks/useLogout";
+import { Button } from "./shared/Button";
 export const Dropdown = () => {
   const { logout } = useLogout();
   const navigate = useNavigate();
@@ -48,15 +48,12 @@ export const Dropdown = () => {
   return (
     <div className=" flex items-center justify-center bg-white">
       <motion.div animate={open ? "open" : "closed"} className="relative" ref={wrapperRef}>
-        <button
-          className="flex items-center gap-2 px-3 py-2 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors"
-          onClick={() => setOpen((previous) => !previous)}
-        >
+        <Button className="rounded-md" onClick={() => setOpen((previous) => !previous)}>
           <span className="font-medium text-[#22292f]">Settings</span>
           <motion.span variants={iconVariants}>
             <FiChevronDown />
           </motion.span>
-        </button>
+        </Button>
 
         <motion.ul
           initial={wrapperVariants.closed}

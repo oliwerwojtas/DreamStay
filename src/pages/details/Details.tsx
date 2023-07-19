@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
-import { Spinner } from "../../components/reusable/Spinner";
+import { Spinner } from "../../components/shared/Spinner";
 import { useGeolocation } from "../../hooks/useGeolocation";
 import { MdLocationOn } from "react-icons/md";
 import { BiBed } from "react-icons/bi";
@@ -17,7 +17,8 @@ import { ImageSlider } from "../../components/ImageSlider";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { BackToTopButton } from "../../components/BackToTopButton";
-export const Details = () => {
+import { Button } from "../../components/shared/Button";
+const Details = () => {
   const { id } = useParams();
   const { listings } = useFetchUserDocuments();
 
@@ -31,12 +32,12 @@ export const Details = () => {
 
   return (
     <div className="flex flex-col justify-center items-center ">
-      <button className="flex mb-4 items-center gap-2 px-3 py-2 mt-4 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors">
+      <Button className="flex mb-4 items-center gap-2 px-3 py-2 mt-4 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors">
         <AiOutlineArrowLeft />
         <Link to="/" className="font-medium">
           Back to list
         </Link>
-      </button>
+      </Button>
 
       <div className="flex bg-green-500 flex-wrap max-w-[80rem] justify-center">
         <div className="flex flex-col px-6 bg-white w-[90vw] h-full ">
@@ -97,3 +98,4 @@ export const Details = () => {
     </div>
   );
 };
+export default Details;
