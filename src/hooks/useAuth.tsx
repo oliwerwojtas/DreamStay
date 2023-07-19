@@ -3,13 +3,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Login, Logout } from "../store/authSlice";
-interface AuthStatus {
-  loggedIn: boolean;
-  googleLoggedIn: boolean;
-  githubLoggedIn: boolean;
-  checkingStatus: boolean;
-  initialStatusChecked: boolean;
-}
+import { AuthStatus } from "../types";
 export const useAuth = (): AuthStatus => {
   const dispatch = useDispatch();
   const [checkingStatus, setCheckingStatus] = useState(true);

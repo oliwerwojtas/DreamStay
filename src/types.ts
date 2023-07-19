@@ -16,7 +16,7 @@ export interface SignupResult {
 
 export interface FormData {
   email: string;
-  password: string;
+  password?: string;
   name: string;
 }
 export interface LoginData {
@@ -61,4 +61,16 @@ export interface FormDataCreate2 {
     userRef: string | undefined;
     timestamp: Timestamp;
   };
+}
+
+export interface AuthStatus {
+  loggedIn: boolean;
+  googleLoggedIn: boolean;
+  githubLoggedIn: boolean;
+  checkingStatus: boolean;
+  initialStatusChecked: boolean;
+}
+
+export interface ErrorType {
+  message: string;
 }

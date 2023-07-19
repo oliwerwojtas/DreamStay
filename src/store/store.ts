@@ -15,6 +15,6 @@ export interface RootState {
   auth: AuthState;
   favorites: FavoritesState;
 }
-export type AppDispatch = typeof store.dispatch;
+// export type AppDispatch = typeof store.dispatch;
 
 export default store;

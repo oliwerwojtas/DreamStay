@@ -3,10 +3,8 @@ import { collection, addDoc, DocumentData, doc, updateDoc, deleteDoc } from "fir
 import { db } from "../config";
 import { FormDataCreate2 } from "../types";
 import { toast } from "react-toastify";
+import { ErrorType } from "../types";
 
-interface ErrorType {
-  message: string;
-}
 export const useDocument = (collectionName: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<ErrorType | null>(null);

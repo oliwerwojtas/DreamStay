@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import { collection, query, where, getDocs, DocumentSnapshot } from "firebase/firestore";
 import { db } from "../config";
 import { FormDataCreate2 } from "../types";
+import { ErrorType } from "../types";
 
-interface ErrorType {
-  message: string;
-}
 export const useFetchUserDocuments = (userId?: string) => {
   const [listings, setListings] = useState<FormDataCreate2[]>([]);
   const [loading, setLoading] = useState(true);

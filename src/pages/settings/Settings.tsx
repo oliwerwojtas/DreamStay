@@ -8,11 +8,7 @@ import { Link } from "react-router-dom";
 import { ListingItem } from "../../components/ListingItem";
 import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
 import { Spinner } from "../../components/reusable/Spinner";
-
-interface FormData {
-  name: string;
-  email: string;
-}
+import { FormData } from "../../types";
 export const Settings = () => {
   const auth = getAuth();
   const [changeDetail, setChangeDetail] = useState<boolean>(false);
