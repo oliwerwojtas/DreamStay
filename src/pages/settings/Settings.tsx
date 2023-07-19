@@ -64,6 +64,7 @@ export const Settings = () => {
       handleSubmitData(e as unknown as FormEvent<HTMLFormElement>);
     }
   };
+
   if (loading) {
     return <Spinner />;
   }

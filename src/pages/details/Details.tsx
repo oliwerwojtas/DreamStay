@@ -16,6 +16,7 @@ import { MapContainerDetails } from "../../components/MapDetails";
 import { ImageSlider } from "../../components/ImageSlider";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { BackToTopButton } from "../../components/BackToTopButton";
 export const Details = () => {
   const { id } = useParams();
   const { listings } = useFetchUserDocuments();
@@ -31,7 +32,7 @@ export const Details = () => {
   return (
     <div className="flex flex-col justify-center items-center ">
       <button className="flex mb-4 items-center gap-2 px-3 py-2 mt-4 rounded-md text-[#22292f] bg-[#ffcb74] hover:bg-[#dba548] transition-colors">
-        <AiOutlineArrowLeft />{" "}
+        <AiOutlineArrowLeft />
         <Link to="/" className="font-medium">
           Back to list
         </Link>
@@ -92,6 +93,7 @@ export const Details = () => {
       <div className="h-80 w-[50rem] px-2 mt-4">
         <ImageSlider imgUrls={details.data.imgUrls} />
       </div>
+      <BackToTopButton />
     </div>
   );
 };

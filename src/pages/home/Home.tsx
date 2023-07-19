@@ -6,7 +6,7 @@ import { ChangeEvent, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import SearchBar from "../../components/SearchBar";
 import { Pagination } from "../../components/Pagination";
-
+import { BackToTopButton } from "../../components/BackToTopButton";
 export const Home = () => {
   const [search, setSearched] = useState<string>("");
   const [sortKey, setSortKey] = useState<string>("date");
@@ -125,6 +125,7 @@ export const Home = () => {
             Checkout apartaments for <strong className="text-[#ffbb44]">rent.</strong>
           </span>
         </span>
+        <BackToTopButton />
       </div>
     </div>
   );
