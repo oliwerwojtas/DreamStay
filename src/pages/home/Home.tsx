@@ -100,7 +100,7 @@ const Home = () => {
           <div className="row-span-3 col-span-full">
             <Pagination
               apartamentsPerPage={apartamentsPerPage}
-              totalPosts={listings.length}
+              totalPosts={saleListings.length}
               paginate={paginateSale}
             />
           </div>
@@ -114,7 +114,7 @@ const Home = () => {
           <div className="row-span-3 col-span-full">
             <Pagination
               apartamentsPerPage={apartamentsPerPage}
-              totalPosts={listings.length}
+              totalPosts={rentListings.length}
               paginate={paginateRent}
             />
           </div>

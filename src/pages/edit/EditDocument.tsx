@@ -10,6 +10,7 @@ import { doc, getDoc, serverTimestamp } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../config";
 import { v4 as uuidv4 } from "uuid";
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 export const EditDocument = () => {
   const auth = getAuth();
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export const EditDocument = () => {
     furnished,
     description,
     regularPrice,
-    // images,
+    images,
     smoke,
     breakfast,
     meters,
@@ -122,15 +123,53 @@ export const EditDocument = () => {
   const handleSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    if (images.length > 4) {
+      setLoading(false);
+      toast.error("Maximum 4 images are allowed");
+      return;
+    }
 
-    // if (images.length > 3) {
-    //   setLoading(false);
-    //   toast.error("Maximum 3 images are allowed");
-    //   return;
-    // }
+    const storeImage = async (image: any) => {
+      return new Promise((resolve, reject) => {
+        const storage = getStorage();
+        const filename = `${auth.currentUser?.uid}-${image.name}-${uuidv4()}`;
+        const storageRef = ref(storage, filename);
+        const uploadTask = uploadBytesResumable(storageRef, image);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            switch (snapshot.state) {
+              case "paused":
+                console.log("Upload is paused");
+                break;
+              case "running":
+                console.log("Upload is running");
+                break;
+            }
+          },
+          (error) => {
+            reject(error);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              resolve(downloadURL);
+            });
+          }
+        );
+      });
+    };
 
+    const imgUrls = await Promise.all([...images].map((image) => storeImage(image))).catch(() => {
+      setLoading(false);
+      toast.error("Images not uploaded");
+      return;
+    });
+    console.log(imgUrls);
     try {
-      const formDataCopy = { ...formData, timestamp: serverTimestamp() };
+      const formDataCopy = { ...formData, imgUrls, timestamp: serverTimestamp() };
+      delete formDataCopy.images;
       await updateDocument(formDataCopy, params.id || "");
       setLoading(false);
       toast.success("Edited!");
@@ -140,10 +179,6 @@ export const EditDocument = () => {
       toast.error("Error editing offer");
       console.error("Error editing offer", error);
     }
-  };
-
-  const handleBackToList = () => {
-    navigate("/settings");
   };
 
   if (loading) {
@@ -390,7 +425,7 @@ export const EditDocument = () => {
 
         <div className="mb-6">
           <p className="text-lg font-semibold">Images</p>
-          <p className="text-gray-700">The first image will be the cover (max 3)</p>
+          <p className="text-gray-700">The first image will be the cover (max 4)</p>
           <input
             type="file"
             id="images"

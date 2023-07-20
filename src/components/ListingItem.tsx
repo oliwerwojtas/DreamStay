@@ -17,6 +17,8 @@ import { addToFavorites, removeFromFavorites } from "../store/favoritesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { RootState } from "../types";
+import { BiBed } from "react-icons/bi";
+import { MdOutlineBathroom } from "react-icons/md";
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;
@@ -113,14 +115,22 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
             <p>
               {formatPrice(listing.regularPrice)} $ {listing.type === "rent" && " / month"}
             </p>
-            <div className="flex items-center mt-[10px] space-x-3">
-              <div className="flex items-center space-x-1">
+            <div className="flex h-[4rem] gap-2 items-end mb-1">
+              <div className="flex items-center space-x-1 w-[6rem] justify-around">
                 {listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}
+                <span className="bg-[#ffcb74] rounded-full w-6 h-6 flex justify-center items-center">
+                  <BiBed size={24} className="p-1" />
+                </span>
               </div>
-            </div>
-            <div>
-              <div className="flex items-center space-x-1">
-                {listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : "1 Bath"}
+
+              <div>
+                <div className="flex items-center space-x-1 w-[6rem] justify-around">
+                  {listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : "1 Bath"}
+
+                  <span className="bg-[#ffcb74] rounded-full w-6 h-6 flex justify-center items-center">
+                    <MdOutlineBathroom size={24} className="p-1" />
+                  </span>
+                </div>
               </div>
             </div>
           </div>

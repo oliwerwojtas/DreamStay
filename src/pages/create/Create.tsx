@@ -100,9 +100,9 @@ const Create = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (images.length > 3) {
+    if (images.length > 4) {
       setLoading(false);
-      toast.error("Maximum 3 images are allowed");
+      toast.error("Maximum 4 images are allowed");
       return;
     }
 
@@ -404,7 +404,7 @@ const Create = () => {
 
         <div className="mb-6">
           <p className="text-lg font-semibold">Images</p>
-          <p className="text-gray-700">The first image will be the cover (max 3)</p>
+          <p className="text-gray-700">The first image will be the cover (max 4)</p>
           <input
             type="file"
             id="images"

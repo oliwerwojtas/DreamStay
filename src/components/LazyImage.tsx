@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { LazyImageProps } from "../types";
-export const LazyImage = ({ width, height, imageUrl }: LazyImageProps) => {
+export const LazyImage = ({ height, imageUrl }: LazyImageProps) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const [inView, setInView] = useState(false);
   const callback: IntersectionObserverCallback = (entries) => {
@@ -23,7 +23,7 @@ export const LazyImage = ({ width, height, imageUrl }: LazyImageProps) => {
     };
   }, []);
   return inView ? (
-    <img src={imageUrl} width={width} height={height} />
+    <img src={imageUrl} height={height} className="rounded-md mb-4" />
   ) : (
     <img ref={imageRef} style={{ width: "100px", height: "500px", marginBottom: "100px" }} />
   );

@@ -3,9 +3,10 @@ import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
 import { Spinner } from "../../components/shared/Spinner";
 import { useGeolocation } from "../../hooks/useGeolocation";
 import { MdLocationOn } from "react-icons/md";
-import { BiBed } from "react-icons/bi";
+
 import { MdSmokeFree } from "react-icons/md";
 import { FaParking } from "react-icons/fa";
+import { BiBed } from "react-icons/bi";
 import { MdOutlineBathroom } from "react-icons/md";
 import { BsFillHouseDoorFill } from "react-icons/bs";
 import { MdOutlineFreeBreakfast } from "react-icons/md";
@@ -40,7 +41,7 @@ const Details = () => {
       </Button>
 
       <div className="flex bg-green-500 flex-wrap max-w-[80rem] justify-center">
-        <div className="flex flex-col px-6 bg-white w-[90vw] h-full ">
+        <div className="flex flex-col px-3 bg-white w-[90vw] h-full ">
           <span>
             {details.data.name} - {details.data.regularPrice} / month
           </span>
@@ -51,33 +52,48 @@ const Details = () => {
           <span>Type: {details.data.type ? "rent" : "sale"}</span>
           <div>Description: {details.data.description}</div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 place-items-center w-full mb-4">
-            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-black border-2 border-green-500 hover:bg-green-600 hover:text-white transition-colors w-[13rem]">
-              <BiBed size={24} />
+            <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
+              <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
+                <BiBed className="bg-[#ffcb74] rounded-full w-8 h-8 px-1 flex justify-center items-center" />
+              </span>
               Beds: {details.data.bedrooms}
-            </p>
-            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-black border-2 border-green-500 hover:bg-green-600 hover:text-white transition-colors w-[13rem]">
-              <MdOutlineBathroom size={24} />
+            </div>
+            <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
+              <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
+                <MdOutlineBathroom size={24} />
+              </span>
               Baths: {details.data.bathrooms}
-            </p>
-            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-black border-2 border-green-500 hover:bg-green-600 hover:text-white transition-colors w-[13rem]">
-              <FaParking size={24} />
+            </div>
+            <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
+              <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
+                <FaParking size={24} />
+              </span>
               {details.data.parking ? "Parking place!" : "No parking place!"}
-            </p>
-            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-black border-2 border-green-500 hover:bg-green-600 hover:text-white transition-colors w-[13rem]">
-              <LuSofa size={24} />
+            </div>
+            <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
+              <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
+                <LuSofa size={24} />
+              </span>
               {details.data.furnished ? "Furnished!" : "No furnished!"}
-            </p>
-            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-black border-2 border-green-500 hover:bg-green-600 hover:text-white transition-colors w-[13rem]">
-              <BsFillHouseDoorFill size={24} /> {details.data.meters}
-            </p>
-            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-indiblack border-2 border-green-500  hover:bg-green-700 hover:text-white transition-colors w-[13rem] ">
-              <MdSmokeFree size={24} />
-              {details.data.smoke ? "Dla palących!" : "Dla niepalących!"}
-            </p>
-            <p className="flex justify-center items-center font-medium gap-1 px-3 py-2 rounded-md text-indiblack  border-2 border-green-500 hover:bg-green-700 hover:text-white transition-colors w-[13rem] ">
-              <MdOutlineFreeBreakfast size={24} />
-              {details.data.breakfast ? "Ze śniadaniami!" : "Bez śniadań!"}
-            </p>
+            </div>
+            <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
+              <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
+                <BsFillHouseDoorFill size={24} />
+              </span>
+              {details.data.meters}m²
+            </div>
+            <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
+              <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
+                <MdSmokeFree size={24} />
+              </span>
+              {details.data.smoke ? "Smoking" : "No Smoking!"}
+            </div>
+            <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
+              <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
+                <MdOutlineFreeBreakfast size={24} />
+              </span>
+              {details.data.breakfast ? "Breakfast" : "No breakfast!"}
+            </div>
           </div>
         </div>
         <div className="w-full bg-red-400 h-[24rem]">
@@ -91,7 +107,7 @@ const Details = () => {
           </MapContainer>
         </div>
       </div>
-      <div className="h-80 w-[50rem] px-2 mt-4">
+      <div>
         <ImageSlider imgUrls={details.data.imgUrls} />
       </div>
       <BackToTopButton />
