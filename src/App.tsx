@@ -111,10 +111,10 @@ const router = createBrowserRouter([
 ]);
 const App = () => {
   return (
-    <div className="dark:bg-red-500">
-      <ToastContainer theme="dark" />
+    <>
+      <ToastContainer theme="dark" className="mt-20 w-[20rem]" />
       <RouterProvider router={router} />
-    </div>
+    </>
   );
 };
 

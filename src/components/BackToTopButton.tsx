@@ -34,7 +34,7 @@ export const BackToTopButton: React.FC = () => {
   return (
     <button
       ref={buttonRef}
-      className={`fixed opacity-0 right-5 bottom-5 rounded-full p-2.5 border-[#ffcb74] border-2 text-[#22292f] font-medium ${
+      className={`fixed opacity-0 right-5 bottom-5 rounded-full p-2.5 border-[#ffcb74] border-2 text-[#22292f] font-medium z-10 ${
         isVisible ? "opacity-[1]" : ""
       }`}
       onClick={handleBackToTop}

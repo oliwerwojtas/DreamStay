@@ -57,7 +57,7 @@ const SearchBar = ({
             initial={wrapperVariants.closed}
             variants={wrapperVariants}
             style={{ originY: "top", translateX: "30%" }}
-            className="absolute flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl "
+            className="absolute flex flex-col gap-2 p-2 rounded-md bg-white shadow-xl "
           >
             <Option
               setOpen={setOpen}

@@ -96,8 +96,8 @@ export interface FavoriteButtonProps {
 }
 export interface LazyImageProps {
   imageUrl: string;
-
-  height: string;
+  alt?: string;
+  className?: string;
 }
 export interface MapContainerWrapperProps {
   position: LatLngTuple;

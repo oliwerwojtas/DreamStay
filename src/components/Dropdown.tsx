@@ -51,7 +51,7 @@ export const Dropdown = () => {
           initial={wrapperVariants.closed}
           variants={wrapperVariants}
           style={{ originY: "top", translateX: "-50%" }}
-          className="absolute flex flex-col gap-2 p-2 rounded-lg bg-white shadow-xl "
+          className="absolute flex flex-col gap-2 p-2 rounded-md bg-white shadow-xl"
         >
           <Option
             setOpen={setOpen}

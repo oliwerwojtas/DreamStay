@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
+import { useFetchUserDocuments } from "../../hooks/useFetchUserListings";
 import { Spinner } from "../../components/shared/Spinner";
 import { useGeolocation } from "../../hooks/useGeolocation";
 import { MdLocationOn } from "react-icons/md";
@@ -40,17 +40,20 @@ const Details = () => {
         </Link>
       </Button>
 
-      <div className="flex bg-green-500 flex-wrap max-w-[80rem] justify-center">
+      <div className="flex  flex-wrap max-w-[80rem] justify-center">
         <div className="flex flex-col px-3 bg-white w-[90vw] h-full ">
           <span>
             {details.data.name} - {details.data.regularPrice} / month
           </span>
           <div className="flex items-center space-x-1">
-            <MdLocationOn className="h-4 w-4 text-green-600" />
+            <MdLocationOn className="h-4 w-4 text-[#ffcb74]" />
             <p className="font-semibold text-sm mb-[2px]  truncate">{details.data.address}</p>
           </div>
           <span>Type: {details.data.type ? "rent" : "sale"}</span>
-          <div>Description: {details.data.description}</div>
+          <div className="flex flex-col break-all ">
+            <span className="font-semibold">Description:</span>
+            <span className="w-full">{details.data.description}</span>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-4 place-items-center w-full mb-4">
             <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
               <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
@@ -96,13 +99,8 @@ const Details = () => {
             </div>
           </div>
         </div>
-        <div className="w-full bg-red-400 h-[24rem]">
-          <MapContainer
-            center={position}
-            zoom={13}
-            scrollWheelZoom={false}
-            style={{ height: "100%", width: "100%" }}
-          >
+        <div className="w-full h-[24rem] mb-4 z-10">
+          <MapContainer center={position} zoom={13} style={{ height: "100%", width: "100%" }}>
             <MapContainerDetails position={position} details={details} />
           </MapContainer>
         </div>

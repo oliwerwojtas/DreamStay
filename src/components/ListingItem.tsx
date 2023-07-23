@@ -19,6 +19,7 @@ import { motion } from "framer-motion";
 import { RootState } from "../types";
 import { BiBed } from "react-icons/bi";
 import { MdOutlineBathroom } from "react-icons/md";
+import { LazyImage } from "./LazyImage";
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;
@@ -29,7 +30,8 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
   const dispatch = useDispatch();
   const [favorites, setFavorites] = useState<string[]>([]);
   const navigate = useNavigate();
-  const daysFromToday = dayjs().diff(dayjs(listing.timestamp.toDate()), "day");
+  const timestamp = listing.timestamp;
+  const daysFromToday = timestamp ? dayjs().diff(dayjs(timestamp.toDate()), "day") : null;
   const { deleteDocument, isLoading } = useDocument("listings");
   const favoritesRedux = useSelector((state: RootState) => state.favorites.favoritesItems);
   const formatPrice = (price: number) => {
@@ -73,7 +75,7 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
 
     if (auth.currentUser?.uid) {
       const userFavoritesRef = doc(db, "favorites", auth.currentUser.uid);
-      let updatedFavorites = [...favorites];
+      const updatedFavorites = [...favorites];
 
       if (!updatedFavorites.includes(id)) {
         updatedFavorites.push(id);
@@ -98,14 +100,24 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
           />
         )}
         <Link to={`/details/${id}`}>
-          <img
-            src={listing.imgUrls[0]}
-            alt="house photo"
-            className="h-[170px] w-full object-cover hover:scale-105 transition-scale duration-200 ease-in"
-          />
-          <span className="absolute top-2 left-2 bg-[#ffcb74] text-[#22292f] uppercase text-xs font-semibold rounded-md px-2 py-1 shadow-lg">
-            {daysFromToday} days ago
-          </span>
+          {listing.imgUrls && listing.imgUrls.length > 0 ? (
+            <LazyImage
+              imageUrl={listing.imgUrls[0]}
+              alt="house photo"
+              className="h-[170px] w-full object-cover hover:scale-105 opacity-1 transition-all opacity-1 duration-200 ease-in"
+            />
+          ) : (
+            <div className="h-[170px] w-full bg-gray-200 flex items-center justify-center">
+              No Image Available
+            </div>
+          )}
+
+          {daysFromToday !== null && (
+            <span className="absolute top-2 left-2 bg-[#ffcb74] text-[#22292f] uppercase text-xs font-semibold rounded-md px-2 py-1 shadow-lg">
+              {daysFromToday} days ago
+            </span>
+          )}
+
           <div className="w-full p-[10px]">
             <div className="flex items-center space-x-1">
               <MdLocationOn className="h-4 w-4 text-[#ffcb74]" />

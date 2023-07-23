@@ -1,4 +1,4 @@
-import { useFetchUserDocuments } from "../../hooks/useFetchUserDocuments";
+import { useFetchUserDocuments } from "../../hooks/useFetchUserListings";
 
 import { ListingItem } from "../../components/ListingItem";
 import { Spinner } from "../../components/shared/Spinner";

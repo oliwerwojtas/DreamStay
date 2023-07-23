@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { MouseEvent } from "react";
+
 import icon from "../assets/favicon-32x32.png";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,6 @@ import { db } from "../config";
 import { RootState } from "../types";
 import { useSelector } from "react-redux";
 import { MdOutlineFavorite } from "react-icons/md";
-import { toast } from "react-toastify";
 import { Button } from "./shared/Button";
 
 export const Header = () => {
@@ -42,10 +41,6 @@ export const Header = () => {
     }
   }, [auth.currentUser, favorites.length, favorites]);
 
-  const handleOpenFavourites = (e: MouseEvent<HTMLParagraphElement>) => {
-    e.preventDefault();
-    toast.error("Not ready yet! :)");
-  };
   return (
     <div className="bg-white border-b shadow-sm sticky top-0 z-30">
       <header className="flex justify-between items-center px-3 py-3 max-w-6xl mx-auto">
@@ -63,7 +58,7 @@ export const Header = () => {
               <>
                 {loggedIn || googleLoggedIn || githubLoggedIn ? (
                   <>
-                    <p className="flex justify-center items-center" onClick={handleOpenFavourites}>
+                    <p className="flex justify-center items-center">
                       <MdOutlineFavorite size={24} className="text-red-600" />
                       <span className="font-medium text-lg">({favoritesCount})</span>
                     </p>
@@ -72,13 +67,13 @@ export const Header = () => {
                   </>
                 ) : (
                   <>
-                    <Button className="px-5 rounded-md ">
-                      <NavLink to="/login" className="font-medium text-[#22292f]">
+                    <Button className="px-0 py-0 rounded-md ">
+                      <NavLink to="/login" className="font-medium text-[#22292f] px-5 ">
                         Login
                       </NavLink>
                     </Button>
-                    <Button className="px-5 rounded-md ">
-                      <NavLink to="/signup" className="font-medium text-[#22292f]">
+                    <Button className="px-0 py-0 rounded-md ">
+                      <NavLink to="/signup" className="font-medium text-[#22292f] px-5">
                         Sign Up
                       </NavLink>
                     </Button>

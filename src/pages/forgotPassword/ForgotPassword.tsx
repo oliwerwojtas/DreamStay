@@ -1,38 +1,31 @@
-import { FormEvent, ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import { HiOutlineMail } from "react-icons/hi";
-
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { SignupError } from "../../types";
+
 import { Spinner } from "../../components/shared/Spinner";
 export const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState<SignupError | null>(null);
   const [loading, setLoading] = useState(false);
-
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Invalid email address").required("Email is required"),
+  });
   if (loading) {
     return <Spinner />;
   }
-  const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = async (values: { email: string }) => {
     setLoading(true);
-    setError(null);
 
     try {
       const auth = getAuth();
-      await sendPasswordResetEmail(auth, email);
+      await sendPasswordResetEmail(auth, values.email);
       toast.success("Email was sent");
     } catch (error) {
       const errorMessage = (error as Error).message;
-      setError({ message: errorMessage });
-
       toast.error(errorMessage);
     }
 
@@ -67,37 +60,52 @@ export const ForgotPassword = () => {
             Sign Up
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-green-600 my-4"></div>
           </h1>
-
-          <form onSubmit={handleSubmit}>
-            <div className="flex justify-center">
-              <div className="relative">
-                <input
-                  className="w-80 px-4 py-2 text-base text-gray-700 rounded-md transition ease-in-out mb-6 bg-gray-100 placeholder:px-7"
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={handleChangeEmail}
-                  placeholder="Email"
-                />
-                {email === "" && <HiOutlineMail size={20} className="absolute top-2.5 left-5" />}
-              </div>
-            </div>
-            <div className="flex justify-between text-xs mx-2 mb-12">
-              <p>
-                Back to login
-                <Link
-                  to="/signup"
-                  className="text-green-600 hover:text-red-800 transition duration-200 ease-in-out ml-1"
-                ></Link>
-              </p>
-            </div>
-            <button
-              type="submit"
-              className="w-1/2 bg-green-600 text-white px-7 py-3 mb-6 rounded-md font-semibold mx-auto"
-            >
-              Sign up
-            </button>
-          </form>
+          <Formik
+            initialValues={{
+              email: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ values }) => (
+              <Form>
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <Field
+                      className="w-80 px-4 py-2 text-base text-gray-700 rounded-md transition ease-in-out mb-6 bg-gray-100 placeholder:px-7"
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="text-red-500 text-xs mt-1 mx-auto w-full"
+                    />
+                    {values.email === "" && (
+                      <HiOutlineMail size={20} className="absolute top-2.5 left-5" />
+                    )}
+                  </div>
+                </div>
+                <div className="flex justify-between text-xs mx-2 mb-12">
+                  <p>
+                    Back to login
+                    <Link
+                      to="/signup"
+                      className="text-green-600 hover:text-red-800 transition duration-200 ease-in-out ml-1"
+                    ></Link>
+                  </p>
+                </div>
+                <button
+                  type="submit"
+                  className="w-1/2 bg-green-600 text-white px-7 py-3 mb-6 rounded-md font-semibold mx-auto"
+                >
+                  Sign up
+                </button>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </section>
