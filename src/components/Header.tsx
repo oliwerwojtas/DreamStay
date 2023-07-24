@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import { MouseEvent } from "react";
 import icon from "../assets/favicon-32x32.png";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ import { RootState } from "../types";
 import { useSelector } from "react-redux";
 import { MdOutlineFavorite } from "react-icons/md";
 import { Button } from "./shared/Button";
-
+import { FavoritesModal } from "./FavouritesModal";
 export const Header = () => {
   const auth = getAuth();
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ export const Header = () => {
   const { loggedIn, googleLoggedIn, githubLoggedIn, initialStatusChecked } = useAuth();
   const [favoritesCount, setFavoritesCount] = useState(0);
   const favorites = useSelector((state: RootState) => state.favorites.favoritesItems);
+  const [showFavoritesModal, setShowFavoritesModal] = useState(false);
 
   useEffect(() => {
     if (auth.currentUser?.uid) {
@@ -41,9 +42,17 @@ export const Header = () => {
     }
   }, [auth.currentUser, favorites.length, favorites]);
 
+  const handleCloseFavourites = () => {
+    setShowFavoritesModal(false);
+  };
+  const handleOpenFavourites = (e: MouseEvent<HTMLParagraphElement>) => {
+    e.preventDefault();
+    setShowFavoritesModal(true);
+  };
   return (
     <div className="bg-white border-b shadow-sm sticky top-0 z-30">
       <header className="flex justify-between items-center px-3 py-3 max-w-6xl mx-auto">
+        {showFavoritesModal && <FavoritesModal onClose={handleCloseFavourites} />}
         <div className="flex items-center cursor-pointer" onClick={() => navigate("/")}>
           <img src={icon} alt="app icon" className="h-10" />
           <div>
@@ -58,7 +67,7 @@ export const Header = () => {
               <>
                 {loggedIn || googleLoggedIn || githubLoggedIn ? (
                   <>
-                    <p className="flex justify-center items-center">
+                    <p className="flex justify-center items-center" onClick={handleOpenFavourites}>
                       <MdOutlineFavorite size={24} className="text-red-600" />
                       <span className="font-medium text-lg">({favoritesCount})</span>
                     </p>

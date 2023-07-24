@@ -6,7 +6,7 @@ import { MediaAuthGithub } from "../../components/auth/GithubAuth";
 import { toast } from "react-toastify";
 import { useLogin } from "../../hooks/useLogin";
 import { SignupError } from "../../types";
-import { Formik, Form, Field, ErrorMessage, useFormikContext } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -48,7 +48,7 @@ const Login = () => {
             Sign in to Account
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-[#22292f] my-4"></div>
           </h1>
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-4">
             <div className="flex w-1/2 justify-around">
               <MediaAuth />
               <MediaAuthGithub />
@@ -66,9 +66,9 @@ const Login = () => {
             {({ values }) => (
               <Form>
                 <div className="flex justify-center">
-                  <div className="relative">
+                  <div className="relative ">
                     <Field
-                      className="w-80 px-4 py-2 text-base text-gray-700 rounded-md transition ease-in-out mb-6 bg-gray-100 placeholder:px-7"
+                      className="w-80 px-4 py-2 text-base text-gray-700 rounded-md transition ease-in-out mb-2 bg-gray-100 placeholder:px-7"
                       type="email"
                       id="email"
                       name="email"
@@ -78,7 +78,7 @@ const Login = () => {
                     <ErrorMessage
                       name="email"
                       component="div"
-                      className=" text-red-500 text-xs mx-auto w-full text-center"
+                      className=" text-red-600 text-base font-medium mx-auto w-full text-center mb-2"
                     />
 
                     {values.email === "" && (
@@ -86,8 +86,8 @@ const Login = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex justify-center  mb-0">
-                  <div className={`relative ${values.password ? "mb-6" : ""}`}>
+                <div className="flex justify-center mb-2">
+                  <div className="relative">
                     <Field
                       className="w-80 px-4 py-2 text-base text-gray-700 rounded-md transition ease-in-out bg-gray-100 placeholder:px-7"
                       type="password"
@@ -101,11 +101,11 @@ const Login = () => {
                     <ErrorMessage
                       name="password"
                       component="div"
-                      className="text-red-500 text-xs mx-auto w-full mt-4 text-center"
+                      className="text-red-600 font-medium text-base mx-auto w-full mt-2 mb-2 text-center"
                     />
                   </div>
                 </div>
-                <div className="flex justify-between text-xs mx-2 mb-12 ">
+                <div className="flex justify-between text-xs mx-2 mb-6 ">
                   <p>
                     Dont' have account?
                     <Link

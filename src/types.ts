@@ -125,3 +125,6 @@ export interface RootState {
   auth: AuthState;
   favorites: FavoritesState;
 }
+export interface FavoritesModalProps {
+  onClose: () => void;
+}

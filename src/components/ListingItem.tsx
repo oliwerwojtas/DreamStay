@@ -8,7 +8,7 @@ import { MdEdit } from "react-icons/md";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { FavoriteButton } from "./FavouriteButton";
-
+import { AiOutlineClose } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { useDocument } from "../hooks/useDocument";
 import { doc, getDoc, setDoc } from "firebase/firestore";
@@ -20,12 +20,14 @@ import { RootState } from "../types";
 import { BiBed } from "react-icons/bi";
 import { MdOutlineBathroom } from "react-icons/md";
 import { LazyImage } from "./LazyImage";
+
 interface ListingItemProps {
   listing: FormDataCreate2["data"];
   id: string;
+  isModalOpen: boolean;
 }
 
-export const ListingItem = ({ listing, id }: ListingItemProps) => {
+export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
   const auth = getAuth();
   const dispatch = useDispatch();
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -34,6 +36,7 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
   const daysFromToday = timestamp ? dayjs().diff(dayjs(timestamp.toDate()), "day") : null;
   const { deleteDocument, isLoading } = useDocument("listings");
   const favoritesRedux = useSelector((state: RootState) => state.favorites.favoritesItems);
+
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat(undefined, { minimumFractionDigits: 2 }).format(price);
   };
@@ -58,7 +61,6 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
   }, [auth.currentUser, favoritesRedux]);
 
   const handleDelete = async () => {
-    dispatch(removeFromFavorites([id]));
     await deleteDocument("listings", id);
 
     if (!isLoading) {
@@ -90,14 +92,45 @@ export const ListingItem = ({ listing, id }: ListingItemProps) => {
       }
     }
   };
+
+  const removeFromFavoritesHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
+    if (auth.currentUser?.uid) {
+      const userFavoritesRef = doc(db, "favorites", auth.currentUser.uid);
+      const updatedFavorites = favorites.filter((favoriteId) => favoriteId !== id);
+
+      try {
+        await setDoc(userFavoritesRef, { favorites: updatedFavorites });
+        dispatch(removeFromFavorites([id]));
+        setFavorites(updatedFavorites);
+      } catch (error) {
+        console.error("Error removing from favorites:", error);
+      }
+    }
+  };
+  console.log(favoritesRedux);
   return (
     <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }} layout>
       <li className="bg-[white] text-[#22292f] w-[17rem] relative z-10 flex flex-col justify-centershadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
-        {auth.currentUser?.uid != listing.userRef && (
-          <FavoriteButton
-            isFavorite={favorites.includes(id)}
-            addToFavoritesHandler={addToFavoritesHandler}
-          />
+        {isModalOpen ? (
+          auth.currentUser?.uid !== listing.userRef ? (
+            <div
+              className="bg-[#ffcb74] px-4 py-4 rounded-full w-6 h-6 flex justify-center items-center absolute right-2 top-2 z-20 cursor-pointer"
+              onClick={removeFromFavoritesHandler}
+            >
+              <div className="relative">
+                <AiOutlineClose size={22} className="text-red-600" />
+              </div>
+            </div>
+          ) : null
+        ) : (
+          auth.currentUser?.uid !== listing.userRef && (
+            <FavoriteButton
+              isFavorite={favorites.includes(id)}
+              addToFavoritesHandler={addToFavoritesHandler}
+            />
+          )
         )}
         <Link to={`/details/${id}`}>
           {listing.imgUrls && listing.imgUrls.length > 0 ? (
