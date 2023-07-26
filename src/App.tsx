@@ -1,11 +1,11 @@
+//components
 import { PrivateRoute } from "./components/shared/PrivateRoute";
+//utilities
+import { Spinner } from "./components/shared/Spinner";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { EditDocument } from "./pages/edit/EditDocument";
-import { ForgotPassword } from "./pages/forgotPassword/ForgotPassword";
-import { lazy, Suspense } from "react";
-import { Spinner } from "./components/shared/Spinner";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const Welcome = lazy(() => import("./pages/welcome/Welcome"));
@@ -14,7 +14,10 @@ const SignUp = lazy(() => import("./pages/signup/SignUp"));
 const Details = lazy(() => import("./pages/details/Details"));
 const Settings = lazy(() => import("./pages/settings/Settings"));
 const Create = lazy(() => import("./pages/create/Create"));
+const EditDocument = lazy(() => import("./pages/edit/EditDocument"));
+const ForgotPassword = lazy(() => import("./pages/forgotPassword/ForgotPassword"));
 const RootLayout = lazy(() => import("./pages/RootLayout"));
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -109,6 +112,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 const App = () => {
   return (
     <>

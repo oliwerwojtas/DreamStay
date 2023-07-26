@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { getAuth } from "firebase/auth";
 import { useDispatch } from "react-redux";
+//utilities
+import { getAuth } from "firebase/auth";
 import { Logout } from "../store/authSlice";
 import { useState } from "react";
 import { SignupError } from "../types";
+
 export const useLogout = () => {
   const [error, setError] = useState<SignupError | null>(null);
   const [loading, setLoading] = useState(false);

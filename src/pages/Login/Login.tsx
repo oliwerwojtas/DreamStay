@@ -1,18 +1,21 @@
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
-import { LoginData } from "../../types";
+import { useLogin } from "../../hooks/useLogin";
+//components
 import { MediaAuth } from "../../components/auth/GoogleAuth";
 import { MediaAuthGithub } from "../../components/auth/GithubAuth";
+import { Button } from "../../components/shared/Button";
+//utilities
+import { Link } from "react-router-dom";
+import { LoginData } from "../../types/auth/auth.ts";
 import { toast } from "react-toastify";
-import { useLogin } from "../../hooks/useLogin";
 import { SignupError } from "../../types";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { Button } from "../../components/shared/Button";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import animation from "../../assets/login-animation.json";
+
 const Login = () => {
   const { login } = useLogin();
   const loginRef = useRef<LottieRefCurrentProps>(null);

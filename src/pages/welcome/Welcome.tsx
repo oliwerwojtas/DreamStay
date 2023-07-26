@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+//utilities
+import { motion } from "framer-motion";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import animation from "../../assets/lottie-home.json";
 
@@ -17,6 +18,7 @@ const Welcome = () => {
 
     return () => clearInterval(interval);
   }, []);
+
   return (
     <section>
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-8xl ">

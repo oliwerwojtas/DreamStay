@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+//utilities
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { SignupError, SignupData, SignupResult } from "../types";
+import { SignupError, SignupResult } from "../types";
+import { SignupData } from "../types/auth/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../config";
 import { toast } from "react-toastify";
 
 export const useSignup = () => {
   const [error, setError] = useState<SignupError | null>(null);
-  const [isPending, setIsPending] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const signup = async (data: SignupData): Promise<SignupResult> => {
     setError(null);
-    setIsPending(true);
+    setLoading(true);
 
     try {
       const { email, password, displayName } = data;
@@ -35,17 +37,17 @@ export const useSignup = () => {
         autoClose: 3000,
         hideProgressBar: true,
       });
-      setIsPending(false);
+      setLoading(false);
 
       navigate("/");
       return { user };
     } catch (error) {
       const errorMessage = (error as Error).message;
       setError({ message: errorMessage });
-      setIsPending(false);
+      setLoading(false);
       throw error;
     }
   };
 
-  return { signup, error, isPending };
+  return { signup, error, loading };
 };

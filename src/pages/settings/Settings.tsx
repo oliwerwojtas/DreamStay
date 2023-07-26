@@ -1,14 +1,18 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState } from "react";
+import { useFetchUserListings } from "../../hooks/useFetchUserListings";
+//components
+import { Spinner } from "../../components/shared/Spinner";
+import { ListingItem } from "../../components/ListingItem";
+//utilities
+import { ChangeEvent, FormEvent } from "react";
 import { getAuth, updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../config";
 import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
-import { ListingItem } from "../../components/ListingItem";
-import { useFetchUserDocuments } from "../../hooks/useFetchUserListings";
-import { Spinner } from "../../components/shared/Spinner";
 import { FormData } from "../../types";
+
 const Settings = () => {
   const auth = getAuth();
   const [changeDetail, setChangeDetail] = useState<boolean>(false);
@@ -19,8 +23,8 @@ const Settings = () => {
   });
 
   const { name, email } = formData;
-  const { listings, loading } = useFetchUserDocuments(auth.currentUser?.uid);
-  console.log(listings);
+  const { listings, loading } = useFetchUserListings(auth.currentUser?.uid);
+
   const handleEditData: () => void = () => {
     setChangeDetail((prevState) => !prevState);
   };

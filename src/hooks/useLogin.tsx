@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
-import { SignupError, LoginData } from "../types";
-
-import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
+//utilities
+import { getAuth, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { LoginData } from "../types/auth/auth";
+import { SignupError } from "../types";
+import { toast } from "react-toastify";
 import { Login } from "../store/authSlice";
 
 export const useLogin = () => {
   const [error, setError] = useState<SignupError | null>(null);
-  const [isPending, setIsPending] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const login = async (data: LoginData) => {
     setError(null);
-    setIsPending(true);
+    setLoading(true);
 
     try {
       const { email, password } = data;
@@ -35,15 +36,15 @@ export const useLogin = () => {
         autoClose: 3000,
         hideProgressBar: true,
       });
-      setIsPending(false);
+      setLoading(false);
       navigate("/");
     } catch (error) {
       const errorMessage = (error as Error).message;
       setError({ message: errorMessage });
-      setIsPending(false);
+      setLoading(false);
       throw error;
     }
   };
 
-  return { login, error, isPending };
+  return { login, error, loading };
 };

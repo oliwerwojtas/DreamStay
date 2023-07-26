@@ -4,12 +4,13 @@ import { db } from "../config";
 import { FormDataCreate2 } from "../types";
 import { ErrorType } from "../types";
 
-export const useFetchUserDocuments = (userId?: string) => {
+export const useFetchUserListings = (userId?: string) => {
   const [listings, setListings] = useState<FormDataCreate2[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<ErrorType | null>(null);
+
   useEffect(() => {
-    const fetchUserDocuments = async () => {
+    const fetchUserListings = async () => {
       const listRef = collection(db, "listings");
       let q = query(listRef);
 
@@ -39,7 +40,7 @@ export const useFetchUserDocuments = (userId?: string) => {
       }
     };
 
-    fetchUserDocuments();
+    fetchUserListings();
   }, [userId]);
 
   return { listings, loading };

@@ -1,12 +1,15 @@
-import { useState, ChangeEvent, MouseEvent, FormEvent } from "react";
+import { useState } from "react";
+import { useDocument } from "../../hooks/useDocument";
+import { useNavigate } from "react-router-dom";
+//components
 import { Spinner } from "../../components/shared/Spinner";
+//utilities
 import { toast } from "react-toastify";
 import { FormDataCreate } from "../../types";
-import { useDocument } from "../../hooks/useDocument";
-import { getAuth } from "firebase/auth";
+import { ChangeEvent, MouseEvent, FormEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { getAuth } from "firebase/auth";
 import { serverTimestamp } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const Create = () => {
@@ -15,7 +18,7 @@ const Create = () => {
 
   const { addDocument } = useDocument("listings");
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormDataCreate>({
     id: uuidv4(),
     type: "rent",

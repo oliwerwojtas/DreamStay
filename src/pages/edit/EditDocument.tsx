@@ -1,23 +1,26 @@
-import { useState, ChangeEvent, MouseEvent, FormEvent, useEffect } from "react";
+import { useState } from "react";
+import { useDocument } from "../../hooks/useDocument";
+import { useNavigate, useParams } from "react-router-dom";
+//components
 import { Spinner } from "../../components/shared/Spinner";
+//utilities
 import { toast } from "react-toastify";
+import { FormDataCreate } from "../../types";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { FormDataCreate } from "../../types";
-import { useDocument } from "../../hooks/useDocument";
+import { ChangeEvent, MouseEvent, FormEvent, useEffect } from "react";
 import { getAuth } from "firebase/auth";
 import { doc, getDoc, serverTimestamp } from "firebase/firestore";
-import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../config";
 import { v4 as uuidv4 } from "uuid";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
-export const EditDocument = () => {
+const EditDocument = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const { updateDocument } = useDocument("listings");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [listing, setListing] = useState(null);
-  console.log(listing);
+
   const [formData, setFormData] = useState<FormDataCreate>({
     id: uuidv4(),
     type: "rent",
@@ -445,3 +448,5 @@ export const EditDocument = () => {
     </main>
   );
 };
+
+export default EditDocument;

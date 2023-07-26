@@ -1,4 +1,4 @@
-import { FormDataCreate2 } from "../types";
+import { ListingItemProps } from "../types";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import "dayjs/locale/pl";
@@ -20,12 +20,6 @@ import { RootState } from "../types";
 import { BiBed } from "react-icons/bi";
 import { MdOutlineBathroom } from "react-icons/md";
 import { LazyImage } from "./LazyImage";
-
-interface ListingItemProps {
-  listing: FormDataCreate2["data"];
-  id: string;
-  isModalOpen: boolean;
-}
 
 export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
   const auth = getAuth();
@@ -152,9 +146,9 @@ export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
           )}
 
           <div className="w-full p-[10px]">
-            <div className="flex items-center space-x-1">
-              <MdLocationOn className="h-4 w-4 text-[#ffcb74]" />
-              <p className="font-semibold text-sm mb-[2px]  truncate">{listing.address}</p>
+            <div className="flex items-center ">
+              <MdLocationOn className="flex h-4 w-8 text-[#ffcb74]" />
+              <p className="font-semibold text-sm mb-[2px] truncate">{listing.address}</p>
             </div>
             <p className="font-semibold mt-2 text-lg truncate">{listing.name}</p>
             <p>

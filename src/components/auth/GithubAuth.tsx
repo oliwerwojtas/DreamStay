@@ -1,12 +1,16 @@
+import { useNavigate } from "react-router-dom";
+//components
+import { Button } from "../shared/Button";
+//utilities
 import { GithubAuthProvider, getAuth, signInWithPopup, User } from "firebase/auth";
 import { toast } from "react-toastify";
 import { db } from "../../config";
 import { getDoc, doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
 import { AiFillGithub } from "react-icons/ai";
-import { Button } from "../shared/Button";
+
 export const MediaAuthGithub = () => {
   const navigate = useNavigate();
+
   const handleMediaAuth = async () => {
     try {
       const auth = getAuth();

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store/store";
+//utilities
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { RootState, AuthStatus } from "../types/auth/auth";
 import { Login, Logout } from "../store/authSlice";
-import { AuthStatus } from "../types";
+
 export const useAuth = (): AuthStatus => {
   const dispatch = useDispatch();
-  const [checkingStatus, setCheckingStatus] = useState(true);
-  const [initialStatusChecked, setInitialStatusChecked] = useState(false);
+  const [checkingStatus, setCheckingStatus] = useState<boolean>(true);
+  const [initialStatusChecked, setInitialStatusChecked] = useState<boolean>(false);
 
   const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
   const googleLoggedIn = useSelector((state: RootState) => state.auth.googleLoggedIn);
@@ -28,7 +29,7 @@ export const useAuth = (): AuthStatus => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [dispatch]);
 
   return { loggedIn, googleLoggedIn, githubLoggedIn, checkingStatus, initialStatusChecked };
 };

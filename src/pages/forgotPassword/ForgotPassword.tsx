@@ -1,14 +1,15 @@
 import { useState } from "react";
+//components
+import { Spinner } from "../../components/shared/Spinner";
+//utilities
 import { Link } from "react-router-dom";
-
 import { toast } from "react-toastify";
 import { HiOutlineMail } from "react-icons/hi";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
-import { Spinner } from "../../components/shared/Spinner";
-export const ForgotPassword = () => {
+const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Email is required"),
@@ -111,3 +112,5 @@ export const ForgotPassword = () => {
     </section>
   );
 };
+
+export default ForgotPassword;

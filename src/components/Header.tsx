@@ -19,7 +19,7 @@ export const Header = () => {
 
   const { loggedIn, googleLoggedIn, githubLoggedIn, initialStatusChecked } = useAuth();
   const [favoritesCount, setFavoritesCount] = useState(0);
-  const favorites = useSelector((state: RootState) => state.favorites.favoritesItems);
+  const favoritesRedux = useSelector((state: RootState) => state.favorites.favoritesItems);
   const [showFavoritesModal, setShowFavoritesModal] = useState(false);
 
   useEffect(() => {
@@ -33,14 +33,14 @@ export const Header = () => {
             const favoritesCount = favoritesData.favorites.length;
             setFavoritesCount(favoritesCount);
           } else {
-            setFavoritesCount(favorites.length);
+            setFavoritesCount(favoritesRedux.length);
           }
         })
         .catch((error) => {
           console.error("Error getting user favorites:", error);
         });
     }
-  }, [auth.currentUser, favorites.length, favorites]);
+  }, [auth.currentUser, favoritesRedux.length, favoritesRedux]);
 
   const handleCloseFavourites = () => {
     setShowFavoritesModal(false);
@@ -77,12 +77,12 @@ export const Header = () => {
                 ) : (
                   <>
                     <Button className="px-0 py-0 rounded-md ">
-                      <NavLink to="/login" className="font-medium text-[#22292f] px-5 ">
+                      <NavLink to="/login" className="font-medium text-[#22292f] px-2">
                         Login
                       </NavLink>
                     </Button>
                     <Button className="px-0 py-0 rounded-md ">
-                      <NavLink to="/signup" className="font-medium text-[#22292f] px-5">
+                      <NavLink to="/signup" className="font-medium text-[#22292f] px-2">
                         Sign Up
                       </NavLink>
                     </Button>

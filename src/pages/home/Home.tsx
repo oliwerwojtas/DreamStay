@@ -1,4 +1,4 @@
-import { useFetchUserDocuments } from "../../hooks/useFetchUserListings";
+import { useFetchUserListings } from "../../hooks/useFetchUserListings";
 
 import { ListingItem } from "../../components/ListingItem";
 import { Spinner } from "../../components/shared/Spinner";
@@ -10,11 +10,12 @@ import { BackToTopButton } from "../../components/BackToTopButton";
 const Home = () => {
   const [search, setSearched] = useState<string>("");
   const [sortKey, setSortKey] = useState<string>("date");
-  const [currentSalePage, setCurrentSalePage] = useState(1);
-  const [currentRentPage, setCurrentRentPage] = useState(1);
-  const [apartamentsPerPage] = useState(6);
-  const { listings, loading } = useFetchUserDocuments();
+  const [currentSalePage, setCurrentSalePage] = useState<number>(1);
+  const [currentRentPage, setCurrentRentPage] = useState<number>(1);
+  const [apartamentsPerPage] = useState<number>(6);
+  const { listings, loading } = useFetchUserListings();
   const debounceSearch = useDebounce(search, 500);
+
   const handleSearchText = (e: ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
     setSearched(searchText);
@@ -37,6 +38,7 @@ const Home = () => {
       setSortKey(selectedSortKey);
     }
   };
+
   const sortedListings = [...filteredListings];
 
   if (sortKey === "name") {
@@ -52,7 +54,7 @@ const Home = () => {
   }
   const saleListings = sortedListings.filter((listing) => listing.data.type === "sale");
   const rentListings = sortedListings.filter((listing) => listing.data.type === "rent");
-  const hasListings = filteredListings.length > 0;
+  // const hasListings = filteredListings.length > 0;
 
   const indexOfLastSaleApartament = currentSalePage * apartamentsPerPage;
   const indexOfFirstSaleApartment = indexOfLastSaleApartament - apartamentsPerPage;

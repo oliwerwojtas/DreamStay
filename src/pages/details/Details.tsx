@@ -1,27 +1,29 @@
-import { useParams } from "react-router-dom";
-import { useFetchUserDocuments } from "../../hooks/useFetchUserListings";
-import { Spinner } from "../../components/shared/Spinner";
 import { useGeolocation } from "../../hooks/useGeolocation";
-import { MdLocationOn } from "react-icons/md";
-
+import { useParams } from "react-router-dom";
+import { useFetchUserListings } from "../../hooks/useFetchUserListings";
+//components
+import { Spinner } from "../../components/shared/Spinner";
+import { MapContainerDetails } from "../../components/MapDetails";
+import { Gallery } from "../../components/Gallery";
+import { BackToTopButton } from "../../components/BackToTopButton";
+import { Button } from "../../components/shared/Button";
+//utilities
 import { MdSmokeFree } from "react-icons/md";
+import { MdLocationOn } from "react-icons/md";
 import { FaParking } from "react-icons/fa";
 import { BiBed } from "react-icons/bi";
 import { MdOutlineBathroom } from "react-icons/md";
 import { BsFillHouseDoorFill } from "react-icons/bs";
 import { MdOutlineFreeBreakfast } from "react-icons/md";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { LuSofa } from "react-icons/lu";
 import { MapContainer } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
-import { MapContainerDetails } from "../../components/MapDetails";
-import { ImageSlider } from "../../components/ImageSlider";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { BackToTopButton } from "../../components/BackToTopButton";
-import { Button } from "../../components/shared/Button";
+
 const Details = () => {
   const { id } = useParams();
-  const { listings } = useFetchUserDocuments();
+  const { listings } = useFetchUserListings();
 
   const details = listings.find((listing) => listing.id === id);
   const location = useGeolocation(details?.data.address || "");
@@ -106,7 +108,7 @@ const Details = () => {
         </div>
       </div>
       <div>
-        <ImageSlider imgUrls={details.data.imgUrls} />
+        <Gallery imgUrls={details.data.imgUrls} />
       </div>
       <BackToTopButton />
     </div>

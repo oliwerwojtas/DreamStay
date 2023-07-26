@@ -1,16 +1,19 @@
 import { useRef } from "react";
+import { useSignup } from "../../hooks/useSignup";
+//components
+import { Button } from "../../components/shared/Button";
+//utilities
 import { Link } from "react-router-dom";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import animation from "../../assets/registration-animation.json";
-import { useSignup } from "../../hooks/useSignup";
 import { toast } from "react-toastify";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineUser } from "react-icons/ai";
-import { Button } from "../../components/shared/Button";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { FormData } from "../../types";
+
 const SignUp = () => {
   const { signup } = useSignup();
   const registerRef = useRef<LottieRefCurrentProps>(null);
@@ -43,8 +46,8 @@ const SignUp = () => {
   return (
     <section>
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto ">
-        <div className="w-full md:w-[67%] lg:w-[40%] px-6 lg:ml-20 bg-white h-[30rem] flex flex-col justify-between py-4 rounded-md">
-          <h1 className="text-4xl text-center mt-6 mb-4 font-extrabold text-[#22292f] relative group">
+        <div className="w-[500px] md:w-[400px] lg:w-[400px] px-2 lg:px-8 lg:ml-20 bg-white h-[30rem] flex flex-col justify-between py-4 rounded-md">
+          <h1 className="text-3xl text-center mt-6 mb-4 font-extrabold text-[#22292f] relative group">
             Sign Up
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-[#22292f] my-4"></div>
           </h1>
@@ -58,82 +61,80 @@ const SignUp = () => {
             validationSchema={validationSchema}
             onSubmit={handleSignUpSubmit}
           >
-            {/* {({ isSubmitting }) => ( */}
-            <Form>
-              <div className="flex justify-center">
-                <div className="relative">
-                  <Field
-                    className="w-80 px-4 py-2 text-base text-gray-700 rounded-md transition ease-in-out mb-2 bg-gray-100 placeholder:px-7"
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Full Name"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className=" text-red-600 text-base font-medium mx-auto w-full text-center mb-2"
-                  />
-                  <AiOutlineUser size={20} className="absolute top-2.5 left-5" />
+            {({ values }) => (
+              <Form>
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <Field
+                      className="w-80 px-4 py-2 text-base text-gray-700 rounded-md transition ease-in-out mb-2 bg-gray-100 placeholder:px-7"
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="Full Name"
+                    />
+                    <ErrorMessage
+                      name="name"
+                      component="div"
+                      className=" text-red-600 text-base font-medium mx-auto w-full text-center mb-2"
+                    />
+                    <AiOutlineUser size={20} className="absolute top-2.5 left-5" />
+                  </div>
                 </div>
-              </div>
-              <div className="flex justify-center">
-                <div className="relative">
-                  <Field
-                    className="w-80 px-4 py-2 text-base text-gray-700 rounded-md transition ease-in-out mb-2 bg-gray-100 placeholder:px-7"
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Email"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className=" text-red-600 text-base font-medium mx-auto w-full text-center mb-2"
-                  />
-                  <HiOutlineMail size={20} className="absolute top-2.5 left-5" />
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <Field
+                      className="w-80 px-4 py-2 text-base text-gray-700 rounded-md transition ease-in-out mb-2 bg-gray-100 placeholder:px-7"
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className=" text-red-600 text-base font-medium mx-auto w-full text-center mb-2"
+                    />
+                    {values.email === "" && (
+                      <HiOutlineMail size={20} className="absolute top-2.5 left-5" />
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="flex justify-center">
-                <div className="relative">
-                  <Field
-                    className="w-80 px-4 py-2 text-base text-gray-700  rounded-md transition ease-in-out mb-2 bg-gray-100 placeholder:px-7"
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Password"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className=" text-red-600 text-base font-medium mx-auto w-full text-center mb-2"
-                  />
-                  <RiLockPasswordLine size={20} className="absolute top-2.5 left-5" />
+                <div className="flex justify-center">
+                  <div className="relative">
+                    <Field
+                      className="w-80 px-4 py-2 text-base text-gray-700  rounded-md transition ease-in-out mb-2 bg-gray-100 placeholder:px-7"
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="Password"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className=" text-red-600 text-base font-medium mx-auto w-full text-center mb-2"
+                    />
+                    {values.password === "" && (
+                      <RiLockPasswordLine size={20} className="absolute top-2.5 left-5" />
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="flex justify-between text-xs mx-2 mb-12">
-                <p>
+                <div className="flex justify-between text-xs mx-2 mb-6 ">
                   <Link
                     to="/login"
-                    className="text-green-600 hover:text-green-800 transition duration-200 ease-in-out ml-1"
+                    className=" transition duration-200 ease-in-out ml-1 font-semibold"
                   >
                     Back to login
                   </Link>
-                </p>
-                <p>
-                  <Link
-                    to="/forgotPassword"
-                    className="text-green-600 hover:text-green-800 transition duration-200 ease-in-out ml-1 "
-                  >
+
+                  <Link to="/forgotPassword" className=" transition duration-200 ease-in-out ml-1 ">
                     Forgot password?
                   </Link>
-                </p>
-              </div>
-              <div className="flex justify-center">
-                <Button className="mb-4 px-5 mt-4 font-medium rounded-md">Sign up</Button>
-              </div>
-            </Form>
-            {/* )} */}
+                </div>
+                <div className="flex justify-center">
+                  <Button className="mb-4 px-5 mt-4 font-medium rounded-md">Sign up</Button>
+                </div>
+              </Form>
+            )}
           </Formik>
         </div>
         <div className="md:w-[67%] lg:w-[40%]">

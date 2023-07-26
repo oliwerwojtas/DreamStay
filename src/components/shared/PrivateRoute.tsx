@@ -1,7 +1,10 @@
-import { Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+//components
 import { Spinner } from "./Spinner";
-import { PrivateRouteProps } from "../../types";
+//utilities
+import { Navigate } from "react-router-dom";
+import { PrivateRouteProps } from "../../types/components/components";
+
 export const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const { loggedIn, checkingStatus } = useAuth();
   if (checkingStatus) {

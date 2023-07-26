@@ -1,6 +1,7 @@
 import { SetStateAction, Dispatch } from "react";
 import { IconType } from "react-icons";
 import { motion } from "framer-motion";
+
 const itemVariants = {
   open: {
     opacity: 1,
