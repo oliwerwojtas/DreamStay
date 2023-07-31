@@ -57,7 +57,7 @@ const EditDocument = () => {
   } = formData;
 
   const params = useParams();
-  console.log(params);
+
   useEffect(() => {
     setLoading(true);
     const fetchListing = async () => {

@@ -11,20 +11,12 @@ import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineUser } from "react-icons/ai";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { signupValidation } from "../../utilities/validations";
 import { FormData } from "../../types";
 
 const SignUp = () => {
   const { signup } = useSignup();
   const registerRef = useRef<LottieRefCurrentProps>(null);
-
-  const validationSchema = Yup.object({
-    name: Yup.string().required("Full Name is required"),
-    email: Yup.string().email("Invalid email address").required("Email is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-  });
 
   const handleSignUpSubmit = async (
     values: FormData,
@@ -58,7 +50,7 @@ const SignUp = () => {
               email: "",
               password: "",
             }}
-            validationSchema={validationSchema}
+            validationSchema={signupValidation}
             onSubmit={handleSignUpSubmit}
           >
             {({ values }) => (
@@ -77,7 +69,9 @@ const SignUp = () => {
                       component="div"
                       className=" text-red-600 text-base font-medium mx-auto w-full text-center mb-2"
                     />
-                    <AiOutlineUser size={20} className="absolute top-2.5 left-5" />
+                    {values.name === "" && (
+                      <AiOutlineUser size={20} className="absolute top-2.5 left-5" />
+                    )}
                   </div>
                 </div>
                 <div className="flex justify-center">

@@ -1,12 +1,13 @@
-import { motion } from "framer-motion";
-
-import { ListingItem } from "./ListingItem";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { RootState } from "../types";
 import { useFetchUserListings } from "../hooks/useFetchUserListings";
-import { FavoritesModalProps } from "../types";
+//components
+import { ListingItem } from "./ListingItem";
+import { FavoritesModalProps } from "../types/components/components";
 import { Button } from "./shared/Button";
+//utilities
+import { RootState } from "../types/auth/auth";
+import { motion } from "framer-motion";
 import { getAuth } from "firebase/auth";
 import { AiOutlineClose } from "react-icons/ai";
 import { db } from "../config";
@@ -18,7 +19,7 @@ export const FavoritesModal = ({ onClose }: FavoritesModalProps) => {
   const favoritesRedux = useSelector((state: RootState) => state.favorites.favoritesItems);
   const [favorites, setFavorites] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  console.log(listings);
+
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
@@ -34,7 +35,6 @@ export const FavoritesModal = ({ onClose }: FavoritesModalProps) => {
 
         if (userFavorites.length > 0) {
           const favoritesData = userFavorites[0].data();
-          console.log("FavoritesData:", favoritesData);
           setFavorites(favoritesData.favorites);
         } else {
           setFavorites([]);

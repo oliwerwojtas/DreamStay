@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { collection, addDoc, DocumentData, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../config";
-import { FormDataCreate2 } from "../types";
+import { DataFromCreate } from "../types";
 import { toast } from "react-toastify";
 import { ErrorType } from "../types";
 
 export const useDocument = (collectionName: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<ErrorType | null>(null);
-  const [listings, setListings] = useState<FormDataCreate2[]>([]);
+  const [listings, setListings] = useState<DataFromCreate[]>([]);
   const addDocument = async (document: DocumentData) => {
     setIsLoading(true);
     setError(null);

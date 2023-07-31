@@ -1,34 +1,8 @@
 import { SetStateAction, Dispatch } from "react";
 import { IconType } from "react-icons";
 import { motion } from "framer-motion";
+import { itemVariants, actionIconVariants } from "../../utilities/animations";
 
-const itemVariants = {
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      when: "beforeChildren",
-    },
-  },
-  closed: {
-    opacity: 0,
-    y: -15,
-    transition: {
-      when: "afterChildren",
-    },
-  },
-};
-
-const actionIconVariants = {
-  open: {
-    scale: 1,
-    y: 0,
-  },
-  closed: {
-    scale: 0,
-    y: -7,
-  },
-};
 export const Option = ({
   text,
   Icon,

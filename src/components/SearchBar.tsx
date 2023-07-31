@@ -1,29 +1,20 @@
 import { useState, useEffect, useRef } from "react";
+//components
 import { Option } from "./shared/Option";
+import { Button } from "./shared/Button";
+//utilities
 import { MdOutlineSpellcheck } from "react-icons/md";
 import { MdLocationOn } from "react-icons/md";
 import { AiOutlineFieldTime } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { Button } from "./shared/Button";
-import { SearchBarProps } from "../types";
-const SearchBar = ({
-  search,
-  handleSearchText,
-  // className,
-  onSortOptionClick,
-  sortKey,
-}: SearchBarProps) => {
+import { SearchBarProps } from "../types/components/components";
+import { wrapperVariants } from "../utilities/animations";
+
+const SearchBar = ({ search, handleSearchText, onSortOptionClick, sortKey }: SearchBarProps) => {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const wrapperVariants = {
-    open: {
-      scaleY: 1,
-    },
-    closed: {
-      scaleY: 0,
-    },
-  };
+
   const handleOptionClick = (sortKey: string) => {
     onSortOptionClick(sortKey);
     setOpen(false);
@@ -40,6 +31,7 @@ const SearchBar = ({
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
   return (
     <div className="flex justify-between w-4/5">
       <div className=" flex items-center justify-center bg-white">

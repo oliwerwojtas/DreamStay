@@ -10,21 +10,16 @@ import { LoginData } from "../../types/auth/auth.ts";
 import { toast } from "react-toastify";
 import { SignupError } from "../../types";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import animation from "../../assets/login-animation.json";
+import { loginValidation } from "../../utilities/validations.tsx";
 
 const Login = () => {
   const { login } = useLogin();
   const loginRef = useRef<LottieRefCurrentProps>(null);
   const [error, setError] = useState<SignupError | null>(null);
-
-  const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email address").required("Email is required"),
-    password: Yup.string().required("Password is required"),
-  });
 
   const handleLoginSubmit = async (
     values: LoginData,
@@ -63,7 +58,7 @@ const Login = () => {
               email: "",
               password: "",
             }}
-            validationSchema={validationSchema}
+            validationSchema={loginValidation}
             onSubmit={handleLoginSubmit}
           >
             {({ values }) => (
@@ -76,6 +71,7 @@ const Login = () => {
                       id="email"
                       name="email"
                       placeholder="Email"
+                      data-cy="emailLogin"
                     />
 
                     <ErrorMessage
@@ -97,6 +93,7 @@ const Login = () => {
                       id="password"
                       name="password"
                       placeholder="Password"
+                      data-cy="passwordLogin"
                     />
                     {values.password === "" && (
                       <RiLockPasswordLine size={20} className="absolute top-2.5 left-5" />
@@ -127,7 +124,7 @@ const Login = () => {
                     </Link>
                   </p>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center" data-cy="login-submit">
                   <Button className=" mb-4 px-5 mt-4 font-medium rounded-md">Sign in</Button>
                 </div>
               </Form>

@@ -1,4 +1,12 @@
-import { ListingItemProps } from "../types";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDocument } from "../hooks/useDocument";
+import { useNavigate } from "react-router-dom";
+//components
+import { ListingItemProps } from "../types/components/components";
+import { LazyImage } from "./LazyImage";
+import { FavoriteButton } from "./FavouriteButton";
+//utilities
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import "dayjs/locale/pl";
@@ -6,20 +14,14 @@ import { MdLocationOn } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { FavoriteButton } from "./FavouriteButton";
 import { AiOutlineClose } from "react-icons/ai";
-import { useEffect, useState } from "react";
-import { useDocument } from "../hooks/useDocument";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../config";
 import { addToFavorites, removeFromFavorites } from "../store/favoritesSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { RootState } from "../types";
+import { RootState } from "../types/auth/auth";
 import { BiBed } from "react-icons/bi";
 import { MdOutlineBathroom } from "react-icons/md";
-import { LazyImage } from "./LazyImage";
 
 export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
   const auth = getAuth();
@@ -36,22 +38,25 @@ export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
   };
 
   useEffect(() => {
-    if (auth.currentUser?.uid) {
-      const userFavoritesRef = doc(db, "favorites", auth.currentUser.uid);
+    const fetchData = async () => {
+      try {
+        if (auth.currentUser?.uid) {
+          const userFavoritesRef = doc(db, "favorites", auth.currentUser.uid);
+          const docSnapshot = await getDoc(userFavoritesRef);
 
-      getDoc(userFavoritesRef)
-        .then((docSnapshot) => {
           if (docSnapshot.exists()) {
             const favoritesData = docSnapshot.data();
             setFavorites(favoritesData.favorites);
           } else {
             setFavorites([]);
           }
-        })
-        .catch((error) => {
-          console.error("Error getting user favorites:", error);
-        });
-    }
+        }
+      } catch (error) {
+        console.error("Error getting user favorites:", error);
+      }
+    };
+
+    fetchData();
   }, [auth.currentUser, favoritesRedux]);
 
   const handleDelete = async () => {
@@ -63,7 +68,6 @@ export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
   };
 
   const handleEdit = () => {
-    console.log(id);
     navigate(`/edit/${id}`);
   };
   const addToFavoritesHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -103,7 +107,7 @@ export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
       }
     }
   };
-  console.log(favoritesRedux);
+
   return (
     <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }} layout>
       <li className="bg-[white] text-[#22292f] w-[17rem] relative z-10 flex flex-col justify-centershadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">

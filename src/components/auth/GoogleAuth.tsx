@@ -30,7 +30,6 @@ export const MediaAuth = () => {
         });
       }
       navigate("/");
-      console.log(user);
     } catch (error) {
       toast.error("Could not authorize with Google");
       console.log(error);
@@ -41,7 +40,7 @@ export const MediaAuth = () => {
       className="w-12 h-12 rounded-full justify-center duration-300 ease-in-out"
       onClick={handleMediaAuth}
     >
-      <BsGoogle size={20} />
+      <BsGoogle size={20} data-cy="google-login" />
     </Button>
   );
 };

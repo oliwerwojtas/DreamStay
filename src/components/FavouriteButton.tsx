@@ -1,11 +1,10 @@
+import { FavoriteButtonProps } from "../types/components/components";
+//utilities
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { motion } from "framer-motion";
-import { FavoriteButtonProps } from "../types";
+import { favoriteButtonVariants } from "../utilities/animations";
+
 export const FavoriteButton = ({ isFavorite, addToFavoritesHandler }: FavoriteButtonProps) => {
-  const favoriteVariants = {
-    initial: { opacity: 1, scale: 1 },
-    animate: { scale: [1, 1.5, 1], transition: { duration: 0.5 } },
-  };
   return (
     <div
       onClick={addToFavoritesHandler}
@@ -13,7 +12,7 @@ export const FavoriteButton = ({ isFavorite, addToFavoritesHandler }: FavoriteBu
     >
       <motion.div
         className="relative z-20"
-        variants={favoriteVariants}
+        variants={favoriteButtonVariants}
         initial={isFavorite ? "animate" : "initial"}
         animate={isFavorite ? "animate" : "initial"}
         exit="initial"

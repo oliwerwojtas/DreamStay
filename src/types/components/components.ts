@@ -1,6 +1,7 @@
 import { LatLngTuple } from "leaflet";
 import { ChangeEvent, ReactNode } from "react";
 import { MouseEvent } from "react";
+import { DataFromCreate } from "../../types";
 export interface LazyImageProps {
   imageUrl: string;
   alt?: string;
@@ -36,4 +37,9 @@ export interface SearchBarProps {
   className?: string;
   onSortOptionClick: (sortKey: string) => void;
   sortKey: string;
+}
+export interface ListingItemProps {
+  listing: DataFromCreate["data"];
+  id: string;
+  isModalOpen?: boolean;
 }

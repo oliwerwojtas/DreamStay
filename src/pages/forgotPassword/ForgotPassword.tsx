@@ -6,14 +6,12 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { HiOutlineMail } from "react-icons/hi";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { forgotPasswordValidation } from "../../utilities/validations";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
-  const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email address").required("Email is required"),
-  });
+
   if (loading) {
     return <Spinner />;
   }
@@ -65,7 +63,7 @@ const ForgotPassword = () => {
             initialValues={{
               email: "",
             }}
-            validationSchema={validationSchema}
+            validationSchema={forgotPasswordValidation}
             onSubmit={handleSubmit}
           >
             {({ values }) => (

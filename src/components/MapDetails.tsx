@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+//utilities
 import { useMap, TileLayer, Marker, Popup } from "react-leaflet";
-import { MapContainerWrapperProps } from "../types";
+import { MapContainerWrapperProps } from "../types/components/components";
 
 export const MapContainerDetails = ({ position, details }: MapContainerWrapperProps) => {
   const map = useMap();

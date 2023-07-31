@@ -1,30 +1,21 @@
-import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-import { FiChevronDown, FiEdit } from "react-icons/fi";
-import { AiOutlineHome, AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
-import { Option } from "./shared/Option";
 import { useNavigate } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
+//components
 import { Button } from "./shared/Button";
+import { Option } from "./shared/Option";
+//utilities
+import { motion } from "framer-motion";
+import { FiChevronDown, FiEdit } from "react-icons/fi";
+import { AiOutlineHome, AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
+import { settingsIcon, wrapperVariants } from "../utilities/animations";
+
 export const Dropdown = () => {
   const { logout } = useLogout();
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const iconVariants = {
-    open: { rotate: 180 },
-    close: { rotate: 0 },
-  };
-
-  const wrapperVariants = {
-    open: {
-      scaleY: 1,
-    },
-    closed: {
-      scaleY: 0,
-    },
-  };
 
   const handleClickOutside = (e: MouseEvent) => {
     if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
@@ -42,7 +33,7 @@ export const Dropdown = () => {
       <motion.div animate={open ? "open" : "closed"} className="relative" ref={wrapperRef}>
         <Button className="rounded-md" onClick={() => setOpen((previous) => !previous)}>
           <span className="font-medium text-[#22292f]">Settings</span>
-          <motion.span variants={iconVariants}>
+          <motion.span variants={settingsIcon}>
             <FiChevronDown />
           </motion.span>
         </Button>

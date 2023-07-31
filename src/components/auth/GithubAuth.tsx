@@ -30,7 +30,6 @@ export const MediaAuthGithub = () => {
         });
       }
       navigate("/");
-      console.log(user);
     } catch (error) {
       toast.error("Could not authorize with Github");
       console.log(error);

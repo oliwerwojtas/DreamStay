@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { collection, query, where, getDocs, DocumentSnapshot } from "firebase/firestore";
 import { db } from "../config";
-import { FormDataCreate2 } from "../types";
+import { DataFromCreate } from "../types";
 import { ErrorType } from "../types";
 
 export const useFetchUserListings = (userId?: string) => {
-  const [listings, setListings] = useState<FormDataCreate2[]>([]);
+  const [listings, setListings] = useState<DataFromCreate[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<ErrorType | null>(null);
 
@@ -19,9 +19,9 @@ export const useFetchUserListings = (userId?: string) => {
       }
       try {
         const querySnap = await getDocs(q);
-        const listings: FormDataCreate2[] = [];
+        const listings: DataFromCreate[] = [];
         querySnap.forEach((doc: DocumentSnapshot) => {
-          const docData = doc.data() as FormDataCreate2["data"] | undefined;
+          const docData = doc.data() as DataFromCreate["data"] | undefined;
           if (docData !== undefined) {
             listings.push({
               id: doc.id,

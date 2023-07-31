@@ -9,8 +9,6 @@ const Welcome = () => {
 
   const homeRef = useRef<LottieRefCurrentProps>(null);
 
-  const transition = { duration: 0.6 };
-
   useEffect(() => {
     const interval = setInterval(() => {
       setIsPreferenceBased((prevIsPreferenceBased) => !prevIsPreferenceBased);
@@ -39,7 +37,7 @@ const Welcome = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={transition}
+                transition={{ duration: 0.6 }}
                 className="inline-block text-[#ffbb44]"
               >
                 preference-based filtering
@@ -50,7 +48,7 @@ const Welcome = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={transition}
+                transition={{ duration: 0.6 }}
                 className="inline-block text-[#ffbb44]"
               >
                 photos
@@ -63,7 +61,7 @@ const Welcome = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={transition}
+                transition={{ duration: 0.6 }}
                 className="inline-block text-[#ffbb44]"
               >
                 location.
@@ -74,7 +72,7 @@ const Welcome = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={transition}
+                transition={{ duration: 0.6 }}
                 className="inline-block text-[#ffbb44]"
               >
                 description.

@@ -1,6 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+//utilities
 import { AiOutlineArrowUp } from "react-icons/ai";
-export const BackToTopButton: React.FC = () => {
+
+export const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 

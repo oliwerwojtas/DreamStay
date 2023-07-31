@@ -1,12 +1,15 @@
 import { useFetchUserListings } from "../../hooks/useFetchUserListings";
-
+import { useState } from "react";
+import { useDebounce } from "../../hooks/useDebounce";
+//components
 import { ListingItem } from "../../components/ListingItem";
 import { Spinner } from "../../components/shared/Spinner";
-import { ChangeEvent, useState } from "react";
-import { useDebounce } from "../../hooks/useDebounce";
 import SearchBar from "../../components/SearchBar";
 import { Pagination } from "../../components/Pagination";
 import { BackToTopButton } from "../../components/BackToTopButton";
+//utilities
+import { ChangeEvent } from "react";
+
 const Home = () => {
   const [search, setSearched] = useState<string>("");
   const [sortKey, setSortKey] = useState<string>("date");
@@ -91,11 +94,11 @@ const Home = () => {
       <div className="flex flex-wrap ">
         <span className="flex text-5xl px-4 py-4 text-center font-semibold text-[#22292f] justify-center items-center mx-auto w-[35rem]">
           <span className="mb-4">
-            Checkout apartaments for <strong className="text-[#ffbb44]">buy.</strong>
+            Checkout apartaments to <strong className="text-[#ffbb44]">buy.</strong>
           </span>
         </span>
 
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-6 mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-3 mx-auto">
           {currentSaleApartaments.map((listing) => (
             <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
           ))}
@@ -109,7 +112,7 @@ const Home = () => {
         </div>
       </div>
       <div className="flex flex-wrap mt-12 mb-4">
-        <div className="grid order-2 xxl:order-1  grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-6 mx-auto ">
+        <div className="grid order-2 xxl:order-1  grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-3 mx-auto ">
           {currentRentApartaments.map((listing) => (
             <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
           ))}

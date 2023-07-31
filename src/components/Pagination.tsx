@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+//components
 import { Button } from "./shared/Button";
-import { PaginationProps } from "../types";
+//utilities
+import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+import { PaginationProps } from "../types/components/components";
+
 export const Pagination = ({ apartamentsPerPage, totalPosts, paginate }: PaginationProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageNumbers = [];

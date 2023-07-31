@@ -116,7 +116,7 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <>
-      <ToastContainer theme="dark" className="mt-20 w-[20rem]" />
+      <ToastContainer theme="dark" className="mt-16 w-[20rem]" />
       <RouterProvider router={router} />
     </>
   );

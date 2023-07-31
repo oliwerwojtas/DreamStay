@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { LazyImageProps } from "../types";
+//utilities
+import { LazyImageProps } from "../types/components/components";
 
 export const LazyImage = ({ imageUrl, alt, className }: LazyImageProps) => {
   const imageRef = useRef<HTMLImageElement>(null);
@@ -24,7 +25,7 @@ export const LazyImage = ({ imageUrl, alt, className }: LazyImageProps) => {
     };
   }, []);
   return inView ? (
-    <img src={imageUrl} alt={alt} className={`rounded-md ${className}`} />
+    <img src={imageUrl} alt={alt} className={`rounded-md mb-4 ${className}`} />
   ) : (
     <img ref={imageRef} alt={alt} style={{ width: "100%", height: "170px", opacity: 0 }} />
   );

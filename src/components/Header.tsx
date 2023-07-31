@@ -1,18 +1,21 @@
+import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+//components
+import { Dropdown } from "./Dropdown";
+import { Button } from "./shared/Button";
+import { FavoritesModal } from "./FavouritesModal";
+//utilities
 import { NavLink } from "react-router-dom";
 import { MouseEvent } from "react";
 import icon from "../assets/favicon-32x32.png";
-import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import { Dropdown } from "./Dropdown";
-import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config";
-import { RootState } from "../types";
-import { useSelector } from "react-redux";
+import { RootState } from "../types/auth/auth";
 import { MdOutlineFavorite } from "react-icons/md";
-import { Button } from "./shared/Button";
-import { FavoritesModal } from "./FavouritesModal";
+
 export const Header = () => {
   const auth = getAuth();
   const navigate = useNavigate();
@@ -23,11 +26,12 @@ export const Header = () => {
   const [showFavoritesModal, setShowFavoritesModal] = useState(false);
 
   useEffect(() => {
-    if (auth.currentUser?.uid) {
-      const userFavoritesRef = doc(db, "favorites", auth.currentUser.uid);
+    const fetchData = async () => {
+      try {
+        if (auth.currentUser?.uid) {
+          const userFavoritesRef = doc(db, "favorites", auth.currentUser.uid);
+          const docSnapshot = await getDoc(userFavoritesRef);
 
-      getDoc(userFavoritesRef)
-        .then((docSnapshot) => {
           if (docSnapshot.exists()) {
             const favoritesData = docSnapshot.data();
             const favoritesCount = favoritesData.favorites.length;
@@ -35,11 +39,13 @@ export const Header = () => {
           } else {
             setFavoritesCount(favoritesRedux.length);
           }
-        })
-        .catch((error) => {
-          console.error("Error getting user favorites:", error);
-        });
-    }
+        }
+      } catch (error) {
+        console.error("Error getting user favorites:", error);
+      }
+    };
+
+    fetchData();
   }, [auth.currentUser, favoritesRedux.length, favoritesRedux]);
 
   const handleCloseFavourites = () => {
@@ -76,13 +82,21 @@ export const Header = () => {
                   </>
                 ) : (
                   <>
-                    <Button className="px-0 py-0 rounded-md ">
-                      <NavLink to="/login" className="font-medium text-[#22292f] px-2">
+                    <Button className="px-0 py-0 rounded-md">
+                      <NavLink
+                        to="/login"
+                        className="font-medium text-[#22292f] px-2"
+                        data-cy="loginButton"
+                      >
                         Login
                       </NavLink>
                     </Button>
-                    <Button className="px-0 py-0 rounded-md ">
-                      <NavLink to="/signup" className="font-medium text-[#22292f] px-2">
+                    <Button className="px-0 py-0 rounded-md">
+                      <NavLink
+                        to="/signup"
+                        className="font-medium text-[#22292f] px-2"
+                        data-cy="signupButton"
+                      >
                         Sign Up
                       </NavLink>
                     </Button>
