@@ -11,6 +11,7 @@ export interface AuthStatus {
   loggedIn: boolean;
   googleLoggedIn: boolean;
   githubLoggedIn: boolean;
+  emailLoggedIn: boolean;
   checkingStatus: boolean;
   initialStatusChecked: boolean;
 }
@@ -18,6 +19,7 @@ export interface AuthState {
   loggedIn: boolean;
   googleLoggedIn: boolean;
   githubLoggedIn: boolean;
+  emailLoggedIn: boolean;
   checkingStatus: boolean;
 }
 export interface RootState {

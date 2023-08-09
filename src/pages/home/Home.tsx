@@ -57,7 +57,8 @@ const Home = () => {
   }
   const saleListings = sortedListings.filter((listing) => listing.data.type === "sale");
   const rentListings = sortedListings.filter((listing) => listing.data.type === "rent");
-  // const hasListings = filteredListings.length > 0;
+  const hasSaleListings = saleListings.length > 0;
+  const hasRentListings = rentListings.length > 0;
 
   const indexOfLastSaleApartament = currentSalePage * apartamentsPerPage;
   const indexOfFirstSaleApartment = indexOfLastSaleApartament - apartamentsPerPage;
@@ -99,9 +100,15 @@ const Home = () => {
         </span>
 
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-3 mx-auto">
-          {currentSaleApartaments.map((listing) => (
-            <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
-          ))}
+          {hasSaleListings ? (
+            currentSaleApartaments.map((listing) => (
+              <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
+            ))
+          ) : (
+            <div className="text-center w-full">
+              <p>No apartment found for your preferences!</p>
+            </div>
+          )}
           <div className="row-span-3 col-span-full">
             <Pagination
               apartamentsPerPage={apartamentsPerPage}
@@ -113,9 +120,15 @@ const Home = () => {
       </div>
       <div className="flex flex-wrap mt-12 mb-4">
         <div className="grid order-2 xxl:order-1  grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-3 mx-auto ">
-          {currentRentApartaments.map((listing) => (
-            <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
-          ))}
+          {hasRentListings ? (
+            currentRentApartaments.map((listing) => (
+              <ListingItem key={listing.id} id={listing.id} listing={listing.data} />
+            ))
+          ) : (
+            <div className="text-center w-full">
+              <p>No apartment found for your preferences!</p>
+            </div>
+          )}
           <div className="row-span-3 col-span-full">
             <Pagination
               apartamentsPerPage={apartamentsPerPage}

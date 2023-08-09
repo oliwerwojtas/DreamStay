@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useLogin } from "../../hooks/useLogin";
 //components
-import { MediaAuth } from "../../components/auth/GoogleAuth";
+import { MediaAuthGoogle } from "../../components/auth/GoogleAuth";
 import { MediaAuthGithub } from "../../components/auth/GithubAuth";
 import { Button } from "../../components/shared/Button";
 //utilities
@@ -48,7 +48,7 @@ const Login = () => {
           </h1>
           <div className="flex justify-center mt-4">
             <div className="flex w-1/2 justify-around">
-              <MediaAuth />
+              <MediaAuthGoogle />
               <MediaAuthGithub />
             </div>
           </div>

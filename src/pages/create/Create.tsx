@@ -362,7 +362,9 @@ const Create = () => {
             no
           </button>
         </div>
-        <p className="text-lg mt-6 font-semibold">Address</p>
+        <p className="text-lg mt-6 font-semibold">
+          Address <span className="text-sm font-normal"> (format: Limes Rd 4, London)</span>
+        </p>
         <textarea
           id="address"
           value={address}

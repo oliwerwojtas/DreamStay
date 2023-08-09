@@ -22,7 +22,7 @@ export const useDocument = (collectionName: string) => {
       setError({ message: errorMessage });
       setIsLoading(false);
 
-      console.error("Error creating document: ", error);
+      toast.error(`Error creating document: ${errorMessage}`);
     }
   };
   const updateDocument = async (document: DocumentData, id: string) => {

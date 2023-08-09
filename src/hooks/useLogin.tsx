@@ -30,7 +30,7 @@ export const useLogin = () => {
         navigate("/");
       }
 
-      dispatch(Login(userCredential.user.uid));
+      dispatch(Login("email"));
       toast.success("Login successful!", {
         position: "top-center",
         autoClose: 3000,
@@ -42,7 +42,7 @@ export const useLogin = () => {
       const errorMessage = (error as Error).message;
       setError({ message: errorMessage });
       setLoading(false);
-      throw error;
+      toast.error(`${errorMessage}`);
     }
   };
 

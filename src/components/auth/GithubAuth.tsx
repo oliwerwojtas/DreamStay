@@ -7,9 +7,12 @@ import { toast } from "react-toastify";
 import { db } from "../../config";
 import { getDoc, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { AiFillGithub } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { Login } from "../../store/authSlice";
 
 export const MediaAuthGithub = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleMediaAuth = async () => {
     try {
@@ -29,10 +32,11 @@ export const MediaAuthGithub = () => {
           timestamp: serverTimestamp(),
         });
       }
+      dispatch(Login("github"));
       navigate("/");
     } catch (error) {
-      toast.error("Could not authorize with Github");
-      console.log(error);
+      const errorMessage = (error as Error).message;
+      toast.error(`${errorMessage}`);
     }
   };
   return (

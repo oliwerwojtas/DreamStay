@@ -13,6 +13,7 @@ export const useAuth = (): AuthStatus => {
   const loggedIn = useSelector((state: RootState) => state.auth.loggedIn);
   const googleLoggedIn = useSelector((state: RootState) => state.auth.googleLoggedIn);
   const githubLoggedIn = useSelector((state: RootState) => state.auth.githubLoggedIn);
+  const emailLoggedIn = useSelector((state: RootState) => state.auth.emailLoggedIn);
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -20,7 +21,12 @@ export const useAuth = (): AuthStatus => {
       setInitialStatusChecked(true);
 
       if (user) {
-        dispatch(Login(user.uid));
+        if (user.providerData && user.providerData.length > 0) {
+          const loginMethod = user.providerData[0].providerId;
+          dispatch(Login(loginMethod));
+        } else {
+          // Handle anonymous login here if needed
+        }
       } else {
         dispatch(Logout());
       }
@@ -31,5 +37,12 @@ export const useAuth = (): AuthStatus => {
     };
   }, [dispatch]);
 
-  return { loggedIn, googleLoggedIn, githubLoggedIn, checkingStatus, initialStatusChecked };
+  return {
+    loggedIn,
+    emailLoggedIn,
+    googleLoggedIn,
+    githubLoggedIn,
+    checkingStatus,
+    initialStatusChecked,
+  };
 };
