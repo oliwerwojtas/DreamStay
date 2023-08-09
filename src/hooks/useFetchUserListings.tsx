@@ -3,6 +3,7 @@ import { collection, query, where, getDocs, DocumentSnapshot } from "firebase/fi
 import { db } from "../config";
 import { DataFromCreate } from "../types";
 import { ErrorType } from "../types";
+import { toast } from "react-toastify";
 
 export const useFetchUserListings = (userId?: string) => {
   const [listings, setListings] = useState<DataFromCreate[]>([]);
@@ -35,7 +36,7 @@ export const useFetchUserListings = (userId?: string) => {
       } catch (error) {
         const errorMessage = (error as Error).message;
         setError({ message: errorMessage });
-        console.error("Error fetching documents: ", error);
+        toast.error(`${errorMessage}`);
         setLoading(false);
       }
     };

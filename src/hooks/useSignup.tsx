@@ -45,7 +45,7 @@ export const useSignup = () => {
       const errorMessage = (error as Error).message;
       setError({ message: errorMessage });
       setLoading(false);
-      throw error;
+      toast.error(`${errorMessage}`);
     }
   };
 

@@ -29,7 +29,8 @@ const SignUp = () => {
 
       console.log(user);
     } catch (error) {
-      toast.error("Something went wrong");
+      const errorMessage = (error as Error).message;
+      toast.error(`${errorMessage}`);
     } finally {
       setSubmitting(false);
     }
@@ -38,7 +39,7 @@ const SignUp = () => {
   return (
     <section>
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto ">
-        <div className="w-[500px] md:w-[400px] lg:w-[400px] px-2 lg:px-8 lg:ml-20 bg-white h-[30rem] flex flex-col justify-between py-4 rounded-md">
+        <div className="w-[500px] md:w-[400px] lg:w-[400px] px-2 lg:px-8 lg:mr-4 0 bg-white h-[30rem] flex flex-col justify-between py-4 rounded-md">
           <h1 className="text-3xl text-center mt-6 mb-4 font-extrabold text-[#22292f] relative group">
             Sign Up
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-[#22292f] my-4"></div>

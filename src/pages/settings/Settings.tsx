@@ -54,10 +54,10 @@ const Settings = () => {
         toast.success("Profile updated!");
       }
     } catch (error) {
-      toast.error("could not");
+      const errorMessage = (error as Error).message;
+      toast.error(`${errorMessage}`);
     }
   };
-
   const handleSpanClick = (e: React.MouseEvent<HTMLSpanElement>) => {
     handleEditData();
     if (changeDetail) {

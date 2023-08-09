@@ -7,10 +7,12 @@ import { toast } from "react-toastify";
 import { db } from "../../config";
 import { getDoc, doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { BsGoogle } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { Login } from "../../store/authSlice";
 
-export const MediaAuth = () => {
+export const MediaAuthGoogle = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleMediaAuth = async () => {
     try {
       const auth = getAuth();
@@ -29,10 +31,11 @@ export const MediaAuth = () => {
           timestamp: serverTimestamp(),
         });
       }
+      dispatch(Login("google"));
       navigate("/");
     } catch (error) {
-      toast.error("Could not authorize with Google");
-      console.log(error);
+      const errorMessage = (error as Error).message;
+      toast.error(`${errorMessage}`);
     }
   };
   return (

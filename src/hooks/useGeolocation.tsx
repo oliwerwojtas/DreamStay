@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const useGeolocation = (address: string) => {
   const [location, setLocation] = useState({ latitude: 0, longitude: 0 });
@@ -16,7 +17,8 @@ export const useGeolocation = (address: string) => {
 
         setLocation({ latitude: lat, longitude: lng });
       } catch (error) {
-        console.log(error);
+        const errorMessage = (error as Error).message;
+        toast.error(`${errorMessage}`);
       }
     };
 

@@ -5,6 +5,7 @@ const initialState: AuthState = {
   loggedIn: false,
   googleLoggedIn: false,
   githubLoggedIn: false,
+  emailLoggedIn: false,
   checkingStatus: true,
 };
 
@@ -13,9 +14,21 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     Login(state, action: PayloadAction<string>) {
+      const loginMethod = action.payload;
+      switch (loginMethod) {
+        case "google":
+          state.googleLoggedIn = true;
+          break;
+        case "github":
+          state.githubLoggedIn = true;
+          break;
+        case "email":
+          state.emailLoggedIn = true;
+          break;
+        default:
+          break;
+      }
       state.loggedIn = true;
-      state.googleLoggedIn = true;
-      state.githubLoggedIn = true;
     },
     Logout(state) {
       state.loggedIn = false;

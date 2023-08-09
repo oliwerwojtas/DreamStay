@@ -12,6 +12,7 @@ import { getAuth } from "firebase/auth";
 import { AiOutlineClose } from "react-icons/ai";
 import { db } from "../config";
 import { collection, getDocs, query } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 export const FavoritesModal = ({ onClose }: FavoritesModalProps) => {
   const { listings } = useFetchUserListings();
@@ -41,7 +42,8 @@ export const FavoritesModal = ({ onClose }: FavoritesModalProps) => {
         }
         setIsLoading(false);
       } catch (error) {
-        console.error("Error fetching favorites:", error);
+        const errorMessage = (error as Error).message;
+        toast.error(`${errorMessage}`);
         setIsLoading(false);
       }
     };

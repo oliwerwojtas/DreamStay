@@ -5,6 +5,7 @@ import { getAuth } from "firebase/auth";
 import { Logout } from "../store/authSlice";
 import { useState } from "react";
 import { SignupError } from "../types";
+import { toast } from "react-toastify";
 
 export const useLogout = () => {
   const [error, setError] = useState<SignupError | null>(null);
@@ -25,7 +26,7 @@ export const useLogout = () => {
       const errorMessage = (error as Error).message;
       setError({ message: errorMessage });
       setLoading(false);
-      throw error;
+      toast.error(`${errorMessage}`);
     }
   };
 
