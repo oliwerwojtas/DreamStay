@@ -23,14 +23,17 @@ const SignUp = () => {
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
     try {
-      const data = { email: values.email, password: values.password, displayName: values.name };
-      const result = await signup(data);
-      const user = result.user;
+      const password = values.password !== undefined ? values.password : "";
 
-      console.log(user);
+      const data = { email: values.email, password: password, displayName: values.name };
+      const result = await signup(data);
+      if (result !== undefined) {
+        const user = result.user;
+        return user;
+      }
     } catch (error) {
       const errorMessage = (error as Error).message;
-      toast.error(`${errorMessage}`);
+      toast.error(errorMessage);
     } finally {
       setSubmitting(false);
     }
@@ -38,9 +41,9 @@ const SignUp = () => {
 
   return (
     <section>
-      <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto ">
-        <div className="w-[500px] md:w-[400px] lg:w-[400px] px-2 lg:px-8 lg:mr-4 0 bg-white h-[30rem] flex flex-col justify-between py-4 rounded-md">
-          <h1 className="text-3xl text-center mt-6 mb-4 font-extrabold text-[#22292f] relative group">
+      <div className="flex justify-center flex-wrap items-center px-6 py-14 max-w-7xl mx-auto ">
+        <div className="w-[500px] md:w-[400px] lg:w-[400px] px-2 lg:px-8 lg:mr-14  bg-white h-[29rem] flex flex-col justify-between py-4 rounded-md">
+          <h1 className="text-3xl lg:text-4xl text-center mt-6 mb-8 font-extrabold text-[#22292f] relative group">
             Sign Up
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-[#22292f] my-4"></div>
           </h1>
@@ -132,7 +135,7 @@ const SignUp = () => {
             )}
           </Formik>
         </div>
-        <div className="md:w-[67%] lg:w-[40%]">
+        <div className="md:w-[67%] lg:w-[40%] mb-12 md:mb-6 relative">
           <Lottie
             className="h-[250px] md:h-[400px] xxl:h-[550px] "
             onComplete={() => registerRef.current?.setDirection(-1)}

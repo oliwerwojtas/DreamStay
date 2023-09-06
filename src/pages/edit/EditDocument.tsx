@@ -163,7 +163,6 @@ const EditDocument = () => {
     } catch (error) {
       setLoading(false);
       toast.error("Error editing offer");
-      console.error("Error editing offer", error);
     }
   };
 

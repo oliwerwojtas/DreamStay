@@ -16,16 +16,25 @@ import { db } from "../config";
 import { RootState } from "../types/auth/auth";
 import { MdOutlineFavorite } from "react-icons/md";
 import { toast } from "react-toastify";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
 export const Header = () => {
   const auth = getAuth();
   const navigate = useNavigate();
-
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
   const { loggedIn, googleLoggedIn, githubLoggedIn, initialStatusChecked } = useAuth();
   const [favoritesCount, setFavoritesCount] = useState(0);
   const favoritesRedux = useSelector((state: RootState) => state.favorites.favoritesItems);
   const [showFavoritesModal, setShowFavoritesModal] = useState(false);
-
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -58,7 +67,12 @@ export const Header = () => {
     setShowFavoritesModal(true);
   };
   return (
-    <div className="bg-white border-b shadow-sm sticky top-0 z-30">
+    <motion.div
+      className="bg-white border-b shadow-sm sticky top-0 z-30"
+      variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      animate={hidden ? "hidden" : "visible"}
+    >
       <header className="flex justify-between items-center px-3 py-3 max-w-6xl mx-auto">
         {showFavoritesModal && <FavoritesModal onClose={handleCloseFavourites} />}
         <div className="flex items-center cursor-pointer" onClick={() => navigate("/")}>
@@ -109,6 +123,6 @@ export const Header = () => {
           </ul>
         </div>
       </header>
-    </div>
+    </motion.div>
   );
 };

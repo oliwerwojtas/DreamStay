@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useLogin } from "../../hooks/useLogin";
 //components
 import { MediaAuthGoogle } from "../../components/auth/GoogleAuth";
@@ -8,7 +8,7 @@ import { Button } from "../../components/shared/Button";
 import { Link } from "react-router-dom";
 import { LoginData } from "../../types/auth/auth.ts";
 import { toast } from "react-toastify";
-import { SignupError } from "../../types";
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -19,7 +19,6 @@ import { loginValidation } from "../../utilities/validations.tsx";
 const Login = () => {
   const { login } = useLogin();
   const loginRef = useRef<LottieRefCurrentProps>(null);
-  const [error, setError] = useState<SignupError | null>(null);
 
   const handleLoginSubmit = async (
     values: LoginData,
@@ -30,7 +29,6 @@ const Login = () => {
       await login(data);
     } catch (error) {
       const errorMessage = (error as Error).message;
-      setError({ message: errorMessage });
 
       toast.error(errorMessage);
     } finally {
@@ -40,9 +38,9 @@ const Login = () => {
 
   return (
     <section>
-      <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-8xl mx-auto lg:ml-36">
-        <div className="w-[500px] md:w-[400px] lg:w-[400px] px-2 lg:px-8 lg:mr-10 bg-white h-[30rem] flex flex-col justify-between rounded-md">
-          <h1 className="text-3xl lg:text-4xl text-center mt-6 font-extrabold text-[#22292f] relative group">
+      <div className="flex justify-center flex-wrap items-center px-6 py-14 max-w-7xl mx-auto ">
+        <div className="w-[500px] md:w-[400px] lg:w-[400px] px-2 lg:px-8 lg:mr-14  bg-white h-[29rem] flex flex-col justify-between py-4 rounded-md">
+          <h1 className="text-3xl lg:text-4xl text-center mt-6 mb-4 font-extrabold text-[#22292f] relative group">
             Sign in to Account
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-[#22292f] my-4"></div>
           </h1>
