@@ -24,8 +24,6 @@ export const useAuth = (): AuthStatus => {
         if (user.providerData && user.providerData.length > 0) {
           const loginMethod = user.providerData[0].providerId;
           dispatch(Login(loginMethod));
-        } else {
-          // Handle anonymous login here if needed
         }
       } else {
         dispatch(Logout());

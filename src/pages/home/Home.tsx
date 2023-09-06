@@ -27,10 +27,9 @@ const Home = () => {
     return <Spinner />;
   }
   const filteredListings = listings.filter((listing) => {
-    const nameMatches = listing.data.name.toLowerCase().includes(debounceSearch.toLowerCase());
-    const addressMatches = listing.data.address
-      .toLowerCase()
-      .includes(debounceSearch.toLowerCase());
+    const searchQuery = debounceSearch.toString();
+    const nameMatches = listing.data.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const addressMatches = listing.data.address.toLowerCase().includes(searchQuery.toLowerCase());
 
     return nameMatches || addressMatches;
   });

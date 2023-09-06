@@ -13,13 +13,12 @@ import { getAuth } from "firebase/auth";
 import { doc, getDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../config";
 import { v4 as uuidv4 } from "uuid";
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+
 const EditDocument = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const { updateDocument } = useDocument("listings");
   const [loading, setLoading] = useState<boolean>(false);
-  const [listing, setListing] = useState(null);
 
   const [formData, setFormData] = useState<FormDataCreate>({
     id: uuidv4(),
@@ -50,7 +49,7 @@ const EditDocument = () => {
     furnished,
     description,
     regularPrice,
-    images,
+
     smoke,
     breakfast,
     meters,
@@ -60,26 +59,47 @@ const EditDocument = () => {
 
   useEffect(() => {
     setLoading(true);
+
     const fetchListing = async () => {
       try {
-        const docRef = doc(db, "listings", params.id);
-        const docSnap = await getDoc(docRef);
+        if (params.id) {
+          const docRef = doc(db, "listings", params.id);
+          const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-          setListing(docSnap.data());
-          setFormData(docSnap.data());
-          setLoading(false);
+          if (docSnap.exists()) {
+            setFormData({
+              id: docSnap.id,
+              type: docSnap.data().type,
+              name: docSnap.data().name,
+              bedrooms: docSnap.data().bedrooms,
+              bathrooms: docSnap.data().bathrooms,
+              parking: docSnap.data().parking,
+              furnished: docSnap.data().furnished,
+              address: docSnap.data().address,
+              description: docSnap.data().description,
+              regularPrice: docSnap.data().regularPrice,
+              images: docSnap.data().images,
+              imgUrls: docSnap.data().imgUrls,
+              userRef: docSnap.data().userRef,
+              smoke: docSnap.data().smoke,
+              breakfast: docSnap.data().breakfast,
+              meters: docSnap.data().meters,
+            });
+            setLoading(false);
+          }
         } else {
           navigate("/");
-          toast.error("Listing does not exist");
+          toast.error("Listing ID is undefined");
         }
       } catch (error) {
-        console.error("Error fetching listing: ", error);
+        const errorMessage = (error as Error).message;
+        toast.error(errorMessage);
         setLoading(false);
       }
     };
+
     fetchListing();
-  }, [params.id]);
+  }, [navigate, params.id]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
@@ -126,54 +146,17 @@ const EditDocument = () => {
   const handleSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    if (images.length > 4) {
-      setLoading(false);
-      toast.error("Maximum 4 images are allowed");
-      return;
-    }
 
-    const storeImage = async (image: any) => {
-      return new Promise((resolve, reject) => {
-        const storage = getStorage();
-        const filename = `${auth.currentUser?.uid}-${image.name}-${uuidv4()}`;
-        const storageRef = ref(storage, filename);
-        const uploadTask = uploadBytesResumable(storageRef, image);
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("Upload is " + progress + "% done");
-            switch (snapshot.state) {
-              case "paused":
-                console.log("Upload is paused");
-                break;
-              case "running":
-                console.log("Upload is running");
-                break;
-            }
-          },
-          (error) => {
-            reject(error);
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              resolve(downloadURL);
-            });
-          }
-        );
-      });
-    };
-
-    const imgUrls = await Promise.all([...images].map((image) => storeImage(image))).catch(() => {
-      setLoading(false);
-      toast.error("Images not uploaded");
-      return;
-    });
-    console.log(imgUrls);
     try {
-      const formDataCopy = { ...formData, imgUrls, timestamp: serverTimestamp() };
-      delete formDataCopy.images;
-      await updateDocument(formDataCopy, params.id || "");
+      const formDataCopy = {
+        ...formData,
+
+        timestamp: serverTimestamp(),
+      };
+
+      const { images, ...formDataCopyWithoutImages } = formDataCopy;
+
+      await updateDocument(formDataCopyWithoutImages, params.id || "");
       setLoading(false);
       toast.success("Edited!");
       navigate("/settings");
@@ -426,19 +409,6 @@ const EditDocument = () => {
               )}
             </div>
           </div>
-        </div>
-
-        <div className="mb-6">
-          <p className="text-lg font-semibold">Images</p>
-          <p className="text-gray-700">The first image will be the cover (max 4)</p>
-          <input
-            type="file"
-            id="images"
-            onChange={handleChange}
-            accept=".jpg,.png,.jpeg"
-            multiple
-            className="w-full px-3 py-1.5 text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:bg-white focus:border-slate-600"
-          />
         </div>
         <button
           type="submit"

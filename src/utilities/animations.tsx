@@ -44,3 +44,16 @@ export const favoriteButtonVariants = {
   initial: { opacity: 1, scale: 1 },
   animate: { scale: [1, 1.5, 1], transition: { duration: 0.5 } },
 };
+
+export const modalHeartVariants = {
+  initial: { opacity: 0, y: "-100%" },
+  animate: { opacity: 1, y: "0%" },
+  exit: { opacity: 0, y: "-100%" },
+  transition: {
+    duration: 0.3,
+    ease: "easeIn",
+    type: "spring",
+    damping: 10,
+    stiffness: 150,
+  },
+};

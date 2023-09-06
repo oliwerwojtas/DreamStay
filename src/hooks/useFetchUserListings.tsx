@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import { collection, query, where, getDocs, DocumentSnapshot } from "firebase/firestore";
 import { db } from "../config";
 import { DataFromCreate } from "../types";
-import { ErrorType } from "../types";
+
 import { toast } from "react-toastify";
 
 export const useFetchUserListings = (userId?: string) => {
   const [listings, setListings] = useState<DataFromCreate[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<ErrorType | null>(null);
 
   useEffect(() => {
     const fetchUserListings = async () => {
@@ -35,7 +34,7 @@ export const useFetchUserListings = (userId?: string) => {
         setLoading(false);
       } catch (error) {
         const errorMessage = (error as Error).message;
-        setError({ message: errorMessage });
+
         toast.error(`${errorMessage}`);
         setLoading(false);
       }

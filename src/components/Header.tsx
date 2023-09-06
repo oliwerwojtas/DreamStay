@@ -15,6 +15,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config";
 import { RootState } from "../types/auth/auth";
 import { MdOutlineFavorite } from "react-icons/md";
+import { toast } from "react-toastify";
 
 export const Header = () => {
   const auth = getAuth();
@@ -41,7 +42,8 @@ export const Header = () => {
           }
         }
       } catch (error) {
-        console.error("Error getting user favorites:", error);
+        const errorMessage = (error as Error).message;
+        toast.error(`${errorMessage}`);
       }
     };
 

@@ -146,7 +146,7 @@ const Create = () => {
       toast.error("Images not uploaded");
       return;
     });
-    console.log(imgUrls);
+
     try {
       const formDataCopy = {
         ...formData,
@@ -155,16 +155,16 @@ const Create = () => {
         userRef: auth.currentUser?.uid,
       };
 
-      delete formDataCopy.images;
-      // const formDataCopy = { ...formData, timestamp: serverTimestamp() };
-      await addDocument(formDataCopy);
+      const { images, ...formDataCopyWithoutImages } = formDataCopy;
+
+      await addDocument(formDataCopyWithoutImages);
       setLoading(false);
       toast.success("Offer created!");
       navigate("/settings");
     } catch (error) {
       setLoading(false);
-      toast.error("Error creating offer");
-      console.error("Error creating offer", error);
+      const errorMessage = (error as Error).message;
+      toast.error(errorMessage);
     }
   };
   if (loading) {

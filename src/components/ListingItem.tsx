@@ -22,6 +22,7 @@ import { motion } from "framer-motion";
 import { RootState } from "../types/auth/auth";
 import { BiBed } from "react-icons/bi";
 import { MdOutlineBathroom } from "react-icons/md";
+import { toast } from "react-toastify";
 
 export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
   const auth = getAuth();
@@ -52,7 +53,8 @@ export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
           }
         }
       } catch (error) {
-        console.error("Error getting user favorites:", error);
+        const errorMessage = (error as Error).message;
+        toast.error(`${errorMessage}`);
       }
     };
 
@@ -113,14 +115,14 @@ export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
       <li className="bg-[white] text-[#22292f] w-[17rem] relative z-10 flex flex-col justify-centershadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
         {isModalOpen ? (
           auth.currentUser?.uid !== listing.userRef ? (
-            <div
+            <button
               className="bg-[#ffcb74] px-4 py-4 rounded-full w-6 h-6 flex justify-center items-center absolute right-2 top-2 z-20 cursor-pointer"
               onClick={removeFromFavoritesHandler}
             >
               <div className="relative">
                 <AiOutlineClose size={22} className="text-red-600" />
               </div>
-            </div>
+            </button>
           ) : null
         ) : (
           auth.currentUser?.uid !== listing.userRef && (

@@ -13,6 +13,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { db } from "../config";
 import { collection, getDocs, query } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { modalHeartVariants } from "../utilities/animations";
 
 export const FavoritesModal = ({ onClose }: FavoritesModalProps) => {
   const { listings } = useFetchUserListings();
@@ -56,16 +57,7 @@ export const FavoritesModal = ({ onClose }: FavoritesModalProps) => {
         className={` ${
           isLoading ? "" : "bg-[#f6f6f6]"
         } p-4 rounded-md shadow-lg  flex flex-col nowrap overflow-y-auto max-w-[90%] max-h-[90%]`}
-        initial={{ opacity: 0, y: "-100%" }}
-        animate={{ opacity: 1, y: "0%" }}
-        exit={{ opacity: 0, y: "-100%" }}
-        transition={{
-          duration: 0.3,
-          ease: "easeIn",
-          type: "spring",
-          damping: 10,
-          stiffness: 150,
-        }}
+        variants={modalHeartVariants}
       >
         {isLoading ? (
           ""

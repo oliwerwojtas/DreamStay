@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //utilities
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { SignupError, SignupResult } from "../types";
+import { SignupError } from "../types";
 import { SignupData } from "../types/auth/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../config";
@@ -13,7 +13,7 @@ export const useSignup = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const signup = async (data: SignupData): Promise<SignupResult> => {
+  const signup = async (data: SignupData) => {
     setError(null);
     setLoading(true);
 
@@ -45,7 +45,7 @@ export const useSignup = () => {
       const errorMessage = (error as Error).message;
       setError({ message: errorMessage });
       setLoading(false);
-      toast.error(`${errorMessage}`);
+      toast.error(errorMessage);
     }
   };
 

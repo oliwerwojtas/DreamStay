@@ -26,7 +26,7 @@ export const useLogout = () => {
       const errorMessage = (error as Error).message;
       setError({ message: errorMessage });
       setLoading(false);
-      toast.error(`${errorMessage}`);
+      toast.error(errorMessage);
     }
   };
 

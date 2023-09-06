@@ -14,9 +14,8 @@ export const useDocument = (collectionName: string) => {
     setError(null);
 
     try {
-      const docRef = await addDoc(collection(db, collectionName), document);
+      await addDoc(collection(db, collectionName), document);
       setIsLoading(false);
-      console.log("Document written with ID: ", docRef.id);
     } catch (error) {
       const errorMessage = (error as Error).message;
       setError({ message: errorMessage });
@@ -38,7 +37,7 @@ export const useDocument = (collectionName: string) => {
       setError({ message: errorMessage });
       setIsLoading(false);
 
-      console.error("Error creating document: ", error);
+      toast.error(errorMessage);
     }
   };
 
@@ -56,7 +55,7 @@ export const useDocument = (collectionName: string) => {
     } catch (error) {
       const errorMessage = (error as Error).message;
       setError({ message: errorMessage });
-      console.error("Error deleting document: ", error);
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
