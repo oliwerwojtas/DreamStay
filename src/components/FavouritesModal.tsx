@@ -78,16 +78,20 @@ export const FavoritesModal = ({ onClose }: FavoritesModalProps) => {
               className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4"
               onClick={onClose}
             >
-              {favorites.map((favoriteId, index) => {
-                const listingData = listings.find((listing) => listing.id === favoriteId)?.data;
+              {favorites.length <= 0 ? (
+                <p className="text-center">No favorites!</p>
+              ) : (
+                favorites.map((favoriteId, index) => {
+                  const listingData = listings.find((listing) => listing.id === favoriteId)?.data;
 
-                if (listingData)
-                  return (
-                    <li key={index}>
-                      <ListingItem id={favoriteId} listing={listingData} isModalOpen={true} />
-                    </li>
-                  );
-              })}
+                  if (listingData)
+                    return (
+                      <li key={index}>
+                        <ListingItem id={favoriteId} listing={listingData} isModalOpen={true} />
+                      </li>
+                    );
+                })
+              )}
             </ul>
           </>
         )}

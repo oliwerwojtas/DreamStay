@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //utilities
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { SignupError } from "../types";
+import { SignupError } from "../types/others/others";
 import { SignupData } from "../types/auth/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { db } from "../config";

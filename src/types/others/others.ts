@@ -25,17 +25,15 @@ export interface FormDataCreate {
   address: string;
   description: string;
   regularPrice: number;
-  images?: File[];
-  imgUrls?: string[];
+  images: File[];
+  imgUrls: string[];
   userRef: string | undefined;
   smoke: boolean;
-  breakfast: boolean;
   meters: number;
 }
 export interface DataFromCreate {
   id: string;
   data: {
-    breakfast: boolean;
     smoke: boolean;
     meters: number;
     type: string;

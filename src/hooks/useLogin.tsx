@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 //utilities
 import { getAuth, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
 import { LoginData } from "../types/auth/auth";
-import { SignupError } from "../types";
+import { SignupError } from "../types/others/others";
 import { toast } from "react-toastify";
 import { Login } from "../store/authSlice";
 

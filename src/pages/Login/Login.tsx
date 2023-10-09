@@ -103,12 +103,12 @@ const Login = () => {
                     />
                   </div>
                 </div>
-                <div className="flex justify-between text-xs mx-2 mb-6 ">
+                <div className="flex justify-center text-xs mx-2 mb-6 w-80">
                   <p>
                     Dont' have account?
                     <Link
                       to="/signup"
-                      className=" transition duration-200 ease-in-out ml-1 font-semibold"
+                      className=" transition duration-200 ease-in-out font-semibold"
                     >
                       Register
                     </Link>
@@ -116,7 +116,7 @@ const Login = () => {
                   <p>
                     <Link
                       to="/forgotPassword"
-                      className=" transition duration-200 ease-in-out ml-1 "
+                      className=" transition duration-200 ease-in-out ml-12 "
                     >
                       Forgot password?
                     </Link>

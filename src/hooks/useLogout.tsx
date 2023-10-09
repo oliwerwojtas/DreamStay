@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getAuth } from "firebase/auth";
 import { Logout } from "../store/authSlice";
 import { useState } from "react";
-import { SignupError } from "../types";
+import { SignupError } from "../types/others/others";
 import { toast } from "react-toastify";
 
 export const useLogout = () => {

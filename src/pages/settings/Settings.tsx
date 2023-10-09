@@ -11,7 +11,7 @@ import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../config";
 import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
-import { FormData } from "../../types";
+import { FormData } from "../../types/others/others";
 
 const Settings = () => {
   const auth = getAuth();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { collection, query, where, getDocs, DocumentSnapshot } from "firebase/firestore";
 import { db } from "../config";
-import { DataFromCreate } from "../types";
+import { DataFromCreate } from "../types/others/others";
 
 import { toast } from "react-toastify";
 

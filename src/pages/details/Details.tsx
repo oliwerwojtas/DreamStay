@@ -73,13 +73,13 @@ const Details = () => {
               <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
                 <FaParking size={24} />
               </span>
-              {details.data.parking ? "Parking place!" : "No parking place!"}
+              {details.data.parking ? "Parking place" : "No parking place"}
             </div>
             <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
               <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
                 <LuSofa size={24} />
               </span>
-              {details.data.furnished ? "Furnished!" : "No furnished!"}
+              {details.data.furnished ? "Furnished" : "No furnished"}
             </div>
             <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
               <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
@@ -92,12 +92,6 @@ const Details = () => {
                 <MdSmokeFree size={24} />
               </span>
               {details.data.smoke ? "Smoking" : "No Smoking!"}
-            </div>
-            <div className="flex justify-center items-center text-sm font-medium gap-1 py-1 rounded-md text-[#22292f] border-2 border-[#ffcb74] hover:bg-[#FFF6D8] transition-colors min-w-[10rem]">
-              <span className="bg-[#ffcb74] rounded-full w-8 h-8 flex justify-center items-center">
-                <MdOutlineFreeBreakfast size={24} />
-              </span>
-              {details.data.breakfast ? "Breakfast" : "No breakfast!"}
             </div>
           </div>
         </div>

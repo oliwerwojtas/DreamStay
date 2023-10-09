@@ -63,10 +63,10 @@ export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
 
   const handleDelete = async () => {
     await deleteDocument("listings", id);
-
     if (!isLoading) {
       window.location.reload();
     }
+    navigate("/");
   };
 
   const handleEdit = () => {

@@ -12,7 +12,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineUser } from "react-icons/ai";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { signupValidation } from "../../utilities/validations";
-import { FormData } from "../../types";
+import { FormData } from "../../types/others/others";
 
 const SignUp = () => {
   const { signup } = useSignup();

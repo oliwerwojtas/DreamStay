@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { collection, addDoc, DocumentData, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../config";
-import { DataFromCreate } from "../types";
+import { DataFromCreate, ErrorType } from "../types/others/others";
 import { toast } from "react-toastify";
-import { ErrorType } from "../types";
 
 export const useDocument = (collectionName: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

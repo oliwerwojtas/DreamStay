@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "../../components/shared/Spinner";
 //utilities
 import { toast } from "react-toastify";
-import { FormDataCreate } from "../../types";
+import { FormDataCreate } from "../../types/others/others";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { ChangeEvent, MouseEvent, FormEvent, useEffect } from "react";
@@ -35,7 +35,6 @@ const EditDocument = () => {
     imgUrls: [],
     userRef: auth.currentUser?.uid,
     smoke: false,
-    breakfast: false,
     meters: 0,
   });
 
@@ -51,7 +50,6 @@ const EditDocument = () => {
     regularPrice,
 
     smoke,
-    breakfast,
     meters,
   } = formData;
 
@@ -82,7 +80,7 @@ const EditDocument = () => {
               imgUrls: docSnap.data().imgUrls,
               userRef: docSnap.data().userRef,
               smoke: docSnap.data().smoke,
-              breakfast: docSnap.data().breakfast,
+
               meters: docSnap.data().meters,
             });
             setLoading(false);
@@ -312,35 +310,7 @@ const EditDocument = () => {
             no
           </button>
         </div>
-        <p className="text-lg mt-6 font-semibold">Breakfast</p>
-        <div className="flex">
-          <button
-            type="button"
-            id="breakfast"
-            value="true"
-            onClick={handleYesNoClick}
-            className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              !breakfast
-                ? "bg-white text-[#22292f]"
-                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
-            }`}
-          >
-            Yes
-          </button>
-          <button
-            type="button"
-            id="breakfast"
-            value="false"
-            onClick={handleYesNoClick}
-            className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              breakfast
-                ? "bg-white text-[#22292f]"
-                : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
-            }`}
-          >
-            no
-          </button>
-        </div>
+
         <p className="text-lg mt-6 font-semibold">Smoke</p>
         <div className="flex">
           <button
