@@ -105,7 +105,7 @@ const Login = () => {
                 </div>
                 <div className="flex justify-center text-xs mx-2 mb-6 w-80">
                   <p>
-                    Dont' have account?
+                    <span className="mr-1">Dont' have account?</span>
                     <Link
                       to="/signup"
                       className=" transition duration-200 ease-in-out font-semibold"
@@ -123,7 +123,9 @@ const Login = () => {
                   </p>
                 </div>
                 <div className="flex justify-center" data-cy="login-submit">
-                  <Button className=" mb-4 px-5 mt-4 font-medium rounded-md">Sign in</Button>
+                  <Button className=" mb-4 px-5 mt-4 font-medium rounded-md" data-cy="loginButton">
+                    Sign in
+                  </Button>
                 </div>
               </Form>
             )}

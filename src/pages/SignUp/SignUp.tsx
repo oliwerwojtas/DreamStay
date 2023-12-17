@@ -67,6 +67,7 @@ const SignUp = () => {
                       id="name"
                       name="name"
                       placeholder="Full Name"
+                      data-cy="registerName"
                     />
                     <ErrorMessage
                       name="name"
@@ -86,6 +87,7 @@ const SignUp = () => {
                       id="email"
                       name="email"
                       placeholder="Email"
+                      data-cy="registerEmail"
                     />
                     <ErrorMessage
                       name="email"
@@ -105,6 +107,7 @@ const SignUp = () => {
                       id="password"
                       name="password"
                       placeholder="Password"
+                      data-cy="registerPassword"
                     />
                     <ErrorMessage
                       name="password"
@@ -129,7 +132,12 @@ const SignUp = () => {
                   </Link>
                 </div>
                 <div className="flex justify-center">
-                  <Button className="mb-4 px-5 mt-4 font-medium rounded-md">Sign up</Button>
+                  <Button
+                    className="mb-4 px-5 mt-4 font-medium rounded-md"
+                    data-cy="registerButton"
+                  >
+                    Sign up
+                  </Button>
                 </div>
               </Form>
             )}

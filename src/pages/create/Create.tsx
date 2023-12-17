@@ -55,6 +55,8 @@ const Create = () => {
   if (loading) {
     return <Spinner />;
   }
+  console.log(images);
+  console.log(auth.currentUser?.uid);
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     let boolean: boolean | null = null;
@@ -113,6 +115,7 @@ const Create = () => {
         const filename = `${auth.currentUser?.uid}-${image.name}-${uuidv4()}`;
         const storageRef = ref(storage, filename);
         const uploadTask = uploadBytesResumable(storageRef, image);
+
         uploadTask.on(
           "state_changed",
           (snapshot) => {
@@ -131,20 +134,28 @@ const Create = () => {
             reject(error);
           },
           () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              resolve(downloadURL);
-            });
+            getDownloadURL(uploadTask.snapshot.ref)
+              .then((downloadURL) => {
+                resolve(downloadURL);
+                console.log(downloadURL);
+              })
+              .catch((error) => {
+                reject(error); // Reject the promise if an error occurs in getDownloadURL
+              });
           }
         );
       });
     };
 
-    const imgUrls = await Promise.all([...images].map((image) => storeImage(image))).catch(() => {
-      setLoading(false);
-      toast.error("Images not uploaded");
-      return;
-    });
-
+    const imgUrls = await Promise.all([...images].map((image) => storeImage(image))).catch(
+      (error) => {
+        setLoading(false);
+        toast.error("Images not uploaded");
+        throw error;
+      }
+    );
+    console.log(images);
+    console.log(imgUrls);
     try {
       const formDataCopy = {
         ...formData,

@@ -80,7 +80,6 @@ const EditDocument = () => {
               imgUrls: docSnap.data().imgUrls,
               userRef: docSnap.data().userRef,
               smoke: docSnap.data().smoke,
-
               meters: docSnap.data().meters,
             });
             setLoading(false);

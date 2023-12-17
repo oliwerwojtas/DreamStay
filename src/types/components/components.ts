@@ -1,7 +1,7 @@
 import { LatLngTuple } from "leaflet";
 import { ChangeEvent, ReactNode } from "react";
 import { MouseEvent } from "react";
-import { DataFromCreate } from "../../types";
+import { DataFromCreate } from "../others/others";
 export interface LazyImageProps {
   imageUrl: string;
   alt?: string;

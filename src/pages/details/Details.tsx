@@ -14,7 +14,6 @@ import { FaParking } from "react-icons/fa";
 import { BiBed } from "react-icons/bi";
 import { MdOutlineBathroom } from "react-icons/md";
 import { BsFillHouseDoorFill } from "react-icons/bs";
-import { MdOutlineFreeBreakfast } from "react-icons/md";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { LuSofa } from "react-icons/lu";
 import { MapContainer } from "react-leaflet";
