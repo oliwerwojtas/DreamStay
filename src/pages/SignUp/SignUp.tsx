@@ -43,7 +43,10 @@ const SignUp = () => {
     <section>
       <div className="flex justify-center flex-wrap items-center px-6 py-14 max-w-7xl mx-auto ">
         <div className="w-[500px] md:w-[400px] lg:w-[400px] px-2 lg:px-8 lg:mr-14  bg-white h-[29rem] flex flex-col justify-between py-4 rounded-md">
-          <h1 className="text-3xl lg:text-4xl text-center mt-6 mb-8 font-extrabold text-[#22292f] relative group">
+          <h1
+            className="text-3xl lg:text-4xl text-center mt-6 mb-8 font-extrabold text-[#22292f] relative group"
+            data-cy="signupTitle"
+          >
             Sign Up
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1/6 h-[3px] bg-[#22292f] my-4"></div>
           </h1>
@@ -132,11 +135,8 @@ const SignUp = () => {
                   </Link>
                 </div>
                 <div className="flex justify-center">
-                  <Button
-                    className="mb-4 px-5 mt-4 font-medium rounded-md"
-                    data-cy="registerButton"
-                  >
-                    Sign up
+                  <Button className="mb-4 px-5 mt-4 font-medium rounded-md">
+                    <span data-cy="registerButton"> Sign up</span>
                   </Button>
                 </div>
               </Form>

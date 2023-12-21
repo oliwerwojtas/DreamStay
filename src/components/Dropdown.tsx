@@ -31,12 +31,14 @@ export const Dropdown = () => {
   return (
     <div className=" flex items-center justify-center bg-white">
       <motion.div animate={open ? "open" : "closed"} className="relative" ref={wrapperRef}>
-        <Button className="rounded-md" onClick={() => setOpen((previous) => !previous)}>
-          <span className="font-medium text-[#22292f]">Settings</span>
-          <motion.span variants={settingsIcon}>
-            <FiChevronDown />
-          </motion.span>
-        </Button>
+        <div data-cy="settingsDropdown">
+          <Button className="rounded-md" onClick={() => setOpen((previous) => !previous)}>
+            <span className="font-medium text-[#22292f]">Settings</span>
+            <motion.span variants={settingsIcon}>
+              <FiChevronDown />
+            </motion.span>
+          </Button>
+        </div>
 
         <motion.ul
           initial={wrapperVariants.closed}
@@ -49,6 +51,7 @@ export const Dropdown = () => {
             Icon={AiOutlineHome}
             text="Home"
             onClick={() => navigate("/")}
+            dataCy="homeButton"
           />
 
           <Option
@@ -56,6 +59,7 @@ export const Dropdown = () => {
             Icon={AiOutlineUser}
             text="Profile"
             onClick={() => navigate("/settings")}
+            dataCy="profileButton"
           />
 
           <Option
@@ -63,9 +67,16 @@ export const Dropdown = () => {
             Icon={FiEdit}
             text="Create"
             onClick={() => navigate("/create")}
+            dataCy="createButton"
           />
           <span className="flex justify-center">--------------</span>
-          <Option setOpen={setOpen} Icon={AiOutlineLogout} text="Logout" onClick={logout} />
+          <Option
+            setOpen={setOpen}
+            Icon={AiOutlineLogout}
+            text="Logout"
+            onClick={logout}
+            dataCy="logoutButton"
+          />
         </motion.ul>
       </motion.div>
     </div>

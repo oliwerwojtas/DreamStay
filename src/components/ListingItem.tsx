@@ -112,7 +112,10 @@ export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
 
   return (
     <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }} layout>
-      <li className="bg-[white] text-[#22292f] w-[17rem] relative z-10 flex flex-col justify-centershadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150">
+      <li
+        className="bg-[white] text-[#22292f] w-[17rem] relative z-10 flex flex-col justify-centershadow-md hover:shadow-xl rounded-md overflow-hidden transistion-shadow duration-150"
+        data-cy="listingItem"
+      >
         {isModalOpen ? (
           auth.currentUser?.uid !== listing.userRef ? (
             <button

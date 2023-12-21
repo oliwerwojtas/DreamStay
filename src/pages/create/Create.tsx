@@ -55,8 +55,7 @@ const Create = () => {
   if (loading) {
     return <Spinner />;
   }
-  console.log(images);
-  console.log(auth.currentUser?.uid);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     let boolean: boolean | null = null;
@@ -140,7 +139,7 @@ const Create = () => {
                 console.log(downloadURL);
               })
               .catch((error) => {
-                reject(error); // Reject the promise if an error occurs in getDownloadURL
+                reject(error);
               });
           }
         );
@@ -194,6 +193,7 @@ const Create = () => {
                 ? "bg-white text-[#22292f]"
                 : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
+            data-cy="sellButton"
           >
             sell
           </button>
@@ -206,6 +206,7 @@ const Create = () => {
                 ? "bg-white text-[#22292f]"
                 : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
+            data-cy="rentButton"
           >
             rent
           </button>
@@ -219,6 +220,7 @@ const Create = () => {
           placeholder="Name"
           required
           className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
+          data-cy="nameInput"
         />
         <div className="flex space-x-6 mb-6">
           <div>
@@ -232,6 +234,7 @@ const Create = () => {
               max="1250"
               required
               className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center"
+              data-cy="metersInput"
             />
           </div>
           <div>
@@ -245,6 +248,7 @@ const Create = () => {
               max="50"
               required
               className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center"
+              data-cy="bedsInput"
             />
           </div>
           <div>
@@ -258,6 +262,7 @@ const Create = () => {
               max="50"
               required
               className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center"
+              data-cy="bathsInput"
             />
           </div>
         </div>
@@ -273,6 +278,7 @@ const Create = () => {
                 ? "bg-white text-[#22292f]"
                 : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
+            data-cy="parkingButtonYes"
           >
             Yes
           </button>
@@ -284,6 +290,7 @@ const Create = () => {
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
               parking ? "bg-white text-[#22292f]" : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
+            data-cy="parkingButtonNo"
           >
             no
           </button>
@@ -300,6 +307,7 @@ const Create = () => {
                 ? "bg-white text-[#22292f]"
                 : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
+            data-cy="furnishedButtonYes"
           >
             yes
           </button>
@@ -313,6 +321,7 @@ const Create = () => {
                 ? "bg-white text-[#22292f]"
                 : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
+            data-cy="furnishedButtonNo"
           >
             no
           </button>
@@ -328,6 +337,7 @@ const Create = () => {
             className={`mr-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
               !smoke ? "bg-white text-[#22292f]" : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
+            data-cy="smokeButtonYes"
           >
             Yes
           </button>
@@ -339,6 +349,7 @@ const Create = () => {
             className={`ml-3 px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
               smoke ? "bg-white text-[#22292f]" : "bg-[#ffcb74] text-[#22292f] hover:bg-[#dba548]"
             }`}
+            data-cy="smokeButtonNo"
           >
             no
           </button>
@@ -353,6 +364,7 @@ const Create = () => {
           placeholder="Address"
           required
           className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
+          data-cy="addressTextarea"
         />
 
         <p className="text-lg font-semibold">Description</p>
@@ -363,6 +375,7 @@ const Create = () => {
           placeholder="Description"
           required
           className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 mb-6"
+          data-cy="descriptionTextarea"
         />
 
         <div className="flex items-center mb-6">
@@ -378,6 +391,7 @@ const Create = () => {
                 max="400000000"
                 required
                 className="w-full px-4 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-600 text-center"
+                data-cy="priceInput"
               />
               {type === "rent" && (
                 <div className="">
@@ -398,11 +412,13 @@ const Create = () => {
             accept=".jpg,.png,.jpeg"
             multiple
             className="w-full px-3 py-1.5 text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:bg-white focus:border-slate-600"
+            data-cy="imageInput"
           />
         </div>
         <button
           type="submit"
           className="mb-6 w-full px-7 py-3 bg-[#ffcb74] hover:bg-[#dba548] text-[#22292f] font-medium text-sm uppercase rounded shadow-md  hover:shadow-lg focus:bg-[#dba548] focus:shadow-lg active:bg-[#dba548] active:shadow-lg transition duration-150 ease-in-out"
+          data-cy="createListingButton"
         >
           Create Listing
         </button>

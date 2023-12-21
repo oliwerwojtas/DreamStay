@@ -8,11 +8,13 @@ export const Option = ({
   Icon,
   setOpen,
   onClick,
+  dataCy,
 }: {
   text: string;
   Icon: IconType;
   setOpen: Dispatch<SetStateAction<boolean>>;
   onClick: () => void;
+  dataCy: string;
 }) => {
   return (
     <motion.li
@@ -22,6 +24,7 @@ export const Option = ({
         onClick();
       }}
       className="flex items-center gap-2 w-full p-2 pr-8 text-sm font-medium whitespace-nowrap rounded-md hover:bg-[#FFF6D8] text-[#22292f]  transition-colors cursor-pointer"
+      data-cy={dataCy}
     >
       <motion.span
         variants={actionIconVariants}
