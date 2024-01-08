@@ -9,6 +9,7 @@ export const FavoriteButton = ({ isFavorite, addToFavoritesHandler }: FavoriteBu
     <button
       onClick={addToFavoritesHandler}
       className="bg-[#ffcb74] px-4 py-4 rounded-full w-6 h-6 flex justify-center items-center absolute right-2 top-2 z-20"
+      data-cy="favouriteButton"
     >
       <motion.div
         className="relative z-20"
