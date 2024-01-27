@@ -4,6 +4,7 @@ import { Button } from "./shared/Button";
 //utilities
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import { PaginationProps } from "../types/components/components";
+import React from "react";
 
 export const Pagination = ({ apartamentsPerPage, totalPosts, paginate }: PaginationProps) => {
   const [currentPage, setCurrentPage] = useState(1);

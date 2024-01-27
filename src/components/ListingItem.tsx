@@ -23,6 +23,7 @@ import { RootState } from "../types/auth/auth";
 import { BiBed } from "react-icons/bi";
 import { MdOutlineBathroom } from "react-icons/md";
 import { toast } from "react-toastify";
+import React from "react";
 
 export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
   const auth = getAuth();

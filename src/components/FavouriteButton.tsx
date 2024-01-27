@@ -3,6 +3,7 @@ import { FavoriteButtonProps } from "../types/components/components";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { motion } from "framer-motion";
 import { favoriteButtonVariants } from "../utilities/animations";
+import React from "react";
 
 export const FavoriteButton = ({ isFavorite, addToFavoritesHandler }: FavoriteButtonProps) => {
   return (
