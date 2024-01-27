@@ -96,8 +96,9 @@ export const Header = () => {
                       <p
                         className="flex justify-center items-center"
                         onClick={handleOpenFavourites}
+                        data-cy="favouriteCounter"
                       >
-                        <MdOutlineFavorite size={24} className="text-red-600" />
+                        <MdOutlineFavorite size={24} className="text-red-600 cursor-pointer" />
                         <span className="font-medium text-lg">({favoritesCount})</span>
                       </p>
 

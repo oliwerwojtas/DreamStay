@@ -121,6 +121,7 @@ export const ListingItem = ({ listing, id, isModalOpen }: ListingItemProps) => {
             <button
               className="bg-[#ffcb74] px-4 py-4 rounded-full w-6 h-6 flex justify-center items-center absolute right-2 top-2 z-20 cursor-pointer"
               onClick={removeFromFavoritesHandler}
+              data-cy="deleteFromFavourtie"
             >
               <div className="relative">
                 <AiOutlineClose size={22} className="text-red-600" />

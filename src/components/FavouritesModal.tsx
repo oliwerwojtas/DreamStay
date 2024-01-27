@@ -67,12 +67,14 @@ export const FavoritesModal = ({ onClose }: FavoritesModalProps) => {
               <p className="text-center justify-center items-center flex text-[#22292f] font-semibold text-xl">
                 Your favourites homes!
               </p>
-              <Button
-                className="block px-2 py-1 text-[#22292f] font-semibold rounded-md"
-                onClick={onClose}
-              >
-                <AiOutlineClose size={22} />
-              </Button>
+              <div data-cy="closeModal">
+                <Button
+                  className="block px-2 py-1 text-[#22292f] font-semibold rounded-md"
+                  onClick={onClose}
+                >
+                  <AiOutlineClose size={22} />
+                </Button>
+              </div>
             </div>
             <ul
               className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4"
