@@ -58,6 +58,7 @@ export const FavoritesModal = ({ onClose }: FavoritesModalProps) => {
           isLoading ? "" : "bg-[#f6f6f6]"
         } p-4 rounded-md shadow-lg  flex flex-col nowrap overflow-y-auto max-w-[90%] max-h-[90%]`}
         variants={modalHeartVariants}
+        data-cy="modalWindow"
       >
         {isLoading ? (
           ""
